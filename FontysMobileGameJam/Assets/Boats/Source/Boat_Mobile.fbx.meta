@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a7e31c6ec8fbed74fa48da2683136ae3
 timeCreated: 1447321439
 licenseType: Free
+=======
+guid: a4b104f96c3bc1b41b8789f1d1fa630e
+timeCreated: 1441788302
+licenseType: Store
+>>>>>>> origin/master
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -10,6 +16,10 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Mobile_Boat
+<<<<<<< HEAD
+=======
+    6400000: //RootNode
+>>>>>>> origin/master
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,8 +44,13 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
+<<<<<<< HEAD
     meshCompression: 0
     addColliders: 0
+=======
+    meshCompression: 3
+    addColliders: 1
+>>>>>>> origin/master
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -51,7 +66,11 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
+<<<<<<< HEAD
     normalImportMode: 0
+=======
+    normalImportMode: 1
+>>>>>>> origin/master
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
@@ -66,10 +85,15 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
+<<<<<<< HEAD
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1
+=======
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+>>>>>>> origin/master
   additionalBone: 0
   userData: 
   assetBundleName: 
