@@ -1,10 +1,5 @@
 fileFormatVersion: 2
-guid: aadb37a20a33632429047acaef43658a
-labels:
-- ExitGames
-- PUN
-- Photon
-- Networking
+guid: 4ad02dc83da735c4e8d945332b9202f6
 PluginImporter:
   serializedVersion: 1
   iconMap: {}
@@ -12,10 +7,10 @@ PluginImporter:
   isPreloaded: 0
   platformData:
     Any:
-      enabled: 1
+      enabled: 0
       settings: {}
     Editor:
-      enabled: 0
+      enabled: 1
       settings:
         DefaultValueInitialized: true
   userData: 
