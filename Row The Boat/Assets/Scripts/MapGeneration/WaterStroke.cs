@@ -14,6 +14,8 @@ namespace Assets.Scripts.MapGeneration
         private WaterStroke last;
 
         private List<Vector3> lastData;
+        private List<Vector3> lastSideData;
+        private List<Vector3> lastTopData;
 
         public WaterStroke(int size, int zPos, GameObject dirtObject, WaterStroke last)
         {
@@ -50,9 +52,8 @@ namespace Assets.Scripts.MapGeneration
             return water[row][found].transform.position.x;
         }
 
-        public void GenerateSides()
+        public void GenerateSides(Transform parent)
         {
-            GameObject obj;
             List<Vector3> vertices = new List<Vector3>();
             List<int> faces = new List<int>();
 
@@ -64,26 +65,29 @@ namespace Assets.Scripts.MapGeneration
                 amountToDo = 6;
             }
 
+            float low = 1000, high = -1000;
+
             for (int i = 0; i < 5; i++)
             {
-                vertices.Add(new Vector3(GetPivit(i, true) + 0.5f, -1, zPos + i * 2));
-                vertices.Add(new Vector3(GetPivit(i, false) - 0.5f, -1, zPos + i * 2));
+                float left = GetPivit(i, true);
+                float right = GetPivit(i, false);
 
-                vertices.Add(new Vector3(GetPivit(i, true), 1, zPos + i * 2));
-                vertices.Add(new Vector3(GetPivit(i, false), 1, zPos + i * 2));
+                if (left < low) low = left;
+                if (right > high) high = right;
 
-                //obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                //obj.transform.position = new Vector3(GetPivit(i, true), 0, water[i][0].transform.position.z);
+                vertices.Add(new Vector3(left + 1, -1, zPos + i * 2));
+                vertices.Add(new Vector3(right - 1, -1, zPos + i * 2));
 
-                //obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                //obj.transform.position = new Vector3(GetPivit(i, false), 0, water[i][0].transform.position.z);
+                vertices.Add(new Vector3(left, 0, zPos + i * 2));
+                vertices.Add(new Vector3(right, 0, zPos + i * 2));
             }
 
-            vertices.Add(new Vector3(GetPivit(4, true) + 0.5f, -1, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false) - 0.5f, -1, zPos + 4 * 2 + 1));
+            // Add vertices at the end, so the next stroke can connect to it
+            vertices.Add(new Vector3(GetPivit(4, true) + 1, -1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, false) - 1, -1, zPos + 4 * 2 + 1));
 
-            vertices.Add(new Vector3(GetPivit(4, true), 1, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false), 1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, true), 0, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, false), 0, zPos + 4 * 2 + 1));
 
             lastData = vertices.GetRange(vertices.Count - 4, 4);
 
@@ -106,6 +110,8 @@ namespace Assets.Scripts.MapGeneration
                 faces.Add(i * 4 + 7);
             }
 
+            // Generate a bit of floor
+
             Mesh mesh = new Mesh();
             mesh.SetVertices(vertices);
             mesh.SetTriangles(faces, 0);
@@ -115,7 +121,142 @@ namespace Assets.Scripts.MapGeneration
             MeshRenderer mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
             mf.mesh = mesh;
 
+            dirtObject.transform.parent = parent;
 
+
+
+
+
+
+
+            dirtObject = GameObject.Instantiate(dirtObject);
+            vertices = new List<Vector3>();
+            faces = new List<int>();
+
+            if (last != null)
+            {
+                vertices.AddRange(last.lastSideData);
+                amountToDo = 6;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                float left = GetPivit(i, true);
+                float right = GetPivit(i, false);
+
+                vertices.Add(new Vector3(left, 0, zPos + i * 2));
+                vertices.Add(new Vector3(right, 0, zPos + i * 2));
+
+                vertices.Add(new Vector3(left - 5, 1, zPos + i * 2));
+                vertices.Add(new Vector3(right + 5, 1, zPos + i * 2));
+            }
+
+            // Add vertices at the end, so the next stroke can connect to it
+            vertices.Add(new Vector3(GetPivit(4, true), 0, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, false), 0, zPos + 4 * 2 + 1));
+
+            vertices.Add(new Vector3(GetPivit(4, true) - 5, 1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, false) + 5, 1, zPos + 4 * 2 + 1));
+
+            lastSideData = vertices.GetRange(vertices.Count - 4, 4);
+
+            for (int i = 0; i < amountToDo; i++)
+            {
+                faces.Add(i * 4);
+                faces.Add(i * 4 + 2);
+                faces.Add(i * 4 + 6);
+
+                faces.Add(i * 4);
+                faces.Add(i * 4 + 6);
+                faces.Add(i * 4 + 4);
+
+                faces.Add(i * 4 + 1);
+                faces.Add(i * 4 + 5);
+                faces.Add(i * 4 + 3);
+
+                faces.Add(i * 4 + 3);
+                faces.Add(i * 4 + 5);
+                faces.Add(i * 4 + 7);
+            }
+
+            // Generate a bit of floor
+
+            mesh = new Mesh();
+            mesh.SetVertices(vertices);
+            mesh.SetTriangles(faces, 0);
+            mesh.RecalculateNormals();
+
+            mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
+            mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            mf.mesh = mesh;
+
+            dirtObject.transform.parent = parent;
+
+
+
+
+
+
+
+            dirtObject = GameObject.Instantiate(dirtObject);
+            vertices = new List<Vector3>();
+            faces = new List<int>();
+
+            if (last != null)
+            {
+                vertices.AddRange(last.lastTopData);
+                amountToDo = 6;
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                vertices.Add(new Vector3(GetPivit(i, true) - 5, 1, zPos + i * 2));
+                vertices.Add(new Vector3(GetPivit(i, false) + 5, 1, zPos + i * 2));
+
+                vertices.Add(new Vector3(low - 1 - 5, 1, zPos + i * 2));
+                vertices.Add(new Vector3(high + 1 + 5, 1, zPos + i * 2));
+            }
+
+            // Add vertices at the end, so the next stroke can connect to it
+            vertices.Add(new Vector3(GetPivit(4, true) - 5, 1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, false) + 5, 1, zPos + 4 * 2 + 1));
+
+            vertices.Add(new Vector3(low - 1 - 5, 1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(high + 1 + 5, 1, zPos + 4 * 2 + 1));
+
+            lastTopData = vertices.GetRange(vertices.Count - 4, 4);
+
+            for (int i = 0; i < amountToDo; i++)
+            {
+                faces.Add(i * 4);
+                faces.Add(i * 4 + 2);
+                faces.Add(i * 4 + 6);
+
+                faces.Add(i * 4);
+                faces.Add(i * 4 + 6);
+                faces.Add(i * 4 + 4);
+
+                faces.Add(i * 4 + 1);
+                faces.Add(i * 4 + 5);
+                faces.Add(i * 4 + 3);
+
+                faces.Add(i * 4 + 3);
+                faces.Add(i * 4 + 5);
+                faces.Add(i * 4 + 7);
+            }
+
+            // Generate a bit of floor
+
+            mesh = new Mesh();
+            mesh.SetVertices(vertices);
+            mesh.SetTriangles(faces, 0);
+            mesh.RecalculateNormals();
+
+            mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
+            mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            mf.mesh = mesh;
+
+            dirtObject.transform.parent = parent;
         }
     }
 }

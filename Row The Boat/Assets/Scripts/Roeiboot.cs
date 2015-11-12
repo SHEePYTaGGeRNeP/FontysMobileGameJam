@@ -6,22 +6,28 @@ using Assets.Scripts.PhotonNetworking;
 public class Roeiboot : MonoBehaviour
 {
 	public List<Transform> Paddles;
-	
+
 	[SerializeField]
 	private Transform _achter;
+	private RowTiltController _rowController;
 
+	private Rigidbody _rb;
 
 	public float ForceMultiplier = 2;
 
-	private Rigidbody _rb;
-	
+	// Use this for initialization
 	void Start()
 	{
 		this._rb = this.GetComponent<Rigidbody>();
+		this._rowController = this.GetComponent<RowTiltController>();
+		this._rowController.Row += (sender, args) =>
+		{
+			if (args.Side != RowTiltController.RowSide.Left) return;
+			AddForce(this._achter, args.Strength * args.Efficiency);
+		};
 	}
 
-	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		if (Input.GetKeyDown(KeyCode.A))
 		{
@@ -46,10 +52,10 @@ public class Roeiboot : MonoBehaviour
 
 	}
 
-	public void AddForce(Transform paddle)
+	public void AddForce(Transform paddle, float force = 1f)
 	{
-		this._rb.AddForceAtPosition(this.transform.forward * this.ForceMultiplier, paddle.position);
-		this._rb.AddForceAtPosition(this.transform.forward * this.ForceMultiplier, this._achter.position);
+		this._rb.AddForceAtPosition(this.transform.forward * force * this.ForceMultiplier * Time.fixedDeltaTime, paddle.position);
+		this._rb.AddForceAtPosition(this.transform.forward * force * this.ForceMultiplier * Time.fixedDeltaTime, this._achter.position);
 	}
 
 	public Transform AssignPlayer(PhotonRoeier player)

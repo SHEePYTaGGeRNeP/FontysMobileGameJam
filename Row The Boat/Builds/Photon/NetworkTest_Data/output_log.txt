@@ -19,15 +19,15 @@ Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.183 seconds
+- Completed reload, in  0.083 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\System.dll (this message is harmless)
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 3874 -> priority: 1 
-  Thread -> id: 3460 -> priority: 1 
+  Thread -> id: 33c8 -> priority: 1 
+  Thread -> id: 3d18 -> priority: 1 
 OnStatusChanged: Connect
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
@@ -131,41 +131,6 @@ OnEvent: Event 202.
 Registered PhotonView: 2001
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-ArgumentOutOfRangeException: Argument is out of range.
-Parameter name: index
-  at System.Collections.Generic.List`1[UnityEngine.Transform].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
-  at Roeiboot.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-ArgumentOutOfRangeException: Argument is out of range.
-Parameter name: index
-  at System.Collections.Generic.List`1[UnityEngine.Transform].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
-  at Roeiboot.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-ArgumentOutOfRangeException: Argument is out of range.
-Parameter name: index
-  at System.Collections.Generic.List`1[UnityEngine.Transform].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
-  at Roeiboot.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-ArgumentOutOfRangeException: Argument is out of range.
-Parameter name: index
-  at System.Collections.Generic.List`1[UnityEngine.Transform].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
-  at Roeiboot.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-ArgumentOutOfRangeException: Argument is out of range.
-Parameter name: index
-  at System.Collections.Generic.List`1[UnityEngine.Transform].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
-  at Roeiboot.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
 
 OnStatusChanged: Disconnect
  

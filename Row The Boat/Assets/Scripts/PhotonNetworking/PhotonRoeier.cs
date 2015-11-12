@@ -20,7 +20,7 @@ namespace Assets.Scripts.PhotonNetworking
 		void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
-				Roei();
+				this.Roei();
 		}
 
 		public void Roei()
