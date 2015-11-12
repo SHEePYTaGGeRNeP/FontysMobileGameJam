@@ -26,7 +26,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;CROSS_PLATFORM_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_2_2;UNITY_5_2;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_REFLECTION_BUFFERS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;CROSS_PLATFORM_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -51,11 +51,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -68,6 +74,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Row The Boat.CSharp.Plugins.csproj">
+      <Project>{CF567188-862F-7D7C-6231-7C0C745FE31C}</Project>
+      <Name>Row The Boat.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Game Jam Menu Template\Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Game Jam Menu Template\Scripts\EventSystemChecker.cs" />
     <Compile Include="Assets\Game Jam Menu Template\Scripts\Pause.cs" />
@@ -76,6 +88,49 @@
     <Compile Include="Assets\Game Jam Menu Template\Scripts\SetAudioLevels.cs" />
     <Compile Include="Assets\Game Jam Menu Template\Scripts\ShowPanels.cs" />
     <Compile Include="Assets\Game Jam Menu Template\Scripts\StartOptions.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\BackToScene.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\CheckAvailability.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\CloseApplication.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\CreateHouses.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\DampenCameraMovement.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\LoaderGUI.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\MoveToPoint.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\Rotate.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\SensorStatisticsGUI.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\SetScreenRotation.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\SwitchCamera.cs" />
+    <Compile Include="Assets\GyroDroid\DemoSceneAssets\Scripts\SwitchRotationMode.cs" />
+    <Compile Include="Assets\GyroDroid\SampleScripts\LightControl.cs" />
+    <Compile Include="Assets\GyroDroid\SampleScripts\MagneticFieldCamera.cs" />
+    <Compile Include="Assets\GyroDroid\SampleScripts\MinimalSensorCamera.cs" />
+    <Compile Include="Assets\GyroDroid\SampleScripts\MoveByLinearAcc.cs" />
+    <Compile Include="Assets\GyroDroid\SampleScripts\SpaceShipControl.cs" />
+    <Compile Include="Assets\GyroDroid\SampleScripts\TurntableSensorCamera.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Debug\SensorStatistics.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Devices\SensorDeviceAndroid.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Devices\SensorDeviceIPhone.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Devices\SensorDeviceUnity.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Devices\SensorEditorUnity.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Enums\RotationFallbackType.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Enums\SensorDelay.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Enums\SensorStatus.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Enums\SensorSurfaceRotation.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Enums\Type.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Filters\AngleFilter.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Filters\Filter.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Filters\FloatFilter.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Filters\QuaternionFilter.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Filters\Vector3Filter.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Sensor.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\SensorHelper.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Utils\GravityValue.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Utils\LightValue.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Utils\MagneticFieldValue.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Utils\NonAndroidFallback.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Utils\PressureValue.cs" />
+    <Compile Include="Assets\GyroDroid\Scripts\Utils\Sensor.Information.cs" />
+    <Compile Include="Assets\Scenes\RowWithSwipesTest\Scripts\RowSwipesController.cs" />
+    <Compile Include="Assets\Scenes\VibratorTest\Scripts\TestScript.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\ObjectPool\GameObjectType.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\ObjectPool\ObjectData.cs" />
@@ -83,13 +138,24 @@
     <Compile Include="Assets\Scripts\MapGeneration\ObjectPool\PoolList.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Water.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\WaterStroke.cs" />
+    <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\NetworkPlayerScript.cs" />
     <Compile Include="Assets\Scripts\NetworkPlayerSetup.cs" />
-    <Compile Include="Assets\Scripts\TestScript.cs" />
+    <Compile Include="Assets\Scripts\Roeiboot.cs" />
+    <Compile Include="Assets\Scripts\Vibrator\Vibrator.cs" />
+    <Compile Include="Assets\Scripts\WaterOnCam.cs" />
+    <Compile Include="Assets\VibratorTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Art\Wispy Sky\ReadMe.txt" />
     <None Include="Assets\Game Jam Menu Template\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\Game Jam Menu Template\GameJamTemplateReadMe.txt" />
+    <None Include="Assets\GyroDroid-minimal-README.txt" />
+    <None Include="Assets\GyroDroid\DemoSceneAssets\Materials\DoubleSided.shader" />
+    <None Include="Assets\GyroDroid\DemoSceneAssets\Materials\Mobile_Diffuse.shader" />
+    <None Include="Assets\GyroDroid\ReadMe-5.2.txt" />
+    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2012\UnityVS.CSharp.targets" />
 </Project>
