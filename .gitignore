@@ -14,6 +14,7 @@
 *.userprefs
 *.pidb
 *.booproj
+*.orig
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -22,4 +23,3 @@
 sysinfo.txt
 Row The Boat/Row The Boat.CSharp.csproj
 Row The Boat/Assets/UnityVS.meta
-*.csproj

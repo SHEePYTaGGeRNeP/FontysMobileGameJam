@@ -19,15 +19,15 @@ Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.083 seconds
+- Completed reload, in  0.072 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\Photon\NetworkTest_Data\Managed\System.dll (this message is harmless)
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 33c8 -> priority: 1 
-  Thread -> id: 3d18 -> priority: 1 
+  Thread -> id: 558 -> priority: 1 
+  Thread -> id: 4250 -> priority: 1 
 OnStatusChanged: Connect
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
@@ -132,11 +132,500 @@ Registered PhotonView: 2001
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnStatusChanged: Disconnect
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC "AddForce" to All
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Received RPC: AddForce
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Roei (Single force) [0x00000] in <filename unknown>:0 
+  at Assets.Scripts.PhotonNetworking.PhotonRoeier.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+OnEvent: Event 254.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+HandleEventLeave for player ID: 2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
 Network destroy Instantiated GO: Roeier(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: Disconnect
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 

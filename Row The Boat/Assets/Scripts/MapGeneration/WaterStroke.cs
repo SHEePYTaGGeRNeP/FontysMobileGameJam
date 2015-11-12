@@ -201,10 +201,12 @@ namespace Assets.Scripts.MapGeneration
             dirtObject = GameObject.Instantiate(dirtObject);
             vertices = new List<Vector3>();
             faces = new List<int>();
+            List<Color> colors = new List<Color>();
 
             if (last != null)
             {
                 vertices.AddRange(last.lastTopData);
+
                 amountToDo = 6;
             }
 
@@ -249,6 +251,7 @@ namespace Assets.Scripts.MapGeneration
 
             mesh = new Mesh();
             mesh.SetVertices(vertices);
+            mesh.SetColors(colors);
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
