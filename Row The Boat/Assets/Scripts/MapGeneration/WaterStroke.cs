@@ -13,6 +13,8 @@ namespace Assets.Scripts.MapGeneration
         private int zPos;
         private WaterStroke last;
 
+        private List<Vector3> lastData;
+
         public WaterStroke(int size, int zPos, GameObject dirtObject, WaterStroke last)
         {
             water = new List<GameObject>[size];
@@ -58,12 +60,14 @@ namespace Assets.Scripts.MapGeneration
 
             if (last != null)
             {
+                vertices.AddRange(last.lastData);
+                amountToDo = 6;
             }
 
             for (int i = 0; i < 5; i++)
             {
-                vertices.Add(new Vector3(GetPivit(i, true), -1, zPos + i * 2));
-                vertices.Add(new Vector3(GetPivit(i, false), -1, zPos + i * 2));
+                vertices.Add(new Vector3(GetPivit(i, true) + 0.5f, -1, zPos + i * 2));
+                vertices.Add(new Vector3(GetPivit(i, false) - 0.5f, -1, zPos + i * 2));
 
                 vertices.Add(new Vector3(GetPivit(i, true), 1, zPos + i * 2));
                 vertices.Add(new Vector3(GetPivit(i, false), 1, zPos + i * 2));
@@ -75,11 +79,13 @@ namespace Assets.Scripts.MapGeneration
                 //obj.transform.position = new Vector3(GetPivit(i, false), 0, water[i][0].transform.position.z);
             }
 
-            vertices.Add(new Vector3(GetPivit(4, true), -1, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false), -1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, true) + 0.5f, -1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(GetPivit(4, false) - 0.5f, -1, zPos + 4 * 2 + 1));
 
             vertices.Add(new Vector3(GetPivit(4, true), 1, zPos + 4 * 2 + 1));
             vertices.Add(new Vector3(GetPivit(4, false), 1, zPos + 4 * 2 + 1));
+
+            lastData = vertices.GetRange(vertices.Count - 4, 4);
 
             for (int i = 0; i < amountToDo; i++)
             {
