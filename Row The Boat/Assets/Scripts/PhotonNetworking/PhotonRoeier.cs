@@ -14,7 +14,7 @@ namespace Assets.Scripts.PhotonNetworking
 
 		void Start()
 		{
-			_targetRPC = PhotonManager.Instance.GetComponent<PhotonView>();
+			this._targetRPC = PhotonManager.Instance.GetComponent<PhotonView>();
 			this._photonView = this.GetComponent<PhotonView>();
 			this._rowController = this.GetComponent<RowTiltController>();
 			this._rowController.Row += (sender, args) =>
@@ -22,6 +22,7 @@ namespace Assets.Scripts.PhotonNetworking
 				this.Roei(args.Strength * args.Efficiency);
 			};
 			GameObject.Find("Side").GetComponent<Text>().text = Paddle.RowSide.ToString();
+			//this.Paddle = this._targetRPC.RPC("RequestPaddle", PhotonTargets.MasterClient, );
 		}
 
 		void Update()
@@ -32,7 +33,7 @@ namespace Assets.Scripts.PhotonNetworking
 
 		public void Roei(float force)
 		{
-			this._targetRPC.RPC("AddForce", PhotonTargets.All, this.Paddle.transform.position, force);
+			this._targetRPC.RPC("AddForce", PhotonTargets.MasterClient, this.Paddle.transform.position, force);
 		}
 
 		// in an "observed" script:
