@@ -1,0 +1,22 @@
+Algemeen:
+- Zitten in een boot
+- 2 of 4 spelers roeien, 1 navigator (dus 3 of 5 spelers) -> Tekening Maken
+- Positie van spelers random in de boot, spelers moeten zelf uitzoeken waar ze zitten en hoe de boot reageert.
+- Botsen met een obstakel zorgt ervoor dat de snelheid verminderd (met x- snelheid is game over, water wordt zichtbaar bij navigater omdat boot zinkt)
+- Realistisch
+- Levels worden random generated, maar wel specifieke lengte (500m, 1000m, 1500m)
+- Finish line wordt gegeven na dit x aantal meters.
+(- Mogelijk AI waar spelers mee racen, zodat ze zo snel mogelijk bij het einde komen)
+(- Mogelijk pickups die door ergens in de beek liggen, navigator moet er langs navigeren zodat roeiers dit op kunnen pakken)
+
+Navigator: (UI)
+- Ziet level voor zich
+- Moet het team door de 'beek' navigeren en het ontwijken van obstakels
+- Level wordt waziger naarmate je tegen meer obstakels botst (boot zinkt, water komt in het display)
+(- Mogelijk UI voor pickups gebruiken)
+
+Roeiers: (UI)
+- Zien het level niet, weten niet waar ze zitten. 
+- Krijgen feedback na roeislag (Vibratie of Audio)
+- Accelerometer meet snelheid roeislag
+(- Mogelijk UI met pickups oppakken, tot dit er is ziet de speler niets)
