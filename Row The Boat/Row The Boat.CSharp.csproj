@@ -80,6 +80,8 @@
     <Compile Include="Assets\Game Jam Menu Template\Scripts\StartOptions.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Water.cs" />
+    <Compile Include="Assets\Scripts\NetworkPlayerSetup.cs" />
+    <Compile Include="Assets\Scripts\NetworkPlayerScript.cs" />
     <Compile Include="Assets\Scripts\TestScript.cs" />
   </ItemGroup>
   <ItemGroup>
