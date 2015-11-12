@@ -14,6 +14,7 @@ public class RowTiltController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        SensorHelper.ActivateRotation();
     }
 
     // Update is called once per frame
@@ -75,6 +76,7 @@ public class RowTiltController : MonoBehaviour
         else if (_accumulatedStrength >= 0.3f)
         {
             OnRow(new RowEventArgs(_rowSide, _accumulatedStrength, _efficiency));
+            Debug.Log(string.Format("Side: {0}, Strength: {1}, Efficiency: {2}", _rowSide, _accumulatedStrength, _efficiency));
             _accumulatedStrength = 0;
         }
     }

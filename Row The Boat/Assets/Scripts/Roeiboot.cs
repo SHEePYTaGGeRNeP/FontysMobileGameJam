@@ -19,12 +19,19 @@ public class Roeiboot : MonoBehaviour
 	void Start()
 	{
 		this._rb = this.GetComponent<Rigidbody>();
+
 		this._rowController = this.GetComponent<RowTiltController>();
-		this._rowController.Row += (sender, args) =>
-		{
-			if (args.Side != RowTiltController.RowSide.Left) return;
-			AddForce(this._achter, args.Strength * args.Efficiency);
-		};
+	    if (this._rowController != null)
+	    {
+            Debug.Log("Added row controls!");
+            this._rowController.Row += (sender, args) =>
+            {
+                //if (args.Side != RowTiltController.RowSide.Left) return;
+                Debug.Log(string.Format("Side: {0}, Strength: {1}, Efficency: {2}", args.Side, args.Strength, args.Efficiency));
+                AddForce(this._achter, args.Strength * args.Efficiency);
+            };
+        }
+
 	}
 
 	void FixedUpdate()
