@@ -5,9 +5,18 @@ namespace Assets.Scripts.PhotonNetworking
 {
 	class PhotonManager : Photon.PunBehaviour
 	{
+		public static PhotonManager Instance;
+
+
+		public bool Host;
 
 		private Roeiboot _boot;
 		public Roeiboot Boot { get { return this._boot; } }
+
+		void Awake()
+		{
+			Instance = this;
+		}
 
 		void Start()
 		{
@@ -33,6 +42,7 @@ namespace Assets.Scripts.PhotonNetworking
 		void OnPhotonRandomJoinFailed()
 		{
 			Debug.Log("Can't join random room - Creating room");
+			this.Host = true;
 			PhotonNetwork.CreateRoom(null);
 		}
 		public override void OnJoinedRoom()
@@ -45,10 +55,19 @@ namespace Assets.Scripts.PhotonNetworking
 				return;
 			}
 			GameObject player = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);
+			player.transform.position = new Vector3(1, 0, 0);
 			player.GetComponent<PhotonRoeier>().Paddle = this._boot.AssignPlayer(player.GetComponent<PhotonRoeier>());
-			player.transform.position = player.GetComponent<PhotonRoeier>().Paddle.position;
+			player.transform.position = player.GetComponent<PhotonRoeier>().Paddle.transform.position;
 			//monster.GetComponent<myThirdPersonController>().isControllable = true;
 			//myPhotonView = monster.GetComponent<PhotonView>();
+		}
+
+
+		[PunRPC]
+		public void AddForce(Vector3 paddle, float force)
+		{
+			if (!this.Host) return;
+			this._boot.AddForce(paddle, force);
 		}
 	}
 }
