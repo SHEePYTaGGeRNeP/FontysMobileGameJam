@@ -1,0 +1,1 @@
+The GyroDroid-minimal.unitypackage is for easier migration to your own projects.
