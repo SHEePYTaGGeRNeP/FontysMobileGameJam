@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.MapGeneration.ObjectPool;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,30 @@ namespace Assets.Scripts.MapGeneration
 {
     class MapGenerator : MonoBehaviour
     {
-        public GameObject WaterObject;
-        public GameObject DirtObject;
-        public int PathWidth = 7;
+        public GameObject ObjectPoolHolder = null;
+
+        public GameObject WaterObject = null;
+        public GameObject DirtObject = null;
+        public GameObject Oever = null;
+
+        public int WaterWidth = 7;
         private int zPosition = 0;
+
+        private float lastDisplacement = 0;
+        private float displacementValue = 0;
+        private float displacementInterpolation = 1;
+
+        private WaterStroke lastWaterBlock;
+
+        private static MapGenerator instance;
+        public static MapGenerator GetInstance()
+        {
+            return instance;
+        }
 
         public void Start()
         {
+            instance = this;
             CreateWaterMesh();
             CreateDirtMesh();
         }
@@ -26,14 +44,20 @@ namespace Assets.Scripts.MapGeneration
             mesh.Clear();
             List<Vector3> vertices = new List<Vector3>();
 
-            vertices.Add(new Vector3(PathWidth, 0, 1));
-            vertices.Add(new Vector3(PathWidth, 0, -1));
-            vertices.Add(new Vector3(-PathWidth, 0, -1));
-            vertices.Add(new Vector3(-PathWidth, 0, 1));
-            vertices.Add(new Vector3(PathWidth - 1, -1, 1));
-            vertices.Add(new Vector3(PathWidth - 1, -1, -1));
-            vertices.Add(new Vector3(-PathWidth + 1, -1, -1));
-            vertices.Add(new Vector3(-PathWidth + 1, -1, 1));
+            //vertices.Add(new Vector3(WaterWidth, 0, 1));
+            //vertices.Add(new Vector3(WaterWidth, 0, -1));
+            //vertices.Add(new Vector3(-WaterWidth, 0, -1));
+            //vertices.Add(new Vector3(-WaterWidth, 0, 1));
+
+            vertices.Add(new Vector3(WaterWidth, -1, 1));
+            vertices.Add(new Vector3(WaterWidth, -1, -1));
+            vertices.Add(new Vector3(-WaterWidth, -1, -1));
+            vertices.Add(new Vector3(-WaterWidth, -1, 1));
+
+            vertices.Add(new Vector3(WaterWidth - 1, -1, 1));
+            vertices.Add(new Vector3(WaterWidth - 1, -1, -1));
+            vertices.Add(new Vector3(-WaterWidth + 1, -1, -1));
+            vertices.Add(new Vector3(-WaterWidth + 1, -1, 1));
 
             mesh.SetVertices(vertices);
 
@@ -120,20 +144,42 @@ namespace Assets.Scripts.MapGeneration
             w.mesh = mesh;
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
-            GameObject dirt = Instantiate(DirtObject) as GameObject;
-            dirt.transform.position = new Vector3(-1, 0, zPosition);
-            dirt.transform.parent = this.transform;
-
-            for (int i = 0; i < PathWidth; i++)
+            WaterStroke ws = new WaterStroke(5, zPosition, Instantiate(DirtObject), lastWaterBlock); 
+            for (int row = 0; row < 5; row++)
             {
-                GameObject water = Instantiate(WaterObject) as GameObject;
-                water.transform.position = new Vector3(-PathWidth + (i * 2), 0, zPosition);
-                water.transform.parent = this.transform;
+                GameObject dirt = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt);
+                dirt.transform.position = new Vector3(-1 + lastDisplacement, 0, zPosition);
+                dirt.transform.parent = this.transform;
+
+                for (int i = 0; i < WaterWidth; i++)
+                {
+                    GameObject water = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Water);
+                    water.transform.position = new Vector3(-WaterWidth + (i * 2) + lastDisplacement, 0, zPosition);
+                    water.transform.parent = this.transform;
+                    ws.AddWater(water, row);
+                }
+                zPosition += 2;
+
+                if (displacementInterpolation >= 1)
+                {
+                    displacementValue += UnityEngine.Random.Range(-100, 100) / 10;
+                    displacementInterpolation = 0;
+                }
+
+                lastDisplacement = Lerp(lastDisplacement, displacementValue, displacementInterpolation);
+                displacementInterpolation += 0.2f;
             }
 
-            zPosition += 2;
+            ws.GenerateSides();
+
+            lastWaterBlock = ws;
+        }
+
+        private float Lerp(float start, float end, float i)
+        {
+            return start + (end - start) * i;
         }
     }
 }

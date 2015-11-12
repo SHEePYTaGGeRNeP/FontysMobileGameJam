@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.2.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -79,9 +77,14 @@
     <Compile Include="Assets\Game Jam Menu Template\Scripts\ShowPanels.cs" />
     <Compile Include="Assets\Game Jam Menu Template\Scripts\StartOptions.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\ObjectPool\GameObjectType.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\ObjectPool\ObjectData.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\ObjectPool\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\ObjectPool\PoolList.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Water.cs" />
-    <Compile Include="Assets\Scripts\NetworkPlayerSetup.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\WaterStroke.cs" />
     <Compile Include="Assets\Scripts\NetworkPlayerScript.cs" />
+    <Compile Include="Assets\Scripts\NetworkPlayerSetup.cs" />
     <Compile Include="Assets\Scripts\TestScript.cs" />
   </ItemGroup>
   <ItemGroup>
