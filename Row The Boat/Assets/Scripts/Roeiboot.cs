@@ -8,10 +8,6 @@ public class Roeiboot : MonoBehaviour
 
 	[SerializeField]
 	private Transform _rechtsvoor, _linksvoor, _rechtsachter, _linksachter, _achter;
-	[SerializeField]
-	private Text _multiplierText;
-	[SerializeField]
-	private Slider _multiplierSlider;
 
 	public float ForceMultiplier = 2;
 
@@ -49,9 +45,4 @@ public class Roeiboot : MonoBehaviour
 
 	}
 
-	public void OnSliderValueChanged()
-	{
-		this.ForceMultiplier = this._multiplierSlider.value;
-		this._multiplierText.text = this.ForceMultiplier.ToString();
-	}
 }
