@@ -176,7 +176,7 @@ namespace Assets.Scripts.MapGeneration
                     displacementInterpolation += 0.2f;
                 }
 
-                ws.GenerateSides();
+                ws.GenerateSides(this.transform);
 
                 lastWaterBlock = ws;
             }
