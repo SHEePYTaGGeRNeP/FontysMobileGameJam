@@ -13,7 +13,7 @@ namespace Assets.Scripts.MapGeneration
 
         public GameObject WaterObject = null;
         public GameObject DirtObject = null;
-        public GameObject Oever = null;
+        public GameObject DirtSideObject = null;
 
         public int WaterWidth = 7;
         private int zPosition = 0;
@@ -150,7 +150,7 @@ namespace Assets.Scripts.MapGeneration
         {
             if (amount > 0)
             {
-                WaterStroke ws = new WaterStroke(5, zPosition, Instantiate(DirtObject), lastWaterBlock);
+                WaterStroke ws = new WaterStroke(5, zPosition, Instantiate(DirtSideObject), lastWaterBlock);
                 for (int row = 0; row < 5; row++)
                 {
                     GameObject dirt = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt);
@@ -162,8 +162,16 @@ namespace Assets.Scripts.MapGeneration
                         GameObject water = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Water);
                         water.transform.position = new Vector3(-WaterWidth + (i * 2) + lastDisplacement, 0, zPosition);
                         water.transform.parent = this.transform;
+
                         ws.AddWater(water, row);
                     }
+
+                    BoxCollider bc = dirt.AddComponent<BoxCollider>();
+                    bc.center = new Vector3(-8.75f, 0, 0);
+                    bc.size = new Vector3(2, 1, 2);
+                    bc = dirt.AddComponent<BoxCollider>();
+                    bc.center = new Vector3(8.75f, 0, 0);
+                    bc.size = new Vector3(2, 1, 2);
                     zPosition += 2;
 
                     if (displacementInterpolation >= 1)

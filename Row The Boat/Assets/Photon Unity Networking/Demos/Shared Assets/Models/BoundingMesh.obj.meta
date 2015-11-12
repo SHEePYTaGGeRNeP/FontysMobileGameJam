@@ -1,23 +1,26 @@
 fileFormatVersion: 2
-guid: 50e49398ae6a71246b696fbc151d11f7
+guid: a494fd02c2f15b842ba2f5393004cfa3
+timeCreated: 1447353115
+licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Quad
+    100000: LevelCubes2[-934]
     100002: //RootNode
-    400000: Quad
+    400000: LevelCubes2[-934]
     400002: //RootNode
-    2300000: Quad
-    3300000: Quad
-    4300000: Quad
-    6400000: Quad
+    2300000: LevelCubes2[-934]
+    3300000: LevelCubes2[-934]
+    4300000: LevelCubes2[-934]
+    6400000: LevelCubes2[-934]
+    9500000: //RootNode
     11100000: //RootNode
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
-    legacyGenerateAnimations: 0
+    legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
@@ -52,10 +55,10 @@ ModelImporter:
     useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
+    splitTangentsAcrossUV: 0
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -70,7 +73,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
