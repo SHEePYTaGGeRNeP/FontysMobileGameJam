@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Networking;
 
 public class NetworkPlayerSetup : NetworkBehaviour {
@@ -7,7 +6,7 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 	[SerializeField]
 	private Behaviour[] _componentsToDisable;
 
-	void Awake()
+	void Start()
 	{
 		if (!this.isLocalPlayer)
 			for (int i = 0; i < this._componentsToDisable.Length; i++)
