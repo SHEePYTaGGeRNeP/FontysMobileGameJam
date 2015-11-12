@@ -21,3 +21,5 @@
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 Row The Boat/Row The Boat.CSharp.csproj
+Row The Boat/Assets/UnityVS.meta
+*.csproj

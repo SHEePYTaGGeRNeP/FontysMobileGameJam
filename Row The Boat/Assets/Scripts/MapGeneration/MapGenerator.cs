@@ -24,6 +24,8 @@ namespace Assets.Scripts.MapGeneration
 
         private WaterStroke lastWaterBlock;
 
+        private int amount = 30;
+
         private static MapGenerator instance;
         public static MapGenerator GetInstance()
         {
@@ -144,37 +146,41 @@ namespace Assets.Scripts.MapGeneration
             w.mesh = mesh;
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
-            WaterStroke ws = new WaterStroke(5, zPosition, Instantiate(DirtObject), lastWaterBlock); 
-            for (int row = 0; row < 5; row++)
+            if (amount > 0)
             {
-                GameObject dirt = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt);
-                dirt.transform.position = new Vector3(-1 + lastDisplacement, 0, zPosition);
-                dirt.transform.parent = this.transform;
-
-                for (int i = 0; i < WaterWidth; i++)
+                WaterStroke ws = new WaterStroke(5, zPosition, Instantiate(DirtObject), lastWaterBlock);
+                for (int row = 0; row < 5; row++)
                 {
-                    GameObject water = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Water);
-                    water.transform.position = new Vector3(-WaterWidth + (i * 2) + lastDisplacement, 0, zPosition);
-                    water.transform.parent = this.transform;
-                    ws.AddWater(water, row);
-                }
-                zPosition += 2;
+                    GameObject dirt = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt);
+                    dirt.transform.position = new Vector3(-1 + lastDisplacement, 0, zPosition);
+                    dirt.transform.parent = this.transform;
 
-                if (displacementInterpolation >= 1)
-                {
-                    displacementValue += UnityEngine.Random.Range(-100, 100) / 10;
-                    displacementInterpolation = 0;
+                    for (int i = 0; i < WaterWidth; i++)
+                    {
+                        GameObject water = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Water);
+                        water.transform.position = new Vector3(-WaterWidth + (i * 2) + lastDisplacement, 0, zPosition);
+                        water.transform.parent = this.transform;
+                        ws.AddWater(water, row);
+                    }
+                    zPosition += 2;
+
+                    if (displacementInterpolation >= 1)
+                    {
+                        displacementValue += UnityEngine.Random.Range(-100, 100) / 10;
+                        displacementInterpolation = 0;
+                    }
+
+                    lastDisplacement = Lerp(lastDisplacement, displacementValue, displacementInterpolation);
+                    displacementInterpolation += 0.2f;
                 }
 
-                lastDisplacement = Lerp(lastDisplacement, displacementValue, displacementInterpolation);
-                displacementInterpolation += 0.2f;
+                ws.GenerateSides();
+
+                lastWaterBlock = ws;
             }
-
-            ws.GenerateSides();
-
-            lastWaterBlock = ws;
+            amount--;
         }
 
         private float Lerp(float start, float end, float i)
