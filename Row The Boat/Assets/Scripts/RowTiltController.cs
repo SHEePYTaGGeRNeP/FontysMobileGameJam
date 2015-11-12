@@ -1,87 +1,108 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 
-public class RowTiltController : MonoBehaviour {
-    
+public class RowTiltController : MonoBehaviour
+{
+    private Vector3 _acceleration;
+    private float _accumulatedStrength;
+    private float _efficiency;
+    private Vector3 _rotation;
+    private RowSide _rowSide;
 
-    Vector3 Rotation;
-    Vector3 Acceleration;
+    public event EventHandler<RowEventArgs> Row;
 
-    enum RowSide
+    // Use this for initialization
+    private void Start()
     {
-        Left, Right, None
     }
 
-    RowSide rowSide;
-
-    float Efficiency;
-    float AccumulatedStrength;
-
-	// Use this for initialization
-	void Start () 
+    // Update is called once per frame
+    private void Update()
     {
-        
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        Rotation = SensorHelper.rotation.eulerAngles;
+        _rotation = SensorHelper.rotation.eulerAngles;
+
         CheckRowSide();
         CheckEfficiency();
         CheckRowMotion();
-	}
+    }
 
     public void CheckRowSide()
     {
-        if (Rotation.z >= 15 && Rotation.z <= 60)
+        if (_rotation.z >= 15 && _rotation.z <= 60)
         {
-            rowSide = RowSide.Left;
+            _rowSide = RowSide.Left;
         }
-        else if(Rotation.z <= 345 && Rotation.z >= 300)
+        else if (_rotation.z <= 345 && _rotation.z >= 300)
         {
-            rowSide = RowSide.Right;
+            _rowSide = RowSide.Right;
         }
         else
         {
-            rowSide = RowSide.None;
+            _rowSide = RowSide.None;
         }
     }
 
     public void CheckEfficiency()
     {
-        if (rowSide != RowSide.None)
+        if (_rowSide != RowSide.None)
         {
-            if (Rotation.x >= 270)
+            if (_rotation.x >= 270)
             {
-                Efficiency = ((Rotation.x - 270) * (100f / 90f)) / 100f;
+                _efficiency = ((_rotation.x - 270) * (100f / 90f)) / 100f;
             }
-            else if (Rotation.x <= 90)
+            else if (_rotation.x <= 90)
             {
-                Efficiency = Mathf.Abs(((Rotation.x - 90) * (100f / 90f)) / 100f);
+                _efficiency = Mathf.Abs(((_rotation.x - 90) * (100f / 90f)) / 100f);
             }
             else
             {
-                Efficiency = 0;
+                _efficiency = 0;
             }
         }
         else
         {
-            Efficiency = 0;
+            _efficiency = 0;
         }
     }
 
     public void CheckRowMotion()
     {
-        Acceleration = Input.gyro.userAcceleration;
-        if (Acceleration.z >= 0.05f)
+        _acceleration = Input.gyro.userAcceleration;
+        if (_acceleration.z >= 0.05f)
         {
-            AccumulatedStrength += Acceleration.z;
+            _accumulatedStrength += _acceleration.z;
         }
-        else if(AccumulatedStrength >= 0.3f)
+        else if (_accumulatedStrength >= 0.3f)
         {
-            AccumulatedStrength = 0;
-            //Call Function with all information > AddForce(RowSide rowside, float efficiency, float accumulatedstrength)
+            OnRow(new RowEventArgs(_rowSide, _accumulatedStrength, _efficiency));
+            _accumulatedStrength = 0;
         }
+    }
+
+    protected virtual void OnRow(RowEventArgs e)
+    {
+        var row = Row;
+        if (row != null) row.Invoke(this, e);
+    }
+
+    public class RowEventArgs : EventArgs
+    {
+        public RowEventArgs(RowSide side, float strength, float efficiency)
+        {
+            Side = side;
+            Strength = strength;
+            Efficiency = efficiency;
+        }
+
+        public RowSide Side { get; protected set; }
+        public float Strength { get; protected set; }
+        public float Efficiency { get; protected set; }
+    }
+
+    public enum RowSide
+    {
+        Left,
+        Right,
+        None
     }
 }
