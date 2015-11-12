@@ -78,11 +78,14 @@
     <Compile Include="Assets\Game Jam Menu Template\Scripts\StartOptions.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\Water.cs" />
+    <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\NetworkPlayerScript.cs" />
     <Compile Include="Assets\Scripts\NetworkPlayerSetup.cs" />
     <Compile Include="Assets\Scripts\TestScript.cs" />
+    <Compile Include="Assets\Scripts\WaterOnCam.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Art\Wispy Sky\ReadMe.txt" />
     <None Include="Assets\Game Jam Menu Template\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\Game Jam Menu Template\GameJamTemplateReadMe.txt" />
   </ItemGroup>

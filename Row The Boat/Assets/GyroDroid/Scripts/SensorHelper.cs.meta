@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 64b6fe2cd6dd47646839e4b3540814ae
+labels:
+- android
+- gyroscope
+- mobile
+- AR
+- sensors
+- orientation
+- gyro
+- plugin
+- sensor
+- rotation
+- augmentedreality
+- virtualreality
+- accelerometer
+- motion
+- motioncapture
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
