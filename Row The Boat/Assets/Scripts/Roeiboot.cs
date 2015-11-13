@@ -71,7 +71,7 @@ public class Roeiboot : MonoBehaviour
 	{
 		int index = Random.Range(0, this.Paddles.Count);
 		Paddle paddle = this.Paddles[index];
-		player.Paddle = paddle;
+		player.PaddleViewId = paddle.gameObject.GetPhotonView().viewID;
 		this.Paddles.Remove(paddle);
 		return paddle;
 	}

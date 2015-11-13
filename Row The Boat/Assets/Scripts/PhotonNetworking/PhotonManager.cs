@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.PhotonNetworking
 {
@@ -21,7 +22,8 @@ namespace Assets.Scripts.PhotonNetworking
 
 		void Start()
 		{
-			PhotonNetwork.logLevel = PhotonLogLevel.Full;
+			this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
+			PhotonNetwork.logLevel = PhotonLogLevel.Informational;
 			PhotonNetwork.ConnectUsingSettings("0.1");
 		}
 
@@ -47,78 +49,69 @@ namespace Assets.Scripts.PhotonNetworking
 			PhotonNetwork.CreateRoom(null);
 		}
 
+		public override void OnJoinedRoom()
+		{
+			Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
+			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
+		}
+
 		public override void OnPhotonPlayerConnected(PhotonPlayer player)
 		{
-
+			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
+			if (this.Host != PhotonNetwork.isMasterClient)
+			{
+				Debug.Log("WTF IS DIT");
+				Debug.Log("WTF IS DIT1");
+				Debug.Log("WTF IS DIT2");
+				Debug.Log("WTF IS DIT3");
+				Debug.Log("WTF IS DIT4");
+				Debug.Log("WTF IS DIT");
+			}
 			if (PhotonNetwork.isMasterClient)
 			{
+				if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
+				{
+					// TODO: Send RPC to client.
+					Debug.Log("No Paddles avaiable bro");
+					return;
+				}
 				Debug.Log("Spawn");
 				GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);
-					Paddle paddleToAssign = this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
-
-				photonView.RPC("AssignPaddle", player, spawnedPlayer.GetPhotonView().viewID, paddleToAssign.gameObject.GetPhotonView().viewID);
-
+				spawnedPlayer.transform.SetParent(this._boot.transform);
+				Paddle paddleToAssign = this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
+				spawnedPlayer.transform.position = paddleToAssign.transform.position;
+				PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
+				PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
+				photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID);
 			}
+			else
+				GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: False, but other client joined";
 
 
 		}
 
+
+		/// <summary>
+		/// Called on connecting client
+		/// </summary
 		[PunRPC]
 		public void AssignPaddle(int playerID, int paddleID)
 		{
 			Debug.Log("assign paddle");
 			GameObject myPlayer = PhotonView.Find(playerID).gameObject;
 
-			Paddle myPaddle = PhotonView.Find(paddleID).GetComponent<Paddle>();
-			myPlayer.GetComponent<PhotonRoeier>().Paddle = myPaddle;
-
-		}
-
-
-		public override void OnJoinedRoom()
-		{
-			if (this._boot == null)
-				this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
-			if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
-			{
-				Debug.Log("No Paddles avaiable bro");
-				return;
-			}
-
-
-		
-
-			// ben ik de master client? 
-			// dan spawn ik een gameObject
-			// check welke paddle vrij is
-			// stuur naar degene die joined de gespawnde gameobject + pos van paddle
-
-
-			/*
-			GameObject player = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);S
-			player.GetComponent<PhotonRoeier>().Paddle = this._boot.AssignPlayer(player.GetComponent<PhotonRoeier>());
-			player.transform.position = player.GetComponent<PhotonRoeier>().Paddle.transform.position;
-			//monster.GetComponent<myThirdPersonController>().isControllable = true;
-			//myPhotonView = monster.GetComponent<PhotonView>();*/
+			myPlayer.GetComponent<PhotonRoeier>().PaddleViewId = paddleID;
+            myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
+            GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID;
 		}
 
 
 		[PunRPC]
-		public void AddForce(Vector3 paddle, float force)
+		public void AddForce(int paddleViewId, float force)
 		{
-			this._boot.AddForce(paddle, force);
-		}
-
-		[PunRPC]
-		public void RequestPaddle(PhotonRoeier roeier, PhotonMessageInfo info)
-		{
-			Paddle paddle = this._boot.AssignPlayer(roeier);
-			this._photonView.RPC("SetPaddle", info.sender, paddle);
-		}
-
-		void SetPaddle()
-		{
-
+			PhotonView view = PhotonView.Find(paddleViewId);
+			Paddle paddle = PhotonView.Find(paddleViewId).GetComponent<Paddle>();
+			this._boot.AddForce(paddle.transform.position, force);
 		}
 	}
 }
