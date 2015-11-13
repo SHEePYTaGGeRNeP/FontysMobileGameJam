@@ -10,7 +10,7 @@ namespace Assets.Scripts
     {
         public void OnTriggerEnter(Collider collision)
         {
-            if (collision.gameObject.name.ToLower().Contains("ai"))
+            if (this.name.ToLower().Contains("ai"))
             {
                 // AI heeft gewonnen
                 Debug.Log("AI");
