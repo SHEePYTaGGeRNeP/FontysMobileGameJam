@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ namespace Assets.Scripts.PhotonNetworking
 
 		private Roeiboot _boot;
 		public Roeiboot Boot { get { return this._boot; } }
+
+		public event EventHandler OnJoinedRoomEvent;
 
 		void Awake()
 		{
@@ -52,6 +55,15 @@ namespace Assets.Scripts.PhotonNetworking
 		{
 			Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
 			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
+			this.OnJoinedRoomReached(EventArgs.Empty);
+		}
+		protected virtual void OnJoinedRoomReached(EventArgs e)
+		{
+			EventHandler handler = this.OnJoinedRoomEvent;
+			if (handler != null)
+			{
+				handler(this, e);
+			}
 		}
 
 		public override void OnPhotonPlayerConnected(PhotonPlayer player)
