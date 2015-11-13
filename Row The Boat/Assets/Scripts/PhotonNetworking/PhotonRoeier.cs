@@ -12,11 +12,14 @@ namespace Assets.Scripts.PhotonNetworking
 		private PhotonView _photonView;
 		private PhotonView _targetRPC;
 
+		private PaddleSoundController _paddleSoundController;
+
 		void Start()
 		{
 			this._targetRPC = PhotonManager.Instance.GetComponent<PhotonView>();
 			this._photonView = this.GetComponent<PhotonView>();
 			this._rowController = this.GetComponent<RowTiltController>();
+			this._paddleSoundController = this.GetComponent<PaddleSoundController> ();
 			this._rowController.Row += (sender, args) =>
 			{
                 if (args.Side == this.Side)
@@ -33,6 +36,7 @@ namespace Assets.Scripts.PhotonNetworking
 		public void Roei(float force)
 		{
 			if (PaddleViewId == 0) return;
+			_paddleSoundController.PlayRandomPaddleSound ();
 			this._targetRPC.RPC("AddForce", PhotonTargets.MasterClient, this.PaddleViewId, force);
 		}
 
