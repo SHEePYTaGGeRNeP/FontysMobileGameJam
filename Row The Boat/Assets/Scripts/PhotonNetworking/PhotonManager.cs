@@ -67,7 +67,6 @@ namespace Assets.Scripts.PhotonNetworking
 
 		public override void OnPhotonPlayerConnected(PhotonPlayer player)
 		{
-			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
 			if (PhotonNetwork.isMasterClient)
 			{
 				if (this._boot == null)
@@ -87,8 +86,6 @@ namespace Assets.Scripts.PhotonNetworking
 				PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
 				photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID);
 			}
-			else
-				GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: False, but other client joined";
 		}
 
 
