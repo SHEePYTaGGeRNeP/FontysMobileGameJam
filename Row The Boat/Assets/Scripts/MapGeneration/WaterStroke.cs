@@ -169,7 +169,7 @@ namespace Assets.Scripts.MapGeneration
             mf.mesh = mesh;
 
             underWater.transform.parent = parent;
-            other.Add(dirtObject);
+            other.Add(underWater);
 
 
 
@@ -177,7 +177,7 @@ namespace Assets.Scripts.MapGeneration
 
 
             //dirtObject = ObjectPool.ObjectPool.GetInstance().GetObject(ObjectPool.GameObjectType.Dirt);
-            dirtObject = GameObject.Instantiate(dirtObject);
+            //dirtObject = GameObject.Instantiate(dirtObject);
             vertices = new List<Vector3>();
             faces = new List<int>();
 
@@ -235,13 +235,13 @@ namespace Assets.Scripts.MapGeneration
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
-            mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
-            mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            mf = (MeshFilter)side.gameObject.GetComponent(typeof(MeshFilter));
+            mr = (MeshRenderer)side.gameObject.GetComponent(typeof(MeshRenderer));
             mf.mesh.Clear();
             mf.mesh = mesh;
 
-            dirtObject.transform.parent = parent;
-            other.Add(dirtObject);
+            side.transform.parent = parent;
+            other.Add(side);
 
 
 
@@ -250,7 +250,7 @@ namespace Assets.Scripts.MapGeneration
 
 
             //dirtObject = ObjectPool.ObjectPool.GetInstance().GetObject(ObjectPool.GameObjectType.Dirt);
-            dirtObject = GameObject.Instantiate(dirtObject);
+            //dirtObject = GameObject.Instantiate(dirtObject);
             vertices = new List<Vector3>();
             faces = new List<int>();
             List<Color> colors = new List<Color>();
@@ -310,13 +310,13 @@ namespace Assets.Scripts.MapGeneration
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
-            mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
-            mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            mf = (MeshFilter)top.gameObject.GetComponent(typeof(MeshFilter));
+            mr = (MeshRenderer)top.gameObject.GetComponent(typeof(MeshRenderer));
             mf.mesh.Clear();
             mf.mesh = mesh;
 
-            dirtObject.transform.parent = parent;
-            other.Add(dirtObject);
+            top.transform.parent = parent;
+            other.Add(top);
         }
 
         public void Destroy()
@@ -333,6 +333,10 @@ namespace Assets.Scripts.MapGeneration
             {
                 ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(other[i]);
             }
+
+            GameObject.Destroy(underWater);
+            GameObject.Destroy(side);
+            GameObject.Destroy(top);
         }
 
         public float ZPosition { get { return zPos; } }
