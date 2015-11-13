@@ -12,6 +12,7 @@ namespace Assets.Scripts.MapGeneration
         private GameObject dirtObject;
         private int zPos;
         private WaterStroke last;
+        private List<GameObject> other;
 
         private List<Vector3> lastData;
         private List<Vector3> lastSideData;
@@ -20,6 +21,7 @@ namespace Assets.Scripts.MapGeneration
         public WaterStroke(int size, int zPos, GameObject dirtObject, WaterStroke last)
         {
             water = new List<GameObject>[size];
+            other = new List<GameObject>();
             this.zPos = zPos;
             this.dirtObject = dirtObject;
             this.last = last;
@@ -113,22 +115,25 @@ namespace Assets.Scripts.MapGeneration
             // Generate a bit of floor
 
             Mesh mesh = new Mesh();
+            mesh.Clear();
             mesh.SetVertices(vertices);
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
             MeshFilter mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
             MeshRenderer mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            mf.mesh.Clear();
             mf.mesh = mesh;
 
             dirtObject.transform.parent = parent;
+            other.Add(dirtObject);
 
 
 
 
 
 
-
+            //dirtObject = ObjectPool.ObjectPool.GetInstance().GetObject(ObjectPool.GameObjectType.Dirt);
             dirtObject = GameObject.Instantiate(dirtObject);
             vertices = new List<Vector3>();
             faces = new List<int>();
@@ -182,15 +187,18 @@ namespace Assets.Scripts.MapGeneration
             // Generate a bit of floor
 
             mesh = new Mesh();
+            mesh.Clear();
             mesh.SetVertices(vertices);
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
             mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
             mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            mf.mesh.Clear();
             mf.mesh = mesh;
 
             dirtObject.transform.parent = parent;
+            other.Add(dirtObject);
 
 
 
@@ -198,6 +206,7 @@ namespace Assets.Scripts.MapGeneration
 
 
 
+            //dirtObject = ObjectPool.ObjectPool.GetInstance().GetObject(ObjectPool.GameObjectType.Dirt);
             dirtObject = GameObject.Instantiate(dirtObject);
             vertices = new List<Vector3>();
             faces = new List<int>();
@@ -250,6 +259,7 @@ namespace Assets.Scripts.MapGeneration
             // Generate a bit of floor
 
             mesh = new Mesh();
+            mesh.Clear();
             mesh.SetVertices(vertices);
             mesh.SetColors(colors);
             mesh.SetTriangles(faces, 0);
@@ -257,9 +267,29 @@ namespace Assets.Scripts.MapGeneration
 
             mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
             mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            mf.mesh.Clear();
             mf.mesh = mesh;
 
             dirtObject.transform.parent = parent;
+            other.Add(dirtObject);
         }
+
+        public void Destroy()
+        {
+            for (int i = 0; i < water.Length; i++)
+            {
+                for (int j = 0; j < water[i].Count; j++)
+                {
+                    ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(water[i][j]);
+                }
+            }
+
+            for (int i = 0; i < other.Count; i++)
+            {
+                ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(other[i]);
+            }
+        }
+
+        public float ZPosition { get { return zPos; } }
     }
 }

@@ -103,8 +103,8 @@ public class RowTiltController : MonoBehaviour
 
     public enum RowSide
     {
+        None,
         Left,
-        Right,
-        None
+        Right
     }
 }

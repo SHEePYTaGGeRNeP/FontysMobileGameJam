@@ -15,6 +15,8 @@ namespace Assets.Scripts.MapGeneration
         public GameObject DirtObject = null;
         public GameObject DirtSideObject = null;
 
+        public GameObject Player = null;
+
         public int WaterWidth = 7;
         private int zPosition = 0;
 
@@ -25,6 +27,10 @@ namespace Assets.Scripts.MapGeneration
         private WaterStroke lastWaterBlock;
 
         private int amount = 30;
+
+        private List<WaterStroke> strokes;
+        private List<GameObject> strokeObjects;
+        private List<GameObject> dirt;
 
         private static MapGenerator instance;
         public static MapGenerator GetInstance()
@@ -37,6 +43,10 @@ namespace Assets.Scripts.MapGeneration
             instance = this;
             CreateWaterMesh();
             CreateDirtMesh();
+
+            strokes = new List<WaterStroke>();
+            strokeObjects = new List<GameObject>();
+            dirt = new List<GameObject>();
         }
 
         private void CreateDirtMesh()
@@ -148,20 +158,27 @@ namespace Assets.Scripts.MapGeneration
 
         public void Update()
         {
-            if (amount > 0)
+            if (strokes.Count != 30)
             {
-                WaterStroke ws = new WaterStroke(5, zPosition, Instantiate(DirtSideObject), lastWaterBlock);
+                GameObject parent = new GameObject();
+                parent.name = "WaterStroke";
+                parent.transform.parent = this.transform;
+                strokeObjects.Add(parent);
+
+                //WaterStroke ws = new WaterStroke(5, zPosition, ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt), lastWaterBlock);
+                WaterStroke ws = new WaterStroke(5, zPosition, GameObject.Instantiate(DirtSideObject), lastWaterBlock);
                 for (int row = 0; row < 5; row++)
                 {
                     GameObject dirt = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt);
                     dirt.transform.position = new Vector3(-1 + lastDisplacement, 0, zPosition);
-                    dirt.transform.parent = this.transform;
+                    dirt.transform.parent = parent.transform;
+                    this.dirt.Add(dirt);
 
                     for (int i = 0; i < WaterWidth; i++)
                     {
                         GameObject water = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Water);
                         water.transform.position = new Vector3(-WaterWidth + (i * 2) + lastDisplacement, 0, zPosition);
-                        water.transform.parent = this.transform;
+                        water.transform.parent = parent.transform;
 
                         ws.AddWater(water, row);
                     }
@@ -184,11 +201,27 @@ namespace Assets.Scripts.MapGeneration
                     displacementInterpolation += 0.2f;
                 }
 
-                ws.GenerateSides(this.transform);
+                ws.GenerateSides(parent.transform);
 
-                lastWaterBlock = ws;
+                strokes.Add(ws);
+
+                lastWaterBlock = ws;         
             }
-            amount--;
+
+            if (strokes.Count > 0)
+            {
+                if (strokes[0].ZPosition + 5 * 2 < Player.transform.position.z)
+                {
+                    strokes[0].Destroy();
+                    strokes.RemoveAt(0);
+                    strokeObjects.RemoveAt(0);
+                    for (int i = 0; i < 5; i++)
+                    {
+                        ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(dirt[0]);
+                        dirt.RemoveAt(0);
+                    }
+                }
+            }
         }
 
         private float Lerp(float start, float end, float i)

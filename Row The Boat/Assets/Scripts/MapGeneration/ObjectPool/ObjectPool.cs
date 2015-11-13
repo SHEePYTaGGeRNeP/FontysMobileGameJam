@@ -47,9 +47,6 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
                 case GameObjectType.Water:
                     go = GameObject.Instantiate(MapGenerator.GetInstance().WaterObject);
                     break;
-                case GameObjectType.Oever:
-                    go = GameObject.Instantiate(MapGenerator.GetInstance().DirtSideObject);
-                    break;
             }
 
             if (go != null)
