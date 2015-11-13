@@ -32,8 +32,9 @@ public class WaterOnCam : MonoBehaviour {
         if (transform.position.y >= canvas.GetComponent<RectTransform>().sizeDelta.y)
         {
             sinking.Play();
-            gameover.SetActive(true);
+            //gameover.SetActive(true);
             alive = false;
+            Application.LoadLevel("GameOverMenu");
         }
             
 
