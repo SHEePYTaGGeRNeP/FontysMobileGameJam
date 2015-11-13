@@ -47,8 +47,14 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
                 case GameObjectType.Water:
                     go = GameObject.Instantiate(MapGenerator.GetInstance().WaterObject);
                     break;
-                case GameObjectType.Obstacle:
-                    go = GameObject.Instantiate(MapGenerator.GetInstance().obstacles[UnityEngine.Random.Range(0, MapGenerator.GetInstance().obstacles.Count)]);
+                case GameObjectType.Stone:
+                    go = GameObject.Instantiate(MapGenerator.GetInstance().stones[UnityEngine.Random.Range(0, MapGenerator.GetInstance().stones.Count)]);
+                    break;
+                case GameObjectType.Tree:
+                    go = GameObject.Instantiate(MapGenerator.GetInstance().trees[UnityEngine.Random.Range(0, MapGenerator.GetInstance().trees.Count)]);
+                    break;
+                case GameObjectType.Decoration:
+                    go = GameObject.Instantiate(MapGenerator.GetInstance().decoration[UnityEngine.Random.Range(0, MapGenerator.GetInstance().decoration.Count)]);
                     break;
             }
 

@@ -9,6 +9,11 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
     {
         Water,
         Dirt,
-        Obstacle
+        Decoration,
+        
+
+        //Obstacles
+        Stone,
+        Tree
     }
 }

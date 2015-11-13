@@ -15,7 +15,9 @@ namespace Assets.Scripts.MapGeneration
         public GameObject DirtObject = null;
         public GameObject DirtSideObject = null;
 
-        public List<GameObject> obstacles = null;
+        public List<GameObject> stones = null;
+        public List<GameObject> trees = null;
+        public List<GameObject> decoration = null;
 
         public GameObject Player = null;
 
@@ -162,6 +164,8 @@ namespace Assets.Scripts.MapGeneration
 
         public void Update()
         {
+            Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
+
             if (strokes.Count != 30)
             {
                 GameObject parent = new GameObject();
@@ -188,13 +192,13 @@ namespace Assets.Scripts.MapGeneration
                     }
 
                     CapsuleCollider bc = dirt.AddComponent<CapsuleCollider>();
-                    bc.center = new Vector3(-8.75f, 0, 0);
+                    bc.center = new Vector3(-(WaterWidth - 1.25f), 0, 0);
                     //bc.size = new Vector3(2, 1, 2);
                     bc.height = 1;
                     bc.radius = 1.5f;
 
                     bc = dirt.AddComponent<CapsuleCollider>();
-                    bc.center = new Vector3(8.75f, 0, 0);
+                    bc.center = new Vector3(WaterWidth - 1.25f, 0, 0);
                     //bc.size = new Vector3(2, 1, 2);
                     bc.height = 1;
                     bc.radius = 1.5f;
@@ -215,13 +219,59 @@ namespace Assets.Scripts.MapGeneration
                 // Generate an obstacle
                 if (generateObstacle)
                 {
-                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Obstacle);
-                    go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth, WaterWidth), -1, zPosition);
+                    List<GameObjectType> obsta = new List<GameObjectType>();
+                    obsta.Add(GameObjectType.Stone);
+                    obsta.Add(GameObjectType.Tree);
+
+                    GameObjectType type = obsta[UnityEngine.Random.Range(0, obsta.Count)];
+
+                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(type);
+                    if (type == GameObjectType.Stone)
+                    {
+                        go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth, WaterWidth), -1, zPosition);
+                    }
+                    else if (type == GameObjectType.Tree)
+                    {
+                        int dist = UnityEngine.Random.Range(-25, 25);
+                        go.transform.position = new Vector3(lastDisplacement + dist, -1, zPosition);
+
+                        go.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(-45, 45));
+                    }
                     go.transform.parent = parent.transform;
                     ws.AddObstacle(go);
                 }
 
                 generateObstacle = !generateObstacle;
+
+                // Generate decoration
+
+                for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
+                {
+                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
+                    go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth * 3, -WaterWidth), go.transform.position.y, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
+                    go.transform.parent = parent.transform;
+                    ws.AddObstacle(go);
+
+                    //go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Decoration);
+                    //go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth * 3, -WaterWidth), 1, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
+                    //go.transform.parent = parent.transform;
+                    //ws.AddObstacle(go);
+                }
+
+                for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
+                {
+                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
+                    go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(WaterWidth, WaterWidth * 3), go.transform.position.y, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
+                    go.transform.parent = parent.transform;
+                    ws.AddObstacle(go);
+
+                    //go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Decoration);
+                    //go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(WaterWidth, WaterWidth * 3), 1, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
+                    //go.transform.parent = parent.transform;
+                    //ws.AddObstacle(go);
+                }
+
+
 
                 ws.GenerateSides(parent.transform);
 
