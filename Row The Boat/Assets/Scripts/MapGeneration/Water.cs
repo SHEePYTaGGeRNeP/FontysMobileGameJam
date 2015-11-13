@@ -9,8 +9,8 @@ namespace Assets.Scripts.MapGeneration
     class Water : MonoBehaviour
     {
         public Mesh mesh;
-        public Water left;
-        public Water right;
+        //public Water left;
+        //public Water right;
 
         private Vector3 nextPosition = new Vector3();
         private Vector3 startPosition = new Vector3();

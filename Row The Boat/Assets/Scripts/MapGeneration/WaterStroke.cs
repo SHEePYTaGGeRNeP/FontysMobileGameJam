@@ -14,11 +14,19 @@ namespace Assets.Scripts.MapGeneration
         private WaterStroke last;
         private List<GameObject> other;
 
+        private Mesh underWaterMesh;
+        private Mesh sideMesh;
+        private Mesh topMesh;
+
+        private GameObject underWater;
+        private GameObject side;
+        private GameObject top;
+
         private List<Vector3> lastData;
         private List<Vector3> lastSideData;
         private List<Vector3> lastTopData;
 
-        public WaterStroke(int size, int zPos, GameObject dirtObject, WaterStroke last)
+        public WaterStroke(int size, int zPos, GameObject dirtObject, WaterStroke last, Transform parent)
         {
             water = new List<GameObject>[size];
             other = new List<GameObject>();
@@ -29,11 +37,41 @@ namespace Assets.Scripts.MapGeneration
             {
                 water[i] = new List<GameObject>();
             }
+
+
+            underWaterMesh = new Mesh();
+            sideMesh = new Mesh();
+            topMesh = new Mesh();
+            underWater = GameObject.Instantiate(dirtObject);
+            side = GameObject.Instantiate(dirtObject);
+            top = GameObject.Instantiate(dirtObject);
+            underWater.transform.parent = parent;
+            side.transform.parent = parent;
+            top.transform.parent = parent;
+
+            List<Vector3> vertices = new List<Vector3>();
+            List<int> faces = new List<int>();
+            for (int i = 0; i < 24; i++)
+            {
+                vertices.Add(new Vector3());
+                faces.Add(0);
+            }
+            underWaterMesh.SetVertices(vertices);
+            underWaterMesh.SetTriangles(faces.GetRange(0, 21), 0);
+            sideMesh.SetVertices(vertices);
+            sideMesh.SetTriangles(faces.GetRange(0, 21), 0);
+            topMesh.SetVertices(vertices);
+            topMesh.SetTriangles(faces.GetRange(0, 21), 0);
         }
 
         public void AddWater(GameObject obj, int row)
         {
             water[row].Add(obj);
+        }
+
+        public void AddObstacle(GameObject obj)
+        {
+            other.Add(obj);
         }
 
         public float GetPivit(int row, bool findLeft)
@@ -52,6 +90,11 @@ namespace Assets.Scripts.MapGeneration
             }
 
             return water[row][found].transform.position.x;
+        }
+
+        private void GenerateUnderWater()
+        {
+
         }
 
         public void GenerateSides(Transform parent)
@@ -120,12 +163,12 @@ namespace Assets.Scripts.MapGeneration
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
-            MeshFilter mf = (MeshFilter)dirtObject.gameObject.GetComponent(typeof(MeshFilter));
-            MeshRenderer mr = (MeshRenderer)dirtObject.gameObject.GetComponent(typeof(MeshRenderer));
+            MeshFilter mf = (MeshFilter)underWater.gameObject.GetComponent(typeof(MeshFilter));
+            MeshRenderer mr = (MeshRenderer)underWater.gameObject.GetComponent(typeof(MeshRenderer));
             mf.mesh.Clear();
             mf.mesh = mesh;
 
-            dirtObject.transform.parent = parent;
+            underWater.transform.parent = parent;
             other.Add(dirtObject);
 
 
@@ -212,6 +255,8 @@ namespace Assets.Scripts.MapGeneration
             faces = new List<int>();
             List<Color> colors = new List<Color>();
 
+            int sideSize = 50;
+
             if (last != null)
             {
                 vertices.AddRange(last.lastTopData);
@@ -224,16 +269,16 @@ namespace Assets.Scripts.MapGeneration
                 vertices.Add(new Vector3(GetPivit(i, true) - 5, 1, zPos + i * 2));
                 vertices.Add(new Vector3(GetPivit(i, false) + 5, 1, zPos + i * 2));
 
-                vertices.Add(new Vector3(low - 1 - 5, 1, zPos + i * 2));
-                vertices.Add(new Vector3(high + 1 + 5, 1, zPos + i * 2));
+                vertices.Add(new Vector3(low - 1 - sideSize, 5, zPos + i * 2));
+                vertices.Add(new Vector3(high + 1 + sideSize, 5, zPos + i * 2));
             }
 
             // Add vertices at the end, so the next stroke can connect to it
             vertices.Add(new Vector3(GetPivit(4, true) - 5, 1, zPos + 4 * 2 + 1));
             vertices.Add(new Vector3(GetPivit(4, false) + 5, 1, zPos + 4 * 2 + 1));
 
-            vertices.Add(new Vector3(low - 1 - 5, 1, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(high + 1 + 5, 1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(low - 1 - sideSize, 5, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(high + 1 + sideSize, 5, zPos + 4 * 2 + 1));
 
             lastTopData = vertices.GetRange(vertices.Count - 4, 4);
 

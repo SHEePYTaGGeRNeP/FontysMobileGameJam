@@ -47,6 +47,9 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
                 case GameObjectType.Water:
                     go = GameObject.Instantiate(MapGenerator.GetInstance().WaterObject);
                     break;
+                case GameObjectType.Obstacle:
+                    go = GameObject.Instantiate(MapGenerator.GetInstance().obstacles[UnityEngine.Random.Range(0, MapGenerator.GetInstance().obstacles.Count)]);
+                    break;
             }
 
             if (go != null)
