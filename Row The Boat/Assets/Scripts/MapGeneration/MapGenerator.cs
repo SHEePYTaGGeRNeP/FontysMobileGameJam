@@ -166,7 +166,7 @@ namespace Assets.Scripts.MapGeneration
 
         public void Update()
         {
-            Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
+            //Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
 
             if (strokes.Count != 30)
             {
