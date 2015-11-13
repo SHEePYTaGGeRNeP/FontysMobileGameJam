@@ -29,7 +29,7 @@ public class Roeiboot : MonoBehaviour
             this._rowController.Row += (sender, args) =>
             {
                 //if (args.Side != RowTiltController.RowSide.Left) return;
-                AddForce(this._achter, args.Strength * args.Efficiency);
+                AddForce(this._achter.position, args.Strength * args.Efficiency);
             };
         }
 
@@ -71,7 +71,7 @@ public class Roeiboot : MonoBehaviour
 	{
 		int index = Random.Range(0, this.Paddles.Count);
 		Paddle paddle = this.Paddles[index];
-		player.Paddle = paddle;
+		player.PaddleViewId = paddle.gameObject.GetPhotonView().viewID;
 		this.Paddles.Remove(paddle);
 		return paddle;
 	}

@@ -5,7 +5,7 @@ namespace Assets.Scripts.PhotonNetworking
 
 	public class PhotonRoeier : MonoBehaviour
 	{
-		public Paddle Paddle;
+		public int PaddleViewId;
 	
 
 		private RowTiltController _rowController;
@@ -21,8 +21,6 @@ namespace Assets.Scripts.PhotonNetworking
 			{
 				this.Roei(args.Strength * args.Efficiency);
 			};
-			GameObject.Find("Side").GetComponent<Text>().text = Paddle.RowSide.ToString();
-			//this.Paddle = this._targetRPC.RPC("RequestPaddle", PhotonTargets.MasterClient, );
 		}
 
 		void Update()
@@ -33,7 +31,8 @@ namespace Assets.Scripts.PhotonNetworking
 
 		public void Roei(float force)
 		{
-			this._targetRPC.RPC("AddForce", PhotonTargets.MasterClient, this.Paddle.transform.position, force);
+			if (PaddleViewId == 0) return;
+			this._targetRPC.RPC("AddForce", PhotonTargets.MasterClient, this.PaddleViewId, force);
 		}
 
 		// in an "observed" script:
