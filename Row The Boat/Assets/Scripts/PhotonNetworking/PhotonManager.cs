@@ -54,7 +54,6 @@ namespace Assets.Scripts.PhotonNetworking
 		public override void OnJoinedRoom()
 		{
 			Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
-			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
 			this.OnJoinedRoomReached(EventArgs.Empty);
 		}
 		protected virtual void OnJoinedRoomReached(EventArgs e)
@@ -69,15 +68,6 @@ namespace Assets.Scripts.PhotonNetworking
 		public override void OnPhotonPlayerConnected(PhotonPlayer player)
 		{
 			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
-			if (this.Host != PhotonNetwork.isMasterClient)
-			{
-				Debug.Log("WTF IS DIT");
-				Debug.Log("WTF IS DIT1");
-				Debug.Log("WTF IS DIT2");
-				Debug.Log("WTF IS DIT3");
-				Debug.Log("WTF IS DIT4");
-				Debug.Log("WTF IS DIT");
-			}
 			if (PhotonNetwork.isMasterClient)
 			{
 				if (this._boot == null)
@@ -99,8 +89,6 @@ namespace Assets.Scripts.PhotonNetworking
 			}
 			else
 				GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: False, but other client joined";
-
-
 		}
 
 
