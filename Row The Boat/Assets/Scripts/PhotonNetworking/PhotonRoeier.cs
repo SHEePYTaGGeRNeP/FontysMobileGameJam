@@ -6,7 +6,7 @@ namespace Assets.Scripts.PhotonNetworking
 	public class PhotonRoeier : MonoBehaviour
 	{
 		public int PaddleViewId;
-	
+	    public RowTiltController.RowSide Side { get; set; }
 
 		private RowTiltController _rowController;
 		private PhotonView _photonView;
@@ -19,7 +19,8 @@ namespace Assets.Scripts.PhotonNetworking
 			this._rowController = this.GetComponent<RowTiltController>();
 			this._rowController.Row += (sender, args) =>
 			{
-				this.Roei(args.Strength * args.Efficiency);
+                if (args.Side == this.Side)
+				    this.Roei(args.Strength * args.Efficiency);
 			};
 		}
 

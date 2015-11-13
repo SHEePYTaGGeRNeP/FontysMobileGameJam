@@ -101,16 +101,15 @@ namespace Assets.Scripts.PhotonNetworking
 			GameObject myPlayer = PhotonView.Find(playerID).gameObject;
 
 			myPlayer.GetComponent<PhotonRoeier>().PaddleViewId = paddleID;
-			GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID.ToString();
+            myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
+            GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID;
 		}
 
 
 		[PunRPC]
 		public void AddForce(int paddleViewId, float force)
 		{
-			Debug.Log("Force on :" + paddleViewId);
 			PhotonView view = PhotonView.Find(paddleViewId);
-			Debug.Log("View: " + view.viewID);
 			Paddle paddle = PhotonView.Find(paddleViewId).GetComponent<Paddle>();
 			this._boot.AddForce(paddle.transform.position, force);
 		}
