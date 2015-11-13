@@ -164,7 +164,7 @@ namespace Assets.Scripts.MapGeneration
 
         public void Update()
         {
-            //Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
+            Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
 
             if (strokes.Count != 30)
             {
@@ -282,7 +282,7 @@ namespace Assets.Scripts.MapGeneration
 
             if (strokes.Count > 0)
             {
-                if (strokes[0].ZPosition + 5 * 2 < Player.transform.position.z)
+                if (strokes[0].ZPosition + 20 * 2 < Player.transform.position.z)
                 {
                     strokes[0].Destroy();
                     strokes.RemoveAt(0);
