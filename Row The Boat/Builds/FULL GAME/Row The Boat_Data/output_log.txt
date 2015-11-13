@@ -20,21 +20,21 @@ Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The 
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.079 seconds
+- Completed reload, in  0.073 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\System.dll (this message is harmless)
-[VRDevice] Initialization of device oculus failed.
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2dbc -> priority: 1 
-  Thread -> id: a38 -> priority: 1 
+  Thread -> id: 31fc -> priority: 1 
+  Thread -> id: 40dc -> priority: 1 
+[VRDevice] Initialization of device oculus failed.
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.548426 ms
+UnloadTime: 2.053664 ms
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 638.
-Total: 0.881741 ms (FindLiveObjects: 0.060182 ms CreateObjectMapping: 0.065314 ms MarkObjects: 0.738050 ms  DeleteObjects: 0.016795 ms)
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 639.
+Total: 0.613020 ms (FindLiveObjects: 0.068113 ms CreateObjectMapping: 0.035922 ms MarkObjects: 0.492189 ms  DeleteObjects: 0.015395 ms)
 
 OnStatusChanged: Connect
  
@@ -72,7 +72,15 @@ Joining random room!
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OperationResponse 225: ReturnCode: 0.
+Operation failed: OperationResponse 225: ReturnCode: 32760 (No match found). Parameters: {}
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Can't join random room - Creating room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OperationResponse 227: ReturnCode: 0.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -92,7 +100,7 @@ OperationResponse 230: ReturnCode: 0.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OperationResponse 226: ReturnCode: 0.
+OperationResponse 227: ReturnCode: 0.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -100,7 +108,7 @@ OnEvent: Event 255.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnJoinedRoom() : You Have Joined a Room : cf5945c2-bc84-4dfc-ba10-f2cd3b60bd2a
+OnJoinedRoom() : You Have Joined a Room : 8c557600-eb36-4e3e-866e-2a87f1e44de7
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -109,12 +117,20 @@ Checking scene to load...
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.671803 ms
+UnloadTime: 0.638679 ms
 
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 726.
-Total: 0.648943 ms (FindLiveObjects: 0.033590 ms CreateObjectMapping: 0.034989 ms MarkObjects: 0.571032 ms  DeleteObjects: 0.008864 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 871.
+Total: 0.731985 ms (FindLiveObjects: 0.047119 ms CreateObjectMapping: 0.040121 ms MarkObjects: 0.633081 ms  DeleteObjects: 0.010263 ms)
 
-OnEvent: Event 202.
+OnEvent: Event 255.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Spawn
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+RotationVector is available.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -122,27 +138,79 @@ OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-assign paddle
+OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at Assets.Scripts.PhotonNetworking.PhotonManager.AssignPaddle (Int32 playerID, Int32 paddleID) [0x00000] in <filename unknown>:0 
-  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] in <filename unknown>:0 
-Rethrow as TargetInvocationException: Exception has been thrown by the target of an invocation.
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] in <filename unknown>:0 
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <filename unknown>:0 
-  at NetworkingPeer.ExecuteRpc (ExitGames.Client.Photon.Hashtable rpcData, .PhotonPlayer sender) [0x00000] in <filename unknown>:0 
-  at NetworkingPeer.OnEvent (ExitGames.Client.Photon.EventData photonEvent) [0x00000] in <filename unknown>:0 
-  at ExitGames.Client.Photon.PeerBase.DeserializeMessageAndCallback (System.Byte[] inBuff) [0x00000] in <filename unknown>:0 
-  at ExitGames.Client.Photon.EnetPeer.DispatchIncomingCommands () [0x00000] in <filename unknown>:0 
-  at ExitGames.Client.Photon.PhotonPeer.DispatchIncomingCommands () [0x00000] in <filename unknown>:0 
-  at PhotonHandler.Update () [0x00000] in <filename unknown>:0 
+OnEvent: Event 200.
  
-(Filename:  Line: -1)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-RotationVector is available.
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -150,7 +218,7 @@ OnEvent: Event 254.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-HandleEventLeave for player ID: 1
+HandleEventLeave for player ID: 2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 

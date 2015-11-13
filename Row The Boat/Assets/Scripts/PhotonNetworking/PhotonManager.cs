@@ -100,7 +100,6 @@ namespace Assets.Scripts.PhotonNetworking
 
 			myPlayer.GetComponent<PhotonRoeier>().PaddleViewId = paddleID;
 			myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
-			GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID;
 		}
 
 
