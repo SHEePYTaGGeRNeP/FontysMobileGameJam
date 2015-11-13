@@ -22,7 +22,6 @@ namespace Assets.Scripts.PhotonNetworking
 
 		void Start()
 		{
-			this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
 			PhotonNetwork.logLevel = PhotonLogLevel.Informational;
 			PhotonNetwork.ConnectUsingSettings("0.1");
 		}
@@ -69,6 +68,8 @@ namespace Assets.Scripts.PhotonNetworking
 			}
 			if (PhotonNetwork.isMasterClient)
 			{
+				if (this._boot == null)
+					this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
 				if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
 				{
 					// TODO: Send RPC to client.
@@ -101,8 +102,8 @@ namespace Assets.Scripts.PhotonNetworking
 			GameObject myPlayer = PhotonView.Find(playerID).gameObject;
 
 			myPlayer.GetComponent<PhotonRoeier>().PaddleViewId = paddleID;
-            myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
-            GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID;
+			myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
+			GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID;
 		}
 
 
