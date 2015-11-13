@@ -32,7 +32,7 @@ namespace Assets.Scripts.MapGeneration
 
         private WaterStroke lastWaterBlock;
 
-        private int amount = 20;
+        public int MapLengte = 20;
 
         private List<WaterStroke> strokes;
         private List<GameObject> strokeObjects;
@@ -279,7 +279,9 @@ namespace Assets.Scripts.MapGeneration
 
                 strokes.Add(ws);
 
-                lastWaterBlock = ws;         
+                lastWaterBlock = ws;
+
+                MapLengte--;
             }
 
             if (strokes.Count > 0)
@@ -297,13 +299,14 @@ namespace Assets.Scripts.MapGeneration
                 }
             }
 
-            if (amount == 0)
+            if (MapLengte == 0)
             {
                 GameObject fi = Instantiate(Finish);
                 fi.transform.position = new Vector3(lastDisplacement, 0.2f, zPosition);
+                MapLengte = -1;
             }
 
-            amount--;
+            
         }
 
         private float Lerp(float start, float end, float i)
