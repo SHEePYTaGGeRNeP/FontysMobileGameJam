@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class RowTiltController : MonoBehaviour
 {
+    public enum RowSide
+    {
+        None,
+        Left,
+        Right
+    }
+
     private Vector3 _acceleration;
     private float _accumulatedStrength;
     private float _efficiency;
@@ -14,13 +21,15 @@ public class RowTiltController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        SensorHelper.ActivateRotation();
+        Sensor.Activate(Sensor.Type.GameRotationVector);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        _rotation = SensorHelper.rotation.eulerAngles;
+        _rotation = Sensor.gameRotationVector;
+        _acceleration = Input.gyro.userAcceleration;
+        Debug.Log(string.Format("Rot: {0}, Accel: {1}", _rotation, _acceleration));
 
         CheckRowSide();
         CheckEfficiency();
@@ -68,7 +77,6 @@ public class RowTiltController : MonoBehaviour
 
     public void CheckRowMotion()
     {
-        _acceleration = Input.gyro.userAcceleration;
         if (_acceleration.z >= 0.05f)
         {
             _accumulatedStrength += _acceleration.z;
@@ -76,7 +84,8 @@ public class RowTiltController : MonoBehaviour
         else if (_accumulatedStrength >= 0.3f)
         {
             OnRow(new RowEventArgs(_rowSide, _accumulatedStrength, _efficiency));
-            Debug.Log(string.Format("Side: {0}, Strength: {1}, Efficiency: {2}", _rowSide, _accumulatedStrength, _efficiency));
+            Debug.Log(string.Format("Side: {0}, Strength: {1}, Efficiency: {2}", _rowSide, _accumulatedStrength,
+                _efficiency));
             _accumulatedStrength = 0;
         }
     }
@@ -99,12 +108,10 @@ public class RowTiltController : MonoBehaviour
         public RowSide Side { get; protected set; }
         public float Strength { get; protected set; }
         public float Efficiency { get; protected set; }
-    }
 
-    public enum RowSide
-    {
-        None,
-        Left,
-        Right
+        public override string ToString()
+        {
+            return string.Format("Side: {0}, Strength: {1}, Efficiency: {2}", Side, Strength, Efficiency);
+        }
     }
 }
