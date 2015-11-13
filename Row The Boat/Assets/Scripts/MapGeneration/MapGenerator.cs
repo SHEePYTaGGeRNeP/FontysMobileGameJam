@@ -15,6 +15,8 @@ namespace Assets.Scripts.MapGeneration
         public GameObject DirtObject = null;
         public GameObject DirtSideObject = null;
 
+        public GameObject Finish = null;
+
         public List<GameObject> stones = null;
         public List<GameObject> trees = null;
         public List<GameObject> decoration = null;
@@ -30,7 +32,7 @@ namespace Assets.Scripts.MapGeneration
 
         private WaterStroke lastWaterBlock;
 
-        //private int amount = 30;
+        public int MapLengte = 20;
 
         private List<WaterStroke> strokes;
         private List<GameObject> strokeObjects;
@@ -277,12 +279,14 @@ namespace Assets.Scripts.MapGeneration
 
                 strokes.Add(ws);
 
-                lastWaterBlock = ws;         
+                lastWaterBlock = ws;
+
+                MapLengte--;
             }
 
             if (strokes.Count > 0)
             {
-                if (strokes[0].ZPosition + 5 * 2 < Player.transform.position.z)
+                if (strokes[0].ZPosition + 20 * 2 < Player.transform.position.z)
                 {
                     strokes[0].Destroy();
                     strokes.RemoveAt(0);
@@ -294,6 +298,15 @@ namespace Assets.Scripts.MapGeneration
                     }
                 }
             }
+
+            if (MapLengte == 0)
+            {
+                GameObject fi = Instantiate(Finish);
+                fi.transform.position = new Vector3(lastDisplacement, 0.2f, zPosition);
+                MapLengte = -1;
+            }
+
+            
         }
 
         private float Lerp(float start, float end, float i)

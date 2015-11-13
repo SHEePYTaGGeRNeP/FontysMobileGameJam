@@ -115,4 +115,9 @@ public class StartOptions : MonoBehaviour {
 		//Hide the main menu UI element
 		showPanels.HideMenu();
 	}
+
+    public void BackToMenu()
+    {
+        Application.LoadLevel("MainMenu");
+    }
 }
