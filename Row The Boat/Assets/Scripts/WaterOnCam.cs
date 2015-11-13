@@ -31,6 +31,7 @@ public class WaterOnCam : MonoBehaviour {
 
         if (transform.position.y >= canvas.GetComponent<RectTransform>().sizeDelta.y)
         {
+            sinking.Play();
             gameover.SetActive(true);
             alive = false;
         }
@@ -41,13 +42,7 @@ public class WaterOnCam : MonoBehaviour {
             transform.position = Vector3.SmoothDamp(transform.position, new Vector3(transform.position.x, transform.position.y + 40, transform.position.z), ref velocity, smoothTime);
             if (transform.position.y >= originalPosition.y + 40)
                 moving = false;
-        }
-
-        if (!alive)
-        {
-            sinking.Play();
-        }
-            
+        }            
 	}
 
     public void RaiseWater()
