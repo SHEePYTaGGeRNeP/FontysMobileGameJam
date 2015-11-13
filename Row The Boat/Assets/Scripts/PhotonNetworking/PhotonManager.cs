@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ namespace Assets.Scripts.PhotonNetworking
 		private Roeiboot _boot;
 		public Roeiboot Boot { get { return this._boot; } }
 
+		public event EventHandler OnJoinedRoomEvent;
+
 		void Awake()
 		{
 			Instance = this;
@@ -22,7 +25,6 @@ namespace Assets.Scripts.PhotonNetworking
 
 		void Start()
 		{
-			this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
 			PhotonNetwork.logLevel = PhotonLogLevel.Informational;
 			PhotonNetwork.ConnectUsingSettings("0.1");
 		}
@@ -52,23 +54,24 @@ namespace Assets.Scripts.PhotonNetworking
 		public override void OnJoinedRoom()
 		{
 			Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
-			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
+			this.OnJoinedRoomReached(EventArgs.Empty);
+		}
+		protected virtual void OnJoinedRoomReached(EventArgs e)
+		{
+			EventHandler handler = this.OnJoinedRoomEvent;
+			if (handler != null)
+			{
+				handler(this, e);
+			}
 		}
 
 		public override void OnPhotonPlayerConnected(PhotonPlayer player)
 		{
 			GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: " + PhotonNetwork.isMasterClient.ToString();
-			if (this.Host != PhotonNetwork.isMasterClient)
-			{
-				Debug.Log("WTF IS DIT");
-				Debug.Log("WTF IS DIT1");
-				Debug.Log("WTF IS DIT2");
-				Debug.Log("WTF IS DIT3");
-				Debug.Log("WTF IS DIT4");
-				Debug.Log("WTF IS DIT");
-			}
 			if (PhotonNetwork.isMasterClient)
 			{
+				if (this._boot == null)
+					this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
 				if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
 				{
 					// TODO: Send RPC to client.
@@ -86,8 +89,6 @@ namespace Assets.Scripts.PhotonNetworking
 			}
 			else
 				GameObject.Find("MasterClient").GetComponent<Text>().text = "Master: False, but other client joined";
-
-
 		}
 
 
@@ -101,8 +102,8 @@ namespace Assets.Scripts.PhotonNetworking
 			GameObject myPlayer = PhotonView.Find(playerID).gameObject;
 
 			myPlayer.GetComponent<PhotonRoeier>().PaddleViewId = paddleID;
-            myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
-            GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID;
+			myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
+			GameObject.Find("Side").GetComponent<Text>().text = "Paddle ID: " + paddleID;
 		}
 
 
