@@ -8,6 +8,7 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
     enum GameObjectType
     {
         Water,
-        Dirt
+        Dirt,
+        Obstacle
     }
 }

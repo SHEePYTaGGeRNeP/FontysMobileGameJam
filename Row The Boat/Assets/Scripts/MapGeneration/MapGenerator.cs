@@ -15,6 +15,8 @@ namespace Assets.Scripts.MapGeneration
         public GameObject DirtObject = null;
         public GameObject DirtSideObject = null;
 
+        public List<GameObject> obstacles = null;
+
         public GameObject Player = null;
 
         public int WaterWidth = 7;
@@ -26,11 +28,13 @@ namespace Assets.Scripts.MapGeneration
 
         private WaterStroke lastWaterBlock;
 
-        private int amount = 30;
+        //private int amount = 30;
 
         private List<WaterStroke> strokes;
         private List<GameObject> strokeObjects;
         private List<GameObject> dirt;
+
+        private bool generateObstacle = false;
 
         private static MapGenerator instance;
         public static MapGenerator GetInstance()
@@ -166,7 +170,7 @@ namespace Assets.Scripts.MapGeneration
                 strokeObjects.Add(parent);
 
                 //WaterStroke ws = new WaterStroke(5, zPosition, ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt), lastWaterBlock);
-                WaterStroke ws = new WaterStroke(5, zPosition, GameObject.Instantiate(DirtSideObject), lastWaterBlock);
+                WaterStroke ws = new WaterStroke(5, zPosition, DirtSideObject, lastWaterBlock, parent.transform);
                 for (int row = 0; row < 5; row++)
                 {
                     GameObject dirt = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt);
@@ -183,12 +187,19 @@ namespace Assets.Scripts.MapGeneration
                         ws.AddWater(water, row);
                     }
 
-                    BoxCollider bc = dirt.AddComponent<BoxCollider>();
+                    CapsuleCollider bc = dirt.AddComponent<CapsuleCollider>();
                     bc.center = new Vector3(-8.75f, 0, 0);
-                    bc.size = new Vector3(2, 1, 2);
-                    bc = dirt.AddComponent<BoxCollider>();
+                    //bc.size = new Vector3(2, 1, 2);
+                    bc.height = 1;
+                    bc.radius = 1.5f;
+
+                    bc = dirt.AddComponent<CapsuleCollider>();
                     bc.center = new Vector3(8.75f, 0, 0);
-                    bc.size = new Vector3(2, 1, 2);
+                    //bc.size = new Vector3(2, 1, 2);
+                    bc.height = 1;
+                    bc.radius = 1.5f;
+
+
                     zPosition += 2;
 
                     if (displacementInterpolation >= 1)
@@ -200,6 +211,17 @@ namespace Assets.Scripts.MapGeneration
                     lastDisplacement = Lerp(lastDisplacement, displacementValue, displacementInterpolation);
                     displacementInterpolation += 0.2f;
                 }
+
+                // Generate an obstacle
+                if (generateObstacle)
+                {
+                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Obstacle);
+                    go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth, WaterWidth), -1, zPosition);
+                    go.transform.parent = parent.transform;
+                    ws.AddObstacle(go);
+                }
+
+                generateObstacle = !generateObstacle;
 
                 ws.GenerateSides(parent.transform);
 
