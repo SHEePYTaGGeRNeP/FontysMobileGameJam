@@ -10,26 +10,27 @@ public class RowTiltController : MonoBehaviour
         Right
     }
 
-    private Vector3 _acceleration;
-    private float _accumulatedStrength;
-    private float _efficiency;
-    private Vector3 _rotation;
-    private RowSide _rowSide;
+    public bool Debugging;
+    public Vector3 Acceleration;
+    public Vector3 Rotation;
+    public float AccumulatedStrength;
+    public float Efficiency;
+    public RowSide _rowSide;
 
     public event EventHandler<RowEventArgs> Row;
 
     // Use this for initialization
     private void Start()
     {
-        Sensor.Activate(Sensor.Type.GameRotationVector);
+        SensorHelper.ActivateRotation();
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
-        _rotation = Sensor.gameRotationVector;
-        _acceleration = Input.gyro.userAcceleration;
-        Debug.Log(string.Format("Rot: {0}, Accel: {1}", _rotation, _acceleration));
+        Rotation = SensorHelper.rotation.eulerAngles;
+        Acceleration = Input.gyro.userAcceleration;
+        if (Debugging) Debug.Log(string.Format("Rot: {0}, Accel: {1}", Rotation, Acceleration));
 
         CheckRowSide();
         CheckEfficiency();
@@ -38,11 +39,11 @@ public class RowTiltController : MonoBehaviour
 
     public void CheckRowSide()
     {
-        if (_rotation.z >= 15 && _rotation.z <= 60)
+        if (Rotation.z >= 15 && Rotation.z <= 60)
         {
             _rowSide = RowSide.Left;
         }
-        else if (_rotation.z <= 345 && _rotation.z >= 300)
+        else if (Rotation.z <= 345 && Rotation.z >= 300)
         {
             _rowSide = RowSide.Right;
         }
@@ -56,37 +57,36 @@ public class RowTiltController : MonoBehaviour
     {
         if (_rowSide != RowSide.None)
         {
-            if (_rotation.x >= 270)
+            if (Rotation.x >= 270)
             {
-                _efficiency = ((_rotation.x - 270) * (100f / 90f)) / 100f;
+                Efficiency = ((Rotation.x - 270) * (100f / 90f)) / 100f;
             }
-            else if (_rotation.x <= 90)
+            else if (Rotation.x <= 90)
             {
-                _efficiency = Mathf.Abs(((_rotation.x - 90) * (100f / 90f)) / 100f);
+                Efficiency = Mathf.Abs(((Rotation.x - 90) * (100f / 90f)) / 100f);
             }
             else
             {
-                _efficiency = 0;
+                Efficiency = 0;
             }
         }
         else
         {
-            _efficiency = 0;
+            Efficiency = 0;
         }
     }
 
     public void CheckRowMotion()
     {
-        if (_acceleration.z >= 0.05f)
+        if (Mathf.Abs(Acceleration.z) >= 0.05f)
         {
-            _accumulatedStrength += _acceleration.z;
+            AccumulatedStrength += Mathf.Abs(Acceleration.z);
         }
-        else if (_accumulatedStrength >= 0.3f)
+        else if (Mathf.Abs(AccumulatedStrength) >= 0.3f)
         {
-            OnRow(new RowEventArgs(_rowSide, _accumulatedStrength, _efficiency));
-            Debug.Log(string.Format("Side: {0}, Strength: {1}, Efficiency: {2}", _rowSide, _accumulatedStrength,
-                _efficiency));
-            _accumulatedStrength = 0;
+            OnRow(new RowEventArgs(_rowSide, AccumulatedStrength, Efficiency));
+            if (Debugging) Debug.Log("Rowed! " + AccumulatedStrength);
+            AccumulatedStrength = 0;
         }
     }
 
