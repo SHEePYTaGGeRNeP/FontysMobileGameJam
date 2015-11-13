@@ -84,7 +84,7 @@ namespace Assets.Scripts.PhotonNetworking
 				spawnedPlayer.transform.position = paddleToAssign.transform.position;
 				PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
 				PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
-				photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID);
+				photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
 			}
 		}
 
@@ -93,13 +93,13 @@ namespace Assets.Scripts.PhotonNetworking
 		/// Called on connecting client
 		/// </summary
 		[PunRPC]
-		public void AssignPaddle(int playerID, int paddleID)
+		public void AssignPaddle(int playerID, int paddleID, int rowside )
 		{
 			Debug.Log("assign paddle");
 			GameObject myPlayer = PhotonView.Find(playerID).gameObject;
 
 			myPlayer.GetComponent<PhotonRoeier>().PaddleViewId = paddleID;
-			myPlayer.GetComponent<PhotonRoeier>().Side = PhotonView.Find(paddleID).GetComponent<Paddle>().RowSide;
+			myPlayer.GetComponent<PhotonRoeier>().Side = (RowTiltController.RowSide) rowside;
 		}
 
 

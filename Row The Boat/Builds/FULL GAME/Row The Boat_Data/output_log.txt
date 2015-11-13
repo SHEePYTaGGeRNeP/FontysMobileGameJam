@@ -20,21 +20,21 @@ Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The 
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.073 seconds
+- Completed reload, in  0.145 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: E:\DEV\GITHUB\FontysMobileGameJam\Row The Boat\Builds\FULL GAME\Row The Boat_Data\Managed\System.dll (this message is harmless)
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 31fc -> priority: 1 
-  Thread -> id: 40dc -> priority: 1 
 [VRDevice] Initialization of device oculus failed.
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: adc -> priority: 1 
+  Thread -> id: 195c -> priority: 1 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.053664 ms
+UnloadTime: 2.394231 ms
 
-Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 639.
-Total: 0.613020 ms (FindLiveObjects: 0.068113 ms CreateObjectMapping: 0.035922 ms MarkObjects: 0.492189 ms  DeleteObjects: 0.015395 ms)
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 641.
+Total: 0.673669 ms (FindLiveObjects: 0.044320 ms CreateObjectMapping: 0.041987 ms MarkObjects: 0.568700 ms  DeleteObjects: 0.017728 ms)
 
 OnStatusChanged: Connect
  
@@ -108,7 +108,7 @@ OnEvent: Event 255.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnJoinedRoom() : You Have Joined a Room : 8c557600-eb36-4e3e-866e-2a87f1e44de7
+OnJoinedRoom() : You Have Joined a Room : a6b652b1-b916-47b9-84df-8a2816291d88
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -117,10 +117,74 @@ Checking scene to load...
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.638679 ms
+UnloadTime: 0.665271 ms
 
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 871.
-Total: 0.731985 ms (FindLiveObjects: 0.047119 ms CreateObjectMapping: 0.040121 ms MarkObjects: 0.633081 ms  DeleteObjects: 0.010263 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 916.
+Total: 1.072085 ms (FindLiveObjects: 0.049452 ms CreateObjectMapping: 0.040588 ms MarkObjects: 0.954986 ms  DeleteObjects: 0.026125 ms)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
 OnEvent: Event 255.
  
@@ -134,6 +198,86 @@ RotationVector is available.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Center start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: True
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Center start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: True
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Center start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: True
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: True
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
 OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
@@ -150,7 +294,19 @@ OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -162,7 +318,19 @@ OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -170,7 +338,19 @@ OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -178,7 +358,19 @@ OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Left Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Left Side: True
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Skip Right Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
@@ -186,39 +378,27 @@ OnEvent: Event 200.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Left Side: True
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Right Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Left Side: True
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Right Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
+Skip Left Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
-OnEvent: Event 200.
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-OnEvent: Event 200.
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-OnEvent: Event 254.
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
-
-HandleEventLeave for player ID: 2
+Skip Right Side: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
