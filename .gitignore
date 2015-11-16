@@ -28,3 +28,6 @@ Row The Boat/Assets/UnityVS/Editor.meta
 Row The Boat/ProjectSettings/EditorBuildSettings.asset
 Row The Boat/Row The Boat.CSharp.csproj
 Row The Boat/Assets/Art/MapGenerator/DirtObject.prefab
+Row The Boat/Assets/Art/MapGenerator/WaterObject.prefab
+Row The Boat/Builds/FULL GAME/Row The Boat_Data/output_log.txt
+Row The Boat/Assets/Art/MapGenerator/DirtObject.prefab
