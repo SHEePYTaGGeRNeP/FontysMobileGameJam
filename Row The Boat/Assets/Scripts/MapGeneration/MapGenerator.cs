@@ -59,6 +59,7 @@ namespace Assets.Scripts.MapGeneration
 
         private void CreateDirtMesh()
         {
+            // THIS NEEDS TO CHANGE
             Mesh mesh = new Mesh();
             mesh.name = "DirtMesh";
             mesh.Clear();
