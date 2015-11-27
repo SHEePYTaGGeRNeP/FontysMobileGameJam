@@ -35,8 +35,8 @@ namespace Assets.Scripts.PhotonNetworking
 
 		public void Roei(float force)
 		{
-			if (PaddleViewId == 0) return;
-			_paddleSoundController.PlayRandomPaddleSound ();
+			if (this.PaddleViewId == 0) return;
+		    this._paddleSoundController.PlayRandomPaddleSound ();
 			this._targetRPC.RPC("AddForce", PhotonTargets.MasterClient, this.PaddleViewId, force);
 		}
 
@@ -45,7 +45,7 @@ namespace Assets.Scripts.PhotonNetworking
 		{
 			if (stream.isWriting)
 			{
-				Vector3 pos = transform.localPosition;
+				Vector3 pos = this.transform.localPosition;
 				stream.Serialize(ref pos);
 			}
 			else

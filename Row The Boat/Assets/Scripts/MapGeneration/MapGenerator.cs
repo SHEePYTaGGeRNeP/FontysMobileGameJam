@@ -39,6 +39,7 @@ namespace Assets.Scripts.MapGeneration
         private List<GameObject> dirt;
 
         private bool generateObstacle = false;
+        private bool hasGenerated = false;
 
         private static MapGenerator instance;
         public static MapGenerator GetInstance()
@@ -48,14 +49,23 @@ namespace Assets.Scripts.MapGeneration
 
         public void Start()
         {
-            instance = this;
+            instance = this;            
+        }
+
+        public void Generate()
+        {
+            // alleen de master client moet generen
+            if (!PhotonNetwork.isMasterClient) return;
+            Debug.Log("Generating map");
             CreateWaterMesh();
             CreateDirtMesh();
 
             strokes = new List<WaterStroke>();
             strokeObjects = new List<GameObject>();
             dirt = new List<GameObject>();
+            this.hasGenerated = true;
         }
+
 
         private void CreateDirtMesh()
         {
@@ -168,6 +178,8 @@ namespace Assets.Scripts.MapGeneration
         public void Update()
         {
             //Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
+
+            if (!PhotonNetwork.isMasterClient || !this.hasGenerated) return;
 
             if (strokes.Count != 30)
             {

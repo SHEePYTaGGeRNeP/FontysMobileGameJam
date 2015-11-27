@@ -17,6 +17,9 @@ namespace Assets.Scripts.PhotonNetworking
 
 		public event EventHandler OnJoinedRoomEvent;
 
+        [SerializeField]
+        private LobbiesManager _lobbiesManager;
+
 		void Awake()
 		{
 			Instance = this;
@@ -35,10 +38,27 @@ namespace Assets.Scripts.PhotonNetworking
 		}
 		public override void OnConnectedToMaster()
 		{
-			// when AutoJoinLobby is off, this method gets called when PUN finished the connection (instead of OnJoinedLobby())
-			Debug.Log("Joining random room!");
-			PhotonNetwork.JoinRandomRoom();
+            // when AutoJoinLobby is off, this method gets called when PUN finished the connection (instead of OnJoinedLobby())
+            if (this._lobbiesManager == null)
+            {
+                Debug.Log("Joining random room!");
+                PhotonNetwork.JoinRandomRoom();
+            }
+            else
+            {
+                this._lobbiesManager.StartUpdating();
+            }
 		}
+
+        public void CreateRoom(string roomname)
+        {
+            Debug.Log("Creating room " + roomname);
+            this.Host = true;
+            RoomOptions ro = new RoomOptions() { isVisible = true, maxPlayers = 5};
+            PhotonNetwork.CreateRoom(roomname, ro, TypedLobby.Default);
+        }
+
+
 		public override void OnJoinedLobby()
 		{
 			Debug.Log("Joining random room!");

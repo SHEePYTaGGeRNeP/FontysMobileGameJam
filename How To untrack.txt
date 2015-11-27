@@ -1,3 +1,7 @@
 git update-index --assume-unchanged "Row The Boat\Row The Boat.CSharp.csproj"
 git update-index --assume-unchanged "Row The Boat\Assets\Art\MapGenerator\WaterObject.prefab"
 git update-index --assume-unchanged "Row The Boat\Assets\Art\MapGenerator\DirtObject.prefab"
+
+
+TO TRACK AGAIN:
+git update-index --no-assume-unchanged "Row The Boat\Assets\Art\MapGenerator\DirtObject.prefab"

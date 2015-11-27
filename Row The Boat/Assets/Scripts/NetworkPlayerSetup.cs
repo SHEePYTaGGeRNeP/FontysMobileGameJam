@@ -6,7 +6,7 @@ public class NetworkPlayerSetup : NetworkBehaviour {
 	[SerializeField]
 	private Behaviour[] _componentsToDisable;
 
-	void Start()
+    private void Start()
 	{
 		if (!this.isLocalPlayer)
 			for (int i = 0; i < this._componentsToDisable.Length; i++)
