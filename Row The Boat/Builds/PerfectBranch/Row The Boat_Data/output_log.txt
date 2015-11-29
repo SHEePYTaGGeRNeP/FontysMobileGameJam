@@ -1,0 +1,137 @@
+Initialize engine version: 5.2.3f1 (f3d16a1fa2dd)
+[VRDevice] Initialization of device oculus failed.
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 970 (ID=0x13c2)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.047 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x2160 at -1920,-1080
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: E:\GITHUB\FontysMobileGameJam\Row The Boat\Builds\PerfectBranch\Row The Boat_Data\Managed\System.dll (this message is harmless)
+[VRDevice] Initialization of device oculus failed.
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 1dc4 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.464315 ms
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 884.
+Total: 0.561993 ms (FindLiveObjects: 0.055416 ms CreateObjectMapping: 0.033731 ms MarkObjects: 0.460196 ms  DeleteObjects: 0.012047 ms)
+
+OnStatusChanged: Connect
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: EncryptionEstablished
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: Disconnect
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: Connect
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: EncryptionEstablished
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 226.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Joining random room!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OperationResponse 225: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: Disconnect
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: Connect
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: EncryptionEstablished
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OperationResponse 226: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 255.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnJoinedRoom() : You Have Joined a Room : 98c5014a-4d17-44cd-94ec-37664f4f8236
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 202.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 200.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+assign paddle
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+RotationVector is available.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnEvent: Event 254.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+HandleEventLeave for player ID: 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnStatusChanged: Disconnect
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
