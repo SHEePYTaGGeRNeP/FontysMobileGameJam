@@ -7,7 +7,7 @@ public class SetScreenRotation : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        Debug.Log(so);
-		Screen.orientation = so;
+        Debug.Log(this.so);
+		Screen.orientation = this.so;
 	}
 }

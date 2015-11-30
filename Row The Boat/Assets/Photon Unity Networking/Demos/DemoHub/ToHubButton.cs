@@ -32,7 +32,7 @@ public class ToHubButton : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        if (ButtonTexture == null)
+        if (this.ButtonTexture == null)
         {
             this.gameObject.SetActive(false);
             return;
@@ -44,11 +44,11 @@ public class ToHubButton : MonoBehaviour
     {
         if (Application.loadedLevel != 0)
         {
-            int w = ButtonTexture.width + 4;
-            int h = ButtonTexture.height + 4;
+            int w = this.ButtonTexture.width + 4;
+            int h = this.ButtonTexture.height + 4;
 
-            ButtonRect = new Rect(Screen.width - w, Screen.height - h, w, h);
-            if (GUI.Button(ButtonRect, ButtonTexture, GUIStyle.none))
+            this.ButtonRect = new Rect(Screen.width - w, Screen.height - h, w, h);
+            if (GUI.Button(this.ButtonRect, this.ButtonTexture, GUIStyle.none))
             {
                 PhotonNetwork.Disconnect();
                 Application.LoadLevel(0);

@@ -21,38 +21,38 @@ public class IdleRunJump : MonoBehaviour
     // Use this for initialization
     void Start () 
     {
-        animator = GetComponent<Animator>();
-        m_PhotonView = GetComponent<PhotonView>();
-        m_TransformView = GetComponent<PhotonTransformView>();
+        this.animator = this.GetComponent<Animator>();
+        this.m_PhotonView = this.GetComponent<PhotonView>();
+        this.m_TransformView = this.GetComponent<PhotonTransformView>();
 
-        if(animator.layerCount >= 2)
-            animator.SetLayerWeight(1, 1);
+        if(this.animator.layerCount >= 2)
+            this.animator.SetLayerWeight(1, 1);
     }
         
     // Update is called once per frame
     void Update () 
     {
-        if( m_PhotonView.isMine == false && PhotonNetwork.connected == true )
+        if(this.m_PhotonView.isMine == false && PhotonNetwork.connected == true )
         {
             return;
         }
 
-        if (animator)
+        if (this.animator)
         {
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);			
+            AnimatorStateInfo stateInfo = this.animator.GetCurrentAnimatorStateInfo(0);			
 
             if (stateInfo.IsName("Base Layer.Run"))
             {
-                if (Input.GetButton("Fire1")) animator.SetBool("Jump", true);                
+                if (Input.GetButton("Fire1")) this.animator.SetBool("Jump", true);                
             }
             else
             {
-                animator.SetBool("Jump", false);                
+                this.animator.SetBool("Jump", false);                
             }
 
-            if(Input.GetButtonDown("Fire2") && animator.layerCount >= 2)
+            if(Input.GetButtonDown("Fire2") && this.animator.layerCount >= 2)
             {
-                animator.SetBool("Hi", !animator.GetBool("Hi"));
+                this.animator.SetBool("Hi", !this.animator.GetBool("Hi"));
             }
             
         
@@ -64,22 +64,22 @@ public class IdleRunJump : MonoBehaviour
                 v = 0;
             }
 
-            animator.SetFloat( "Speed", h*h+v*v );
-            animator.SetFloat( "Direction", h, DirectionDampTime, Time.deltaTime );
+            this.animator.SetFloat( "Speed", h*h+v*v );
+            this.animator.SetFloat( "Direction", h, this.DirectionDampTime, Time.deltaTime );
 
-            float direction = animator.GetFloat( "Direction" );
+            float direction = this.animator.GetFloat( "Direction" );
 
             float targetSpeedModifier = Mathf.Abs( v );
 
             if( Mathf.Abs( direction ) > 0.2f )
             {
-                targetSpeedModifier = TurnSpeedModifier;
+                targetSpeedModifier = this.TurnSpeedModifier;
             }
 
-            m_SpeedModifier = Mathf.MoveTowards( m_SpeedModifier, targetSpeedModifier, Time.deltaTime * 25f );
+            this.m_SpeedModifier = Mathf.MoveTowards(this.m_SpeedModifier, targetSpeedModifier, Time.deltaTime * 25f );
 
-            Vector3 speed = transform.forward * SynchronizedMaxSpeed * m_SpeedModifier;
-            float turnSpeed = direction * SynchronizedTurnSpeed;
+            Vector3 speed = this.transform.forward * this.SynchronizedMaxSpeed * this.m_SpeedModifier;
+            float turnSpeed = direction * this.SynchronizedTurnSpeed;
 
             /*float moveDistance = Vector3.Distance( transform.position, m_LastPosition ) / Time.deltaTime;
 
@@ -91,7 +91,7 @@ public class IdleRunJump : MonoBehaviour
             //Debug.Log( moveDistance );
             //Debug.Log( speed + " - " + speed.magnitude + " - " + speedModifier + " - " + h + " - " + v );
 
-            m_TransformView.SetSynchronizedValues( speed, turnSpeed );
+            this.m_TransformView.SetSynchronizedValues( speed, turnSpeed );
 
             //m_LastPosition = transform.position;
          }   		  

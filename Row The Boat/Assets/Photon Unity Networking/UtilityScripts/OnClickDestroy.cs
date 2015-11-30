@@ -25,7 +25,7 @@ public class OnClickDestroy : Photon.MonoBehaviour
 
     public void OnClick()
     {
-        if (!DestroyByRpc)
+        if (!this.DestroyByRpc)
         {
             PhotonNetwork.Destroy(this.gameObject);
         }

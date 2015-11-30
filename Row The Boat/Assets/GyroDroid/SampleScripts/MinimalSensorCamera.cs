@@ -16,7 +16,7 @@ public class MinimalSensorCamera : MonoBehaviour {
 		// or you can use the SensorHelper, which has built-in fallback to less accurate but more common sensors:
 		SensorHelper.ActivateRotation();
 
-		useGUILayout = false;
+	    this.useGUILayout = false;
 	}
 	
 	// Update is called once per frame
@@ -25,7 +25,7 @@ public class MinimalSensorCamera : MonoBehaviour {
 		// transform.rotation = Sensor.rotationQuaternion; --- is the same as Sensor.QuaternionFromRotationVector(Sensor.rotationVector);
 		
 		// Helper with fallback:
-        transform.rotation = SensorHelper.rotation;
+	    this.transform.rotation = SensorHelper.rotation;
         Debug.Log(SensorHelper.rotation);
 
 	}

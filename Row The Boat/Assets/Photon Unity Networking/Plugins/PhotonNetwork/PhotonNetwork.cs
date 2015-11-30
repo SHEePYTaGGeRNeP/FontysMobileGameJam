@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using Debug = UnityEngine.Debug;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-
+using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 using UnityEditor;
 using System.IO;
@@ -1073,7 +1073,7 @@ public static class PhotonNetwork
 
         // This can happen when you recompile a script IN play made
         // This helps to surpress some errors, but will not fix breaking
-        PhotonHandler[] photonHandlers = GameObject.FindObjectsOfType(typeof(PhotonHandler)) as PhotonHandler[];
+        PhotonHandler[] photonHandlers = Object.FindObjectsOfType(typeof(PhotonHandler)) as PhotonHandler[];
         if (photonHandlers != null && photonHandlers.Length > 0)
         {
             Debug.LogWarning("Unity recompiled. Connection gets closed and replaced. You can connect as 'new' client.");
@@ -1081,8 +1081,8 @@ public static class PhotonNetwork
             {
                 //Debug.Log("Handler: " + photonHandler + " photonHandler.gameObject: " + photonHandler.gameObject);
                 photonHandler.gameObject.hideFlags = 0;
-                GameObject.DestroyImmediate(photonHandler.gameObject);
-                Component.DestroyImmediate(photonHandler);
+                Object.DestroyImmediate(photonHandler.gameObject);
+                Object.DestroyImmediate(photonHandler);
             }
         }
         #endif
@@ -2764,7 +2764,7 @@ public static class PhotonNetwork
     {
         HashSet<GameObject> objectsWithComponent = new HashSet<GameObject>();
 
-        Component[] targetComponents = (Component[]) GameObject.FindObjectsOfType(type);
+        Component[] targetComponents = (Component[]) Object.FindObjectsOfType(type);
         for (int index = 0; index < targetComponents.Length; index++)
         {
             objectsWithComponent.Add(targetComponents[index].gameObject);
@@ -3001,7 +3001,7 @@ public static class PhotonNetwork
     /// </summary>
     public static void InternalCleanPhotonMonoFromSceneIfStuck()
     {
-        PhotonHandler[] photonHandlers = GameObject.FindObjectsOfType(typeof(PhotonHandler)) as PhotonHandler[];
+        PhotonHandler[] photonHandlers = Object.FindObjectsOfType(typeof(PhotonHandler)) as PhotonHandler[];
         if (photonHandlers != null && photonHandlers.Length > 0)
         {
             Debug.Log("Cleaning up hidden PhotonHandler instances in scene. Please save it. This is not an issue.");
@@ -3012,10 +3012,10 @@ public static class PhotonNetwork
 
                 if (photonHandler.gameObject != null && photonHandler.gameObject.name == "PhotonMono")
                 {
-                    GameObject.DestroyImmediate(photonHandler.gameObject);
+                    Object.DestroyImmediate(photonHandler.gameObject);
                 }
 
-                Component.DestroyImmediate(photonHandler);
+                Object.DestroyImmediate(photonHandler);
             }
         }
     }

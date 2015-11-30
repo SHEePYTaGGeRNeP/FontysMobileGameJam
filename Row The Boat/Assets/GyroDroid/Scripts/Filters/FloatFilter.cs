@@ -4,7 +4,7 @@ public class FloatFilter : Filter<float>
 {
     public override void UpdateFunc(float input)
     {
-        Holder = Mathf.Lerp(Holder, input, Time.deltaTime * Hardness);
+        this.Holder = Mathf.Lerp(this.Holder, input, Time.deltaTime * this.Hardness);
     }
     public FloatFilter(float hardness) : base(hardness)
     {

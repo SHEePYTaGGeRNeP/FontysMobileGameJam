@@ -22,7 +22,7 @@ public class ManualPhotonViewAllocator : MonoBehaviour
     [PunRPC]
     public void InstantiateRpc(int viewID)
     {
-        GameObject go = GameObject.Instantiate(Prefab, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity) as GameObject;
+        GameObject go = GameObject.Instantiate(this.Prefab, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity) as GameObject;
         go.GetPhotonView().viewID = viewID;
 
         OnClickDestroy ocd = go.GetComponent<OnClickDestroy>();

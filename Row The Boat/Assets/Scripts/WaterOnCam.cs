@@ -19,38 +19,38 @@ public class WaterOnCam : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        moving = false;
-        alive = true;
+	    this.moving = false;
+	    this.alive = true;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.C) && alive)
-            RaiseWater();
+        if (Input.GetKeyDown(KeyCode.C) && this.alive)
+            this.RaiseWater();
 
-        if (transform.position.y >= canvas.GetComponent<RectTransform>().sizeDelta.y)
+        if (this.transform.position.y >= this.canvas.GetComponent<RectTransform>().sizeDelta.y)
         {
-            sinking.Play();
+            this.sinking.Play();
             //gameover.SetActive(true);
-            alive = false;
+            this.alive = false;
             Application.LoadLevel("GameOverMenu");
         }
             
 
-        if (moving)
+        if (this.moving)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(transform.position.x, transform.position.y + 40, transform.position.z), ref velocity, smoothTime);
-            if (transform.position.y >= originalPosition.y + 40)
-                moving = false;
+            this.transform.position = Vector3.SmoothDamp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 40, this.transform.position.z), ref this.velocity, this.smoothTime);
+            if (this.transform.position.y >= this.originalPosition.y + 40)
+                this.moving = false;
         }            
 	}
 
     public void RaiseWater()
     {
-        creaking.Play();
-        originalPosition = transform.position;
-        moving = true;
+        this.creaking.Play();
+        this.originalPosition = this.transform.position;
+        this.moving = true;
         //transform.position = new Vector3(transform.position.x, transform.position.y + 40, transform.position.z);
         //if (transform.position.y >= canvas.GetComponent<RectTransform>().sizeDelta.y)
         //    gameover.SetActive(true);

@@ -64,14 +64,14 @@ public class PickupItemSimple : Photon.MonoBehaviour
 
         // how long it is until this item respanws, depends on the pickup time and the respawn time
         double timeSinceRpcCall = (PhotonNetwork.time - msgInfo.timestamp);
-        float timeUntilRespawn = SecondsBeforeRespawn - (float)timeSinceRpcCall;
+        float timeUntilRespawn = this.SecondsBeforeRespawn - (float)timeSinceRpcCall;
         //Debug.Log("msg timestamp: " + msgInfo.timestamp + " time until respawn: " + timeUntilRespawn);
 
         if (timeUntilRespawn > 0)
         {
             // this script simply disables the GO for a while until it respawns. 
             this.gameObject.SetActive(false);
-            Invoke("RespawnAfter", timeUntilRespawn);
+            this.Invoke("RespawnAfter", timeUntilRespawn);
         }
     }
 

@@ -13,25 +13,25 @@ public class MoveToPoint : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(haveLastTouch) {
-			if(Physics.Raycast(Camera.main.ScreenPointToRay(lastTouch.position), out hit, Mathf.Infinity)) {
-				lastPoint = hit.point;
+		if(this.haveLastTouch) {
+			if(Physics.Raycast(Camera.main.ScreenPointToRay(this.lastTouch.position), out this.hit, Mathf.Infinity)) {
+			    this.lastPoint = this.hit.point;
 			}
 		}
 		
-		if(haveLastTouch = (Input.touchCount == 1)) {
-			t = Input.GetTouch(0);
+		if(this.haveLastTouch = (Input.touchCount == 1)) {
+		    this.t = Input.GetTouch(0);
 			
-			if(Physics.Raycast(Camera.main.ScreenPointToRay(t.position), out hit, Mathf.Infinity)) {
-				if(t.phase != TouchPhase.Began && t.phase != TouchPhase.Ended) {
+			if(Physics.Raycast(Camera.main.ScreenPointToRay(this.t.position), out this.hit, Mathf.Infinity)) {
+				if(this.t.phase != TouchPhase.Began && this.t.phase != TouchPhase.Ended) {
 					// move by distance between last and current point
-					transform.position += lastPoint - hit.point;
+				    this.transform.position += this.lastPoint - this.hit.point;
 				}
-				
-				lastPoint = hit.point;
+
+			    this.lastPoint = this.hit.point;
 			}
-			
-			lastTouch = t;
+
+		    this.lastTouch = this.t;
 		}
 	}
 }

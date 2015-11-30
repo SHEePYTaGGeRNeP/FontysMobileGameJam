@@ -20,7 +20,7 @@ public class WorkerInGame : Photon.MonoBehaviour
         }
 
         // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-        PhotonNetwork.Instantiate(this.playerPrefab.name, transform.position, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(this.playerPrefab.name, this.transform.position, Quaternion.identity, 0);
     }
 
     public void OnGUI()
@@ -36,7 +36,7 @@ public class WorkerInGame : Photon.MonoBehaviour
         Debug.Log("OnMasterClientSwitched: " + player);
 
         string message;
-        InRoomChat chatComponent = GetComponent<InRoomChat>();  // if we find a InRoomChat component, we print out a short message
+        InRoomChat chatComponent = this.GetComponent<InRoomChat>();  // if we find a InRoomChat component, we print out a short message
 
         if (chatComponent != null)
         {

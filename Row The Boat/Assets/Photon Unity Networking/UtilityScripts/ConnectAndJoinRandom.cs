@@ -24,12 +24,12 @@ public class ConnectAndJoinRandom : Photon.MonoBehaviour
 
     public virtual void Update()
     {
-        if (ConnectInUpdate && AutoConnect && !PhotonNetwork.connected)
+        if (this.ConnectInUpdate && this.AutoConnect && !PhotonNetwork.connected)
         {
             Debug.Log("Update() was called by Unity. Scene is loaded. Let's connect to the Photon Master Server. Calling: PhotonNetwork.ConnectUsingSettings();");
 
-            ConnectInUpdate = false;
-            PhotonNetwork.ConnectUsingSettings(Version + "."+Application.loadedLevel);
+            this.ConnectInUpdate = false;
+            PhotonNetwork.ConnectUsingSettings(this.Version + "."+Application.loadedLevel);
         }
     }
 

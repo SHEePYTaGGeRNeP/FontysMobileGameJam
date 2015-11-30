@@ -19,13 +19,13 @@ public class SensorStatisticsGUI : MonoBehaviour
 	
 	void Start () 
 	{
-		StartCoroutine(StartEverythingSlowly());
+	    this.StartCoroutine(this.StartEverythingSlowly());
 
-		for(int i = 0; i < W.Length; i++) {
-			W[i] = (int) (W[i] * GUITools.DpiScaling);
+		for(int i = 0; i < this.W.Length; i++) {
+		    this.W[i] = (int) (this.W[i] * GUITools.DpiScaling);
 		}
-		for(int i = 0; i < W2.Length; i++) {
-			W2[i] = (int) (W2[i] * GUITools.DpiScaling);
+		for(int i = 0; i < this.W2.Length; i++) {
+		    this.W2[i] = (int) (this.W2[i] * GUITools.DpiScaling);
 		}
 	}
 	
@@ -46,14 +46,14 @@ public class SensorStatisticsGUI : MonoBehaviour
 		Debug.Log ("tried to activate all sensors");
 
 		// activate GUI
-		showGui = true;
+	    this.showGui = true;
 	}
 
     // Update is called once per frame
     void Update()
     {
         //transform.rotation = SensorHelper.Rotation;
-        transform.localRotation = Sensor.rotation;
+        this.transform.localRotation = Sensor.rotation;
 	}
 		
 	Vector2 _scrollPosition;
@@ -66,31 +66,31 @@ public class SensorStatisticsGUI : MonoBehaviour
 	int C = 0;
 	void OnGUI()
 	{
-		if (!showGui || !enableGUI) return;
+		if (!this.showGui || !this.enableGUI) return;
 		
-		GUI.skin = guiSkin;
+		GUI.skin = this.guiSkin;
 		GUITools.SetFontSizes();
 		
 		// show all sensors and values in a big, fat table
 		// Remember : You can only see on your device what sensors are supported, not in the editor.
-		GUI.color = _guiColor;
+		GUI.color = this._guiColor;
 		
 		GUILayout.BeginArea(new Rect(5,5,Screen.width-10, Screen.height-10));
-		_scrollPosition = GUILayout.BeginScrollView(_scrollPosition);		
+	    this._scrollPosition = GUILayout.BeginScrollView(this._scrollPosition);		
 		
 		GUILayout.BeginHorizontal();
 		{
-			C = 0;
-			GUILayout.Label("Sensor", GUILayout.Width(W[C++]));
+		    this.C = 0;
+			GUILayout.Label("Sensor", GUILayout.Width(this.W[this.C++]));
 			// GUILayout.Label("#", GUILayout.Width(20));
-			GUILayout.Label("Exists", GUILayout.Width(W[C++]));
-			GUILayout.Label("Active", GUILayout.Width(W[C++]));
-			GUILayout.Label("Name", GUILayout.Width(W[C++]));
-			GUILayout.Label("Power", GUILayout.Width(W[C++]));
-			GUILayout.Label("Resolution", GUILayout.Width(W[C++]));
-			GUILayout.Label("MaxRange", GUILayout.Width(W[C++]));
+			GUILayout.Label("Exists", GUILayout.Width(this.W[this.C++]));
+			GUILayout.Label("Active", GUILayout.Width(this.W[this.C++]));
+			GUILayout.Label("Name", GUILayout.Width(this.W[this.C++]));
+			GUILayout.Label("Power", GUILayout.Width(this.W[this.C++]));
+			GUILayout.Label("Resolution", GUILayout.Width(this.W[this.C++]));
+			GUILayout.Label("MaxRange", GUILayout.Width(this.W[this.C++]));
 			// GUILayout.Label("MinDelay", GUILayout.Width(60));
-			GUILayout.Label("Values", GUILayout.Width(W[C++]));
+			GUILayout.Label("Values", GUILayout.Width(this.W[this.C++]));
 		}
 		GUILayout.EndHorizontal();
 		
@@ -98,7 +98,7 @@ public class SensorStatisticsGUI : MonoBehaviour
 		
 		for (var i = 1; i <= Sensor.Count; i++)
 		{
-			C = 0;
+		    this.C = 0;
 			var s = Sensor.Get((Sensor.Type) i);
 		    if (s == null)
 		    {
@@ -106,19 +106,19 @@ public class SensorStatisticsGUI : MonoBehaviour
 		    }
 		    GUILayout.BeginHorizontal();
 		    {
-		        GUILayout.Label("" + s.description, GUILayout.Width(W[C++]));
-		        GUILayout.Label("" + (s.available?"Yes":"No"), GUILayout.Width(W[C++]));
-		        GUILayout.Label(s.active ? "X" : "O", GUILayout.Width(W[C++]));
-		        GUILayout.Label("" + s.name, GUILayout.Width(W[C++]));
-		        GUILayout.Label("" + s.power, GUILayout.Width(W[C++]));
-		        GUILayout.Label("" + s.resolution.ToString("F2"), GUILayout.Width(W[C++]));
-		        GUILayout.Label("" + s.maximumRange, GUILayout.Width(W[C++]));
+		        GUILayout.Label("" + s.description, GUILayout.Width(this.W[this.C++]));
+		        GUILayout.Label("" + (s.available?"Yes":"No"), GUILayout.Width(this.W[this.C++]));
+		        GUILayout.Label(s.active ? "X" : "O", GUILayout.Width(this.W[this.C++]));
+		        GUILayout.Label("" + s.name, GUILayout.Width(this.W[this.C++]));
+		        GUILayout.Label("" + s.power, GUILayout.Width(this.W[this.C++]));
+		        GUILayout.Label("" + s.resolution.ToString("F2"), GUILayout.Width(this.W[this.C++]));
+		        GUILayout.Label("" + s.maximumRange, GUILayout.Width(this.W[this.C++]));
 		        // GUILayout.Label("" + s.minDelay, GUILayout.Width(60));
-		        GUILayout.Label("" + s.values, GUILayout.Width(W[C++]));
+		        GUILayout.Label("" + s.values, GUILayout.Width(this.W[this.C++]));
 					
 		        if (s.available)
 		        {
-		            if (GUILayout.Button(s.active?"Deactivate":"Activate", GUILayout.Width(W[0])))
+		            if (GUILayout.Button(s.active?"Deactivate":"Activate", GUILayout.Width(this.W[0])))
 		            {
 		                if (s.active)
 		                {
@@ -132,7 +132,7 @@ public class SensorStatisticsGUI : MonoBehaviour
 		        }
 		        else
 		        {
-		            GUILayout.Label("Not available", GUILayout.Width(W[0]));
+		            GUILayout.Label("Not available", GUILayout.Width(this.W[0]));
 		        }
 		    }
 		    GUILayout.EndHorizontal();
@@ -141,28 +141,28 @@ public class SensorStatisticsGUI : MonoBehaviour
 	
 		GUILayout.BeginHorizontal();
 		{
-			GUILayout.Label("Best rotation value", GUILayout.Width(W[0]));
+			GUILayout.Label("Best rotation value", GUILayout.Width(this.W[0]));
 			GUILayout.Label("(provided by SensorHelper.rotation)", GUILayout.Width(510));
-			GUILayout.Label("" + SensorHelper.rotation, GUILayout.Width(W[0]));
+			GUILayout.Label("" + SensorHelper.rotation, GUILayout.Width(this.W[0]));
 		}
 		GUILayout.EndHorizontal();
 	
 		GUILayout.BeginHorizontal();
 		{
-			GUILayout.Label("getOrientation", GUILayout.Width(W[0]));
+			GUILayout.Label("getOrientation", GUILayout.Width(this.W[0]));
 			GUILayout.Label("Needs MagneticField and Accelerometer to be enabled. Gets fused from the two.", GUILayout.Width(510));
-			GUILayout.Label("" + Sensor.GetOrientation(), GUILayout.Width(W[0]));
+			GUILayout.Label("" + Sensor.GetOrientation(), GUILayout.Width(this.W[0]));
 		}
 		GUILayout.EndHorizontal();
 	
 		GUILayout.BeginHorizontal();
 		{
-			GUILayout.Label("Rotation Quaternion", GUILayout.Width(W[0]));
+			GUILayout.Label("Rotation Quaternion", GUILayout.Width(this.W[0]));
 			GUILayout.Label("Calculated from rotation vector. Best accuracy.", GUILayout.Width(510));
-			GUILayout.Label("" + Sensor.rotation, GUILayout.Width(W[0]));
+			GUILayout.Label("" + Sensor.rotation, GUILayout.Width(this.W[0]));
 			try
 			{
-				GUILayout.Label("" + Sensor.rotation.eulerAngles, GUILayout.Width(W[0]));
+				GUILayout.Label("" + Sensor.rotation.eulerAngles, GUILayout.Width(this.W[0]));
 			}
 			catch
 			{
@@ -173,17 +173,17 @@ public class SensorStatisticsGUI : MonoBehaviour
 	
 		GUILayout.BeginHorizontal();
 		{
-			GUILayout.Label("getAltitude", GUILayout.Width(W[0]));
+			GUILayout.Label("getAltitude", GUILayout.Width(this.W[0]));
 			GUILayout.Label("Calculated from pressure.", GUILayout.Width(510));
-			GUILayout.Label("" + Sensor.GetAltitude(), GUILayout.Width(W[0]));
+			GUILayout.Label("" + Sensor.GetAltitude(), GUILayout.Width(this.W[0]));
 		}
 		GUILayout.EndHorizontal();
 	
 		GUILayout.BeginHorizontal();
 		{
-			GUILayout.Label("SurfaceRotation", GUILayout.Width(W[0]));
+			GUILayout.Label("SurfaceRotation", GUILayout.Width(this.W[0]));
 			GUILayout.Label("Device surface rotation.", GUILayout.Width(510));
-			GUILayout.Label("" + Sensor.surfaceRotation, GUILayout.Width(W[0]));
+			GUILayout.Label("" + Sensor.surfaceRotation, GUILayout.Width(this.W[0]));
 		}
 		GUILayout.EndHorizontal();
 		
@@ -191,10 +191,10 @@ public class SensorStatisticsGUI : MonoBehaviour
 		{
 	        GUILayout.BeginHorizontal();
 		    {
-	            GUILayout.Label("Gyro", GUILayout.Width(W[0]));
-	            GUILayout.Label("Attitude", GUILayout.Width(W[0]));
-		        GUILayout.Label("" + Input.gyro.attitude, GUILayout.Width(W[0]));
-	            GUILayout.Label("" + Input.gyro.attitude.eulerAngles, GUILayout.Width(W[0]));
+	            GUILayout.Label("Gyro", GUILayout.Width(this.W[0]));
+	            GUILayout.Label("Attitude", GUILayout.Width(this.W[0]));
+		        GUILayout.Label("" + Input.gyro.attitude, GUILayout.Width(this.W[0]));
+	            GUILayout.Label("" + Input.gyro.attitude.eulerAngles, GUILayout.Width(this.W[0]));
 		    }
 	        GUILayout.EndHorizontal();
 		}
@@ -203,9 +203,9 @@ public class SensorStatisticsGUI : MonoBehaviour
 		{
 	        GUILayout.BeginHorizontal();
 		    {
-	            GUILayout.Label("Compass", GUILayout.Width(W[0]));
-	            GUILayout.Label("Raw Vector", GUILayout.Width(W[0]));
-	            GUILayout.Label("" + Input.compass.rawVector, GUILayout.Width(W[0]));
+	            GUILayout.Label("Compass", GUILayout.Width(this.W[0]));
+	            GUILayout.Label("Raw Vector", GUILayout.Width(this.W[0]));
+	            GUILayout.Label("" + Input.compass.rawVector, GUILayout.Width(this.W[0]));
 	        }
 	        GUILayout.EndHorizontal();
 		}

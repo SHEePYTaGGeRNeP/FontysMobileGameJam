@@ -31,7 +31,7 @@ public class RandomMatchmaker : Photon.PunBehaviour
     {
         GameObject monster = PhotonNetwork.Instantiate("monsterprefab", Vector3.zero, Quaternion.identity, 0);
         monster.GetComponent<myThirdPersonController>().isControllable = true;
-        myPhotonView = monster.GetComponent<PhotonView>();
+        this.myPhotonView = monster.GetComponent<PhotonView>();
     }
 
     public void OnGUI()
@@ -44,11 +44,11 @@ public class RandomMatchmaker : Photon.PunBehaviour
 
             if (shoutMarco && GUILayout.Button("Marco!"))
             {
-                myPhotonView.RPC("Marco", PhotonTargets.All);
+                this.myPhotonView.RPC("Marco", PhotonTargets.All);
             }
             if (!shoutMarco && GUILayout.Button("Polo!"))
             {
-                myPhotonView.RPC("Polo", PhotonTargets.All);
+                this.myPhotonView.RPC("Polo", PhotonTargets.All);
             }
         }
     }

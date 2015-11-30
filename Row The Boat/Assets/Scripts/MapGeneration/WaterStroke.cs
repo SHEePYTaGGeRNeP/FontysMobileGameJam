@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration
 {
+    using Object = UnityEngine.Object;
+
     class WaterStroke
     {
         private List<GameObject>[] water;
@@ -28,26 +30,25 @@ namespace Assets.Scripts.MapGeneration
 
         public WaterStroke(int size, int zPos, GameObject dirtObject, WaterStroke last, Transform parent)
         {
-            water = new List<GameObject>[size];
-            other = new List<GameObject>();
+            this.water = new List<GameObject>[size];
+            this.other = new List<GameObject>();
             this.zPos = zPos;
             this.dirtObject = dirtObject;
             this.last = last;
             for (int i = 0; i < size; i++)
             {
-                water[i] = new List<GameObject>();
+                this.water[i] = new List<GameObject>();
             }
 
-
-            underWaterMesh = new Mesh();
-            sideMesh = new Mesh();
-            topMesh = new Mesh();
-            underWater = GameObject.Instantiate(dirtObject);
-            side = GameObject.Instantiate(dirtObject);
-            top = GameObject.Instantiate(dirtObject);
-            underWater.transform.parent = parent;
-            side.transform.parent = parent;
-            top.transform.parent = parent;
+            this.underWaterMesh = new Mesh();
+            this.sideMesh = new Mesh();
+            this.topMesh = new Mesh();
+            this.underWater = Object.Instantiate(dirtObject);
+            this.side = Object.Instantiate(dirtObject);
+            this.top = Object.Instantiate(dirtObject);
+            this.underWater.transform.parent = parent;
+            this.side.transform.parent = parent;
+            this.top.transform.parent = parent;
 
             List<Vector3> vertices = new List<Vector3>();
             List<int> faces = new List<int>();
@@ -56,40 +57,40 @@ namespace Assets.Scripts.MapGeneration
                 vertices.Add(new Vector3());
                 faces.Add(0);
             }
-            underWaterMesh.SetVertices(vertices);
-            underWaterMesh.SetTriangles(faces.GetRange(0, 21), 0);
-            sideMesh.SetVertices(vertices);
-            sideMesh.SetTriangles(faces.GetRange(0, 21), 0);
-            topMesh.SetVertices(vertices);
-            topMesh.SetTriangles(faces.GetRange(0, 21), 0);
+            this.underWaterMesh.SetVertices(vertices);
+            this.underWaterMesh.SetTriangles(faces.GetRange(0, 21), 0);
+            this.sideMesh.SetVertices(vertices);
+            this.sideMesh.SetTriangles(faces.GetRange(0, 21), 0);
+            this.topMesh.SetVertices(vertices);
+            this.topMesh.SetTriangles(faces.GetRange(0, 21), 0);
         }
 
         public void AddWater(GameObject obj, int row)
         {
-            water[row].Add(obj);
+            this.water[row].Add(obj);
         }
 
         public void AddObstacle(GameObject obj)
         {
-            other.Add(obj);
+            this.other.Add(obj);
         }
 
         public float GetPivit(int row, bool findLeft)
         {
             int found = 0;
-            for (int i = 1; i < water[row].Count; i++)
+            for (int i = 1; i < this.water[row].Count; i++)
             {
-                if (water[row][i].transform.position.x < water[row][found].transform.position.x && findLeft)
+                if (this.water[row][i].transform.position.x < this.water[row][found].transform.position.x && findLeft)
                 {
                     found = i;
                 }
-                else if (water[row][i].transform.position.x > water[row][found].transform.position.x && !findLeft)
+                else if (this.water[row][i].transform.position.x > this.water[row][found].transform.position.x && !findLeft)
                 {
                     found = i;
                 }
             }
 
-            return water[row][found].transform.position.x;
+            return this.water[row][found].transform.position.x;
         }
 
         private void GenerateUnderWater()
@@ -104,9 +105,9 @@ namespace Assets.Scripts.MapGeneration
 
             int amountToDo = 5;
 
-            if (last != null)
+            if (this.last != null)
             {
-                vertices.AddRange(last.lastData);
+                vertices.AddRange(this.last.lastData);
                 amountToDo = 6;
             }
 
@@ -114,27 +115,27 @@ namespace Assets.Scripts.MapGeneration
 
             for (int i = 0; i < 5; i++)
             {
-                float left = GetPivit(i, true);
-                float right = GetPivit(i, false);
+                float left = this.GetPivit(i, true);
+                float right = this.GetPivit(i, false);
 
                 if (left < low) low = left;
                 if (right > high) high = right;
 
-                vertices.Add(new Vector3(left + 1, -1, zPos + i * 2));
-                vertices.Add(new Vector3(right - 1, -1, zPos + i * 2));
+                vertices.Add(new Vector3(left + 1, -1, this.zPos + i * 2));
+                vertices.Add(new Vector3(right - 1, -1, this.zPos + i * 2));
 
-                vertices.Add(new Vector3(left, 0, zPos + i * 2));
-                vertices.Add(new Vector3(right, 0, zPos + i * 2));
+                vertices.Add(new Vector3(left, 0, this.zPos + i * 2));
+                vertices.Add(new Vector3(right, 0, this.zPos + i * 2));
             }
 
             // Add vertices at the end, so the next stroke can connect to it
-            vertices.Add(new Vector3(GetPivit(4, true) + 1, -1, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false) - 1, -1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, true) + 1, -1, this.zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, false) - 1, -1, this.zPos + 4 * 2 + 1));
 
-            vertices.Add(new Vector3(GetPivit(4, true), 0, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false), 0, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, true), 0, this.zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, false), 0, this.zPos + 4 * 2 + 1));
 
-            lastData = vertices.GetRange(vertices.Count - 4, 4);
+            this.lastData = vertices.GetRange(vertices.Count - 4, 4);
 
             for (int i = 0; i < amountToDo; i++)
             {
@@ -163,13 +164,13 @@ namespace Assets.Scripts.MapGeneration
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
-            MeshFilter mf = (MeshFilter)underWater.gameObject.GetComponent(typeof(MeshFilter));
-            MeshRenderer mr = (MeshRenderer)underWater.gameObject.GetComponent(typeof(MeshRenderer));
+            MeshFilter mf = (MeshFilter)this.underWater.gameObject.GetComponent(typeof(MeshFilter));
+            MeshRenderer mr = (MeshRenderer)this.underWater.gameObject.GetComponent(typeof(MeshRenderer));
             mf.mesh.Clear();
             mf.mesh = mesh;
 
-            underWater.transform.parent = parent;
-            other.Add(underWater);
+            this.underWater.transform.parent = parent;
+            this.other.Add(this.underWater);
 
 
 
@@ -181,32 +182,32 @@ namespace Assets.Scripts.MapGeneration
             vertices = new List<Vector3>();
             faces = new List<int>();
 
-            if (last != null)
+            if (this.last != null)
             {
-                vertices.AddRange(last.lastSideData);
+                vertices.AddRange(this.last.lastSideData);
                 amountToDo = 6;
             }
 
             for (int i = 0; i < 5; i++)
             {
-                float left = GetPivit(i, true);
-                float right = GetPivit(i, false);
+                float left = this.GetPivit(i, true);
+                float right = this.GetPivit(i, false);
 
-                vertices.Add(new Vector3(left, 0, zPos + i * 2));
-                vertices.Add(new Vector3(right, 0, zPos + i * 2));
+                vertices.Add(new Vector3(left, 0, this.zPos + i * 2));
+                vertices.Add(new Vector3(right, 0, this.zPos + i * 2));
 
-                vertices.Add(new Vector3(left - 5, 1, zPos + i * 2));
-                vertices.Add(new Vector3(right + 5, 1, zPos + i * 2));
+                vertices.Add(new Vector3(left - 5, 1, this.zPos + i * 2));
+                vertices.Add(new Vector3(right + 5, 1, this.zPos + i * 2));
             }
 
             // Add vertices at the end, so the next stroke can connect to it
-            vertices.Add(new Vector3(GetPivit(4, true), 0, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false), 0, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, true), 0, this.zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, false), 0, this.zPos + 4 * 2 + 1));
 
-            vertices.Add(new Vector3(GetPivit(4, true) - 5, 1, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false) + 5, 1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, true) - 5, 1, this.zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, false) + 5, 1, this.zPos + 4 * 2 + 1));
 
-            lastSideData = vertices.GetRange(vertices.Count - 4, 4);
+            this.lastSideData = vertices.GetRange(vertices.Count - 4, 4);
 
             for (int i = 0; i < amountToDo; i++)
             {
@@ -235,13 +236,13 @@ namespace Assets.Scripts.MapGeneration
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
-            mf = (MeshFilter)side.gameObject.GetComponent(typeof(MeshFilter));
-            mr = (MeshRenderer)side.gameObject.GetComponent(typeof(MeshRenderer));
+            mf = (MeshFilter)this.side.gameObject.GetComponent(typeof(MeshFilter));
+            mr = (MeshRenderer)this.side.gameObject.GetComponent(typeof(MeshRenderer));
             mf.mesh.Clear();
             mf.mesh = mesh;
 
-            side.transform.parent = parent;
-            other.Add(side);
+            this.side.transform.parent = parent;
+            this.other.Add(this.side);
 
 
 
@@ -257,30 +258,30 @@ namespace Assets.Scripts.MapGeneration
 
             int sideSize = 50;
 
-            if (last != null)
+            if (this.last != null)
             {
-                vertices.AddRange(last.lastTopData);
+                vertices.AddRange(this.last.lastTopData);
 
                 amountToDo = 6;
             }
 
             for (int i = 0; i < 5; i++)
             {
-                vertices.Add(new Vector3(GetPivit(i, true) - 5, 1, zPos + i * 2));
-                vertices.Add(new Vector3(GetPivit(i, false) + 5, 1, zPos + i * 2));
+                vertices.Add(new Vector3(this.GetPivit(i, true) - 5, 1, this.zPos + i * 2));
+                vertices.Add(new Vector3(this.GetPivit(i, false) + 5, 1, this.zPos + i * 2));
 
-                vertices.Add(new Vector3(low - 1 - sideSize, 5, zPos + i * 2));
-                vertices.Add(new Vector3(high + 1 + sideSize, 5, zPos + i * 2));
+                vertices.Add(new Vector3(low - 1 - sideSize, 5, this.zPos + i * 2));
+                vertices.Add(new Vector3(high + 1 + sideSize, 5, this.zPos + i * 2));
             }
 
             // Add vertices at the end, so the next stroke can connect to it
-            vertices.Add(new Vector3(GetPivit(4, true) - 5, 1, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(GetPivit(4, false) + 5, 1, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, true) - 5, 1, this.zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(this.GetPivit(4, false) + 5, 1, this.zPos + 4 * 2 + 1));
 
-            vertices.Add(new Vector3(low - 1 - sideSize, 5, zPos + 4 * 2 + 1));
-            vertices.Add(new Vector3(high + 1 + sideSize, 5, zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(low - 1 - sideSize, 5, this.zPos + 4 * 2 + 1));
+            vertices.Add(new Vector3(high + 1 + sideSize, 5, this.zPos + 4 * 2 + 1));
 
-            lastTopData = vertices.GetRange(vertices.Count - 4, 4);
+            this.lastTopData = vertices.GetRange(vertices.Count - 4, 4);
 
             for (int i = 0; i < amountToDo; i++)
             {
@@ -310,35 +311,35 @@ namespace Assets.Scripts.MapGeneration
             mesh.SetTriangles(faces, 0);
             mesh.RecalculateNormals();
 
-            mf = (MeshFilter)top.gameObject.GetComponent(typeof(MeshFilter));
-            mr = (MeshRenderer)top.gameObject.GetComponent(typeof(MeshRenderer));
+            mf = (MeshFilter)this.top.gameObject.GetComponent(typeof(MeshFilter));
+            mr = (MeshRenderer)this.top.gameObject.GetComponent(typeof(MeshRenderer));
             mf.mesh.Clear();
             mf.mesh = mesh;
 
-            top.transform.parent = parent;
-            other.Add(top);
+            this.top.transform.parent = parent;
+            this.other.Add(this.top);
         }
 
         public void Destroy()
         {
-            for (int i = 0; i < water.Length; i++)
+            for (int i = 0; i < this.water.Length; i++)
             {
-                for (int j = 0; j < water[i].Count; j++)
+                for (int j = 0; j < this.water[i].Count; j++)
                 {
-                    ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(water[i][j]);
+                    ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(this.water[i][j]);
                 }
             }
 
-            for (int i = 0; i < other.Count; i++)
+            for (int i = 0; i < this.other.Count; i++)
             {
-                ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(other[i]);
+                ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(this.other[i]);
             }
 
-            GameObject.Destroy(underWater);
-            GameObject.Destroy(side);
-            GameObject.Destroy(top);
+            Object.Destroy(this.underWater);
+            Object.Destroy(this.side);
+            Object.Destroy(this.top);
         }
 
-        public float ZPosition { get { return zPos; } }
+        public float ZPosition { get { return this.zPos; } }
     }
 }

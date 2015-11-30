@@ -21,13 +21,13 @@ public class MoveByLinearAcc : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Sensor.Activate(Sensor.Type.LinearAcceleration);
-		r = GetComponent<Rigidbody>();
+	    this.r = this.GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame 
 	void FixedUpdate () {
-		Vector3 linearAcc = FilterMax(Sensor.linearAcceleration / 20 * 10);
-		r.position = new Vector3( -linearAcc.x, r.position.y, -linearAcc.y);
+		Vector3 linearAcc = this.FilterMax(Sensor.linearAcceleration / 20 * 10);
+	    this.r.position = new Vector3( -linearAcc.x, this.r.position.y, -linearAcc.y);
 	}
 	
 	// Decay filter - goes instantly up to higher values, but slowly down back to zero
@@ -39,10 +39,10 @@ public class MoveByLinearAcc : MonoBehaviour {
 	
 	Vector3 FilterMax(Vector3 input)
 	{
-		if(input.magnitude > max.magnitude) max = input; 
-		   
-		holder = Vector3.SmoothDamp(holder, max, ref velocity, 0.1f);
-		if(Vector3.Distance(holder, max) < 0.4f) max = Vector3.zero;
-		return holder;
+		if(input.magnitude > this.max.magnitude) this.max = input;
+
+	    this.holder = Vector3.SmoothDamp(this.holder, this.max, ref this.velocity, 0.1f);
+		if(Vector3.Distance(this.holder, this.max) < 0.4f) this.max = Vector3.zero;
+		return this.holder;
 	}
 }

@@ -12,20 +12,20 @@ public class MoveCam : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        camTransform = GetComponent<Camera>().transform;
-	    originalPos = camTransform.position;
+	    this.camTransform = this.GetComponent<Camera>().transform;
+	    this.originalPos = this.camTransform.position;
 
-        randomPos = originalPos + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-1, 1));
+	    this.randomPos = this.originalPos + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-1, 1));
     }
 	
 	// Update is called once per frame
     private void Update()
     {
-        camTransform.position = Vector3.Slerp(camTransform.position, randomPos, Time.deltaTime);
-        camTransform.LookAt(lookAt);
-        if (Vector3.Distance(camTransform.position, randomPos) < 0.5f)
+        this.camTransform.position = Vector3.Slerp(this.camTransform.position, this.randomPos, Time.deltaTime);
+        this.camTransform.LookAt(this.lookAt);
+        if (Vector3.Distance(this.camTransform.position, this.randomPos) < 0.5f)
         {
-            randomPos = originalPos + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-1, 1));
+            this.randomPos = this.originalPos + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-1, 1));
         }
     }
 }

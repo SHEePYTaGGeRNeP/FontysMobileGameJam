@@ -97,8 +97,8 @@ public class ChatGui : MonoBehaviour, IChatClientListener
             this.UserName = "user" + Environment.TickCount%99; //made-up username
         }
 
-        chatClient = new ChatClient(this);
-        chatClient.Connect(ChatAppId, "1.0", new ExitGames.Client.Photon.Chat.AuthenticationValues(this.UserName));
+        this.chatClient = new ChatClient(this);
+        this.chatClient.Connect(this.ChatAppId, "1.0", new ExitGames.Client.Photon.Chat.AuthenticationValues(this.UserName));
 
         if (this.AlignBottom)
         {
@@ -129,9 +129,9 @@ public class ChatGui : MonoBehaviour, IChatClientListener
     {
         if (Instance != null && Instance == this)
         {
-            if (chatClient != null)
+            if (this.chatClient != null)
             {
-                chatClient.Disconnect();
+                this.chatClient.Disconnect();
             }
         }
     }
@@ -161,7 +161,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
             if ("ChatInput".Equals(GUI.GetNameOfFocusedControl()))
             {
                 // focus on input -> submit it
-                GuiSendsMsg();
+                this.GuiSendsMsg();
                 return; // showing the now modified list would result in an error. to avoid this, we just skip this single frame
             }
             else
@@ -211,7 +211,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
                 GUILayout.Label(ChatGui.WelcomeText);
 
-                if (this.chatClient.TryGetChannel(selectedChannelName, this.doingPrivateChat, out this.selectedChannel))
+                if (this.chatClient.TryGetChannel(this.selectedChannelName, this.doingPrivateChat, out this.selectedChannel))
                 {
                     for (int i = 0; i < this.selectedChannel.Messages.Count; i++)
                     {
@@ -227,7 +227,7 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
 
         GUILayout.BeginHorizontal();
-        if (doingPrivateChat)
+        if (this.doingPrivateChat)
         {
             GUILayout.Label("to:", GUILayout.ExpandWidth(false));
             GUI.SetNextControlName("WhisperTo");
@@ -247,10 +247,10 @@ public class ChatGui : MonoBehaviour, IChatClientListener
 
         }
         GUI.SetNextControlName("ChatInput");
-        inputLine = GUILayout.TextField(inputLine);
+        this.inputLine = GUILayout.TextField(this.inputLine);
         if (GUILayout.Button("Send", GUILayout.ExpandWidth(false)))
         {
-            GuiSendsMsg();
+            this.GuiSendsMsg();
         }
         GUILayout.EndHorizontal();
         GUILayout.EndArea();

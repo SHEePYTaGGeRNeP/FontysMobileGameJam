@@ -7,9 +7,9 @@ public class ShowStatusWhenConnecting : MonoBehaviour
 
     void OnGUI()
     {
-        if( Skin != null )
+        if(this.Skin != null )
         {
-            GUI.skin = Skin;
+            GUI.skin = this.Skin;
         }
 
         float width = 400;
@@ -19,14 +19,14 @@ public class ShowStatusWhenConnecting : MonoBehaviour
 
         GUILayout.BeginArea( centeredRect, GUI.skin.box );
         {
-            GUILayout.Label( "Connecting" + GetConnectingDots(), GUI.skin.customStyles[ 0 ] );
+            GUILayout.Label( "Connecting" + this.GetConnectingDots(), GUI.skin.customStyles[ 0 ] );
             GUILayout.Label( "Status: " + PhotonNetwork.connectionStateDetailed );
         }
         GUILayout.EndArea();
 
         if( PhotonNetwork.connectionStateDetailed == PeerState.Joined )
         {
-            enabled = false;
+            this.enabled = false;
         }
     }
 

@@ -18,24 +18,27 @@ namespace Assets.Scripts.PhotonNetworking
 		public event EventHandler OnJoinedRoomEvent;
 
         [SerializeField]
+        private RoeiButtonHandler _roeiButtonHandler;
+        [SerializeField]
         private LobbiesManager _lobbiesManager;
 
-		void Awake()
+	    private void Awake()
 		{
 			Instance = this;
 			this._photonView = this.GetComponent<PhotonView>();
 		}
 
-		void Start()
+	    private void Start()
 		{
 			PhotonNetwork.logLevel = PhotonLogLevel.Informational;
 			PhotonNetwork.ConnectUsingSettings("0.1");
 		}
 
-		void OnGUI()
+	    private void OnGUI()
 		{
 			GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
 		}
+
 		public override void OnConnectedToMaster()
 		{
             // when AutoJoinLobby is off, this method gets called when PUN finished the connection (instead of OnJoinedLobby())
@@ -57,7 +60,6 @@ namespace Assets.Scripts.PhotonNetworking
             RoomOptions ro = new RoomOptions() { isVisible = true, maxPlayers = 5};
             PhotonNetwork.CreateRoom(roomname, ro, TypedLobby.Default);
         }
-
 
 		public override void OnJoinedLobby()
 		{
@@ -104,29 +106,29 @@ namespace Assets.Scripts.PhotonNetworking
 				spawnedPlayer.transform.position = paddleToAssign.transform.position;
 				PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
 				PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
-				photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
+			    this.photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
 			}
 		}
 
 
 		/// <summary>
 		/// Called on connecting client
-		/// </summary
+		/// </summary>
 		[PunRPC]
 		public void AssignPaddle(int playerID, int paddleID, int rowside )
 		{
-			Debug.Log("assign paddle");
-			GameObject myPlayer = PhotonView.Find(playerID).gameObject;
+			Debug.Log("assigning paddle");
+			PhotonRoeier myPlayer = PhotonView.Find(playerID).gameObject.GetComponent<PhotonRoeier>();
 
-			myPlayer.GetComponent<PhotonRoeier>().PaddleViewId = paddleID;
-			myPlayer.GetComponent<PhotonRoeier>().Side = (RowTiltController.RowSide) rowside;
+            this._roeiButtonHandler.Roeier = myPlayer;
+			myPlayer.PaddleViewId = paddleID;
+			myPlayer.Side = (RowTiltController.RowSide) rowside;
 		}
 
 
 		[PunRPC]
 		public void AddForce(int paddleViewId, float force)
 		{
-			PhotonView view = PhotonView.Find(paddleViewId);
 			Paddle paddle = PhotonView.Find(paddleViewId).GetComponent<Paddle>();
 			this._boot.AddForce(paddle.transform.position, force);
 		}

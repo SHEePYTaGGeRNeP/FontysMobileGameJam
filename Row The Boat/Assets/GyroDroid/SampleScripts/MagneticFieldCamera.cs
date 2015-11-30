@@ -20,6 +20,6 @@ public class MagneticFieldCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// camera is above scene, rotate camera around
-		transform.rotation = Quaternion.Euler(90,magneticFilter.Update(Sensor.GetOrientation().x),0);
+	    this.transform.rotation = Quaternion.Euler(90, this.magneticFilter.Update(Sensor.GetOrientation().x),0);
 	}
 }

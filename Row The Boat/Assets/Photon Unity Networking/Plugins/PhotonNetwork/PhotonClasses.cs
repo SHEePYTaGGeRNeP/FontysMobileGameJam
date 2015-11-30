@@ -1116,7 +1116,7 @@ public class PhotonStream
     {
         get
         {
-            return data.Count;
+            return this.data.Count;
         }
     }
 
@@ -1177,9 +1177,9 @@ public class PhotonStream
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                myBool = (bool)data[currentItem];
+                myBool = (bool)this.data[this.currentItem];
                 this.currentItem++;
             }
         }
@@ -1190,16 +1190,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref int myInt)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(myInt);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                myInt = (int)data[currentItem];
-                currentItem++;
+                myInt = (int)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1209,16 +1209,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref string value)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(value);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                value = (string)data[currentItem];
-                currentItem++;
+                value = (string)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1228,16 +1228,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref char value)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(value);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                value = (char)data[currentItem];
-                currentItem++;
+                value = (char)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1247,16 +1247,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref short value)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(value);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                value = (short)data[currentItem];
-                currentItem++;
+                value = (short)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1266,16 +1266,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref float obj)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                obj = (float)data[currentItem];
-                currentItem++;
+                obj = (float)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1285,16 +1285,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref PhotonPlayer obj)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                obj = (PhotonPlayer)data[currentItem];
-                currentItem++;
+                obj = (PhotonPlayer)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1304,16 +1304,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref Vector3 obj)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                obj = (Vector3)data[currentItem];
-                currentItem++;
+                obj = (Vector3)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1323,16 +1323,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref Vector2 obj)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                obj = (Vector2)data[currentItem];
-                currentItem++;
+                obj = (Vector2)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1342,16 +1342,16 @@ public class PhotonStream
     /// </summary>
     public void Serialize(ref Quaternion obj)
     {
-        if (write)
+        if (this.write)
         {
             this.data.Add(obj);
         }
         else
         {
-            if (this.data.Count > currentItem)
+            if (this.data.Count > this.currentItem)
             {
-                obj = (Quaternion)data[currentItem];
-                currentItem++;
+                obj = (Quaternion)this.data[this.currentItem];
+                this.currentItem++;
             }
         }
     }
@@ -1413,7 +1413,7 @@ public class WebRpcResponse
     /// <returns>String resembling the result.</returns>
     public string ToStringFull()
     {
-        return string.Format("{0}={2}: {1} \"{3}\"", Name, SupportClass.DictionaryToString(Parameters), ReturnCode, DebugMessage);
+        return string.Format("{0}={2}: {1} \"{3}\"", this.Name, SupportClass.DictionaryToString(this.Parameters), this.ReturnCode, this.DebugMessage);
     }
 }
 

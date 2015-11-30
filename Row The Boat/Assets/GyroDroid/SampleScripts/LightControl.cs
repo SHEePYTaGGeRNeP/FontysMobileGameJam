@@ -26,20 +26,20 @@ public class LightControl : MonoBehaviour {
 		
 		// compare to predefined LightValue constants
 		if(lightValue < Sensor.LightValue.Cloudy)
-			ItIsNight(true);
+		    this.ItIsNight(true);
 		else
-			ItIsNight(false);
+		    this.ItIsNight(false);
 	}
 	
 	void ItIsNight(bool on) {
 		// slowly fade colors and ambientLight settings
 		if(on) {
-			Camera.main.backgroundColor = Color.Lerp(Camera.main.backgroundColor, nightBackgroundColor, Time.deltaTime);
-			RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, darkAmbient, Time.deltaTime);
+			Camera.main.backgroundColor = Color.Lerp(Camera.main.backgroundColor, this.nightBackgroundColor, Time.deltaTime);
+			RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, this.darkAmbient, Time.deltaTime);
 		}
 		else {
-			Camera.main.backgroundColor = Color.Lerp(Camera.main.backgroundColor, dayBackgroundColor, Time.deltaTime);
-			RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, lightAmbient, Time.deltaTime);
+			Camera.main.backgroundColor = Color.Lerp(Camera.main.backgroundColor, this.dayBackgroundColor, Time.deltaTime);
+			RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, this.lightAmbient, Time.deltaTime);
 		}		
 	}
 }

@@ -27,7 +27,7 @@ public class CubeInter : Photon.MonoBehaviour
 
     void Awake()
     {
-        if (photonView.isMine)
+        if (this.photonView.isMine)
             this.enabled = false;//Only enable inter/extrapol for remote players
     }
 
@@ -36,8 +36,8 @@ public class CubeInter : Photon.MonoBehaviour
         // Always send transform (depending on reliability of the network view)
         if (stream.isWriting)
         {
-            Vector3 pos = transform.localPosition;
-            Quaternion rot = transform.localRotation;
+            Vector3 pos = this.transform.localPosition;
+            Quaternion rot = this.transform.localRotation;
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
         }
@@ -51,9 +51,9 @@ public class CubeInter : Photon.MonoBehaviour
             stream.Serialize(ref rot);
 
             // Shift buffer contents, oldest data erased, 18 becomes 19, ... , 0 becomes 1
-            for (int i = m_BufferedState.Length - 1; i >= 1; i--)
+            for (int i = this.m_BufferedState.Length - 1; i >= 1; i--)
             {
-                m_BufferedState[i] = m_BufferedState[i - 1];
+                this.m_BufferedState[i] = this.m_BufferedState[i - 1];
             }
 			
 			
@@ -62,15 +62,15 @@ public class CubeInter : Photon.MonoBehaviour
             state.timestamp = info.timestamp;
             state.pos = pos;
             state.rot = rot;
-            m_BufferedState[0] = state;
+            this.m_BufferedState[0] = state;
 
             // Increment state count but never exceed buffer size
-            m_TimestampCount = Mathf.Min(m_TimestampCount + 1, m_BufferedState.Length);
+            this.m_TimestampCount = Mathf.Min(this.m_TimestampCount + 1, this.m_BufferedState.Length);
 
             // Check integrity, lowest numbered state in the buffer is newest and so on
-            for (int i = 0; i < m_TimestampCount - 1; i++)
+            for (int i = 0; i < this.m_TimestampCount - 1; i++)
             {
-                if (m_BufferedState[i].timestamp < m_BufferedState[i + 1].timestamp)
+                if (this.m_BufferedState[i].timestamp < this.m_BufferedState[i + 1].timestamp)
                     Debug.Log("State inconsistent");
             }
 		}
@@ -80,7 +80,7 @@ public class CubeInter : Photon.MonoBehaviour
     void Update()
     {
         double currentTime = PhotonNetwork.time;
-        double interpolationTime = currentTime - interpolationBackTime;
+        double interpolationTime = currentTime - this.interpolationBackTime;
         // We have a window of interpolationBackTime where we basically play 
         // By having interpolationBackTime the average ping, you will usually use interpolation.
         // And only if no more data arrives we will use extrapolation
@@ -88,17 +88,17 @@ public class CubeInter : Photon.MonoBehaviour
         // Use interpolation
         // Check if latest state exceeds interpolation time, if this is the case then
         // it is too old and extrapolation should be used
-        if (m_BufferedState[0].timestamp > interpolationTime)
+        if (this.m_BufferedState[0].timestamp > interpolationTime)
         {
-			 for (int i = 0; i < m_TimestampCount; i++)
+			 for (int i = 0; i < this.m_TimestampCount; i++)
             {
                 // Find the state which matches the interpolation time (time+0.1) or use last state
-                if (m_BufferedState[i].timestamp <= interpolationTime || i == m_TimestampCount - 1)
+                if (this.m_BufferedState[i].timestamp <= interpolationTime || i == this.m_TimestampCount - 1)
                 {
                     // The state one slot newer (<100ms) than the best playback state
-                    State rhs = m_BufferedState[Mathf.Max(i - 1, 0)];
+                    State rhs = this.m_BufferedState[Mathf.Max(i - 1, 0)];
                     // The best playback state (closest to 100 ms old (default time))
-                    State lhs = m_BufferedState[i];
+                    State lhs = this.m_BufferedState[i];
 
                     // Use the time between the two slots to determine if interpolation is necessary
                     double length = rhs.timestamp - lhs.timestamp;
@@ -109,8 +109,8 @@ public class CubeInter : Photon.MonoBehaviour
                         t = (float)((interpolationTime - lhs.timestamp) / length);
 
                     // if t=0 => lhs is used directly
-                    transform.localPosition = Vector3.Lerp(lhs.pos, rhs.pos, t);
-                    transform.localRotation = Quaternion.Slerp(lhs.rot, rhs.rot, t);
+                    this.transform.localPosition = Vector3.Lerp(lhs.pos, rhs.pos, t);
+                    this.transform.localRotation = Quaternion.Slerp(lhs.rot, rhs.rot, t);
 					return;
                 }
             }
@@ -119,10 +119,10 @@ public class CubeInter : Photon.MonoBehaviour
         // received state. You can do clever stuff with predicting what should happen.
         else
         {
-            State latest = m_BufferedState[0];
+            State latest = this.m_BufferedState[0];
 
-            transform.localPosition = Vector3.Lerp(transform.localPosition, latest.pos, Time.deltaTime * 20 );
-            transform.localRotation = latest.rot;
+            this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, latest.pos, Time.deltaTime * 20 );
+            this.transform.localRotation = latest.rot;
         }
     }
 }

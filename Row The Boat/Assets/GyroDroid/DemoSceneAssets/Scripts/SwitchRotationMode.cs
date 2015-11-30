@@ -16,7 +16,7 @@ using System.Collections;
 public class SwitchRotationMode : MonoBehaviour {
 	
 	void Start() {
-		useGUILayout = true;
+	    this.useGUILayout = true;
 	}
 	
 	void OnGUI () {

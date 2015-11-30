@@ -49,7 +49,7 @@ public class IELdemo : MonoBehaviour
         {
             //Only control the cubes if MC
             float movement = Input.GetAxis("Horizontal") * Time.deltaTime * 15;
-            foreach (Transform tran in cubes)
+            foreach (Transform tran in this.cubes)
             {
                 tran.position += new Vector3(movement, 0, 0);
             }

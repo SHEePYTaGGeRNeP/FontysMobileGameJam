@@ -10,27 +10,27 @@ public class BackToScene : MonoBehaviour {
 	public GUISkin skin;
 
 	void Awake() {
-		Screen.autorotateToLandscapeLeft = allowAutoRotation;
-		Screen.autorotateToLandscapeRight = allowAutoRotation;
-		Screen.autorotateToPortrait = allowAutoRotation;
-		Screen.autorotateToPortraitUpsideDown = allowAutoRotation;
+		Screen.autorotateToLandscapeLeft = this.allowAutoRotation;
+		Screen.autorotateToLandscapeRight = this.allowAutoRotation;
+		Screen.autorotateToPortrait = this.allowAutoRotation;
+		Screen.autorotateToPortraitUpsideDown = this.allowAutoRotation;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(key))
+		if(Input.GetKeyDown(this.key))
 		{
-			GoBack();
+		    this.GoBack();
 		}
 	}
 	
 	void GoBack() {
 		Debug.Log("Loading: Menu");
-		Application.LoadLevel(mainMenuName);
+		Application.LoadLevel(this.mainMenuName);
 	}
 	
 	void OnGUI() {
-		GUI.skin = skin;
+		GUI.skin = this.skin;
 
 		float dpiScaling = GUITools.DpiScaling;
 		GUITools.SetFontSizes();
@@ -39,7 +39,7 @@ public class BackToScene : MonoBehaviour {
 		
 		if(GUILayout.Button ("Back To Menu", GUILayout.Height(50 * dpiScaling), GUILayout.Width(200 * dpiScaling)))
 		{
-			GoBack();
+		    this.GoBack();
 		}
 		
 		GUILayout.EndArea();

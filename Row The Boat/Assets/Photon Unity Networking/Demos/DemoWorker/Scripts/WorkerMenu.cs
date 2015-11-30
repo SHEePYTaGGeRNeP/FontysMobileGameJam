@@ -138,14 +138,14 @@ public class WorkerMenu : MonoBehaviour
         GUILayout.EndHorizontal();
 
 
-        if (!string.IsNullOrEmpty(ErrorDialog))
+        if (!string.IsNullOrEmpty(this.ErrorDialog))
         {
-            GUILayout.Label(ErrorDialog);
+            GUILayout.Label(this.ErrorDialog);
 
             if (this.timeToClearDialog < Time.time)
             {
                 this.timeToClearDialog = 0;
-                ErrorDialog = "";
+                this.ErrorDialog = "";
             }
         }
 
@@ -202,19 +202,19 @@ public class WorkerMenu : MonoBehaviour
 
     public void OnPhotonCreateRoomFailed()
     {
-        ErrorDialog = "Error: Can't create room (room name maybe already used).";
+        this.ErrorDialog = "Error: Can't create room (room name maybe already used).";
         Debug.Log("OnPhotonCreateRoomFailed got called. This can happen if the room exists (even if not visible). Try another room name.");
     }
 
     public void OnPhotonJoinRoomFailed(object[] cause)
     {
-        ErrorDialog = "Error: Can't join room (full or unknown room name). " + cause[1];
+        this.ErrorDialog = "Error: Can't join room (full or unknown room name). " + cause[1];
         Debug.Log("OnPhotonJoinRoomFailed got called. This can happen if the room is not existing or full or closed.");
     }
 
     public void OnPhotonRandomJoinFailed()
     {
-        ErrorDialog = "Error: Can't join random room (none found).";
+        this.ErrorDialog = "Error: Can't join random room (none found).";
         Debug.Log("OnPhotonRandomJoinFailed got called. Happens if no room is available (or all full or invisible or closed). JoinrRandom filter-options can limit available rooms.");
     }
 

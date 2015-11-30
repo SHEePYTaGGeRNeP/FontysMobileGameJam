@@ -17,10 +17,9 @@ public class GUIFriendFinding : MonoBehaviour
 
         // Photon Cloud does not implement community features for users but can work with external friends lists.
         // We assume you get some list of IDs of your friends.
-        friendListOfSomeCommunity = FetchFriendsFromCommunity();
+        this.friendListOfSomeCommunity = FetchFriendsFromCommunity();
 
-
-        GuiRect = new Rect(Screen.width / 4, 80, Screen.width / 2, Screen.height - 100);
+        this.GuiRect = new Rect(Screen.width / 4, 80, Screen.width / 2, Screen.height - 100);
     }
 
     
@@ -62,7 +61,7 @@ public class GUIFriendFinding : MonoBehaviour
         }
 
 
-        GUILayout.BeginArea(GuiRect);
+        GUILayout.BeginArea(this.GuiRect);
 
         GUILayout.Label("Your (random) name: " + PhotonNetwork.playerName);
         GUILayout.Label("Your friends: " + string.Join(", ",this.friendListOfSomeCommunity));

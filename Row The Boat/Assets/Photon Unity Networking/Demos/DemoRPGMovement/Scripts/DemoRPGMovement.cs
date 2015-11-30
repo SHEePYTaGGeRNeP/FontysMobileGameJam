@@ -7,7 +7,7 @@ public class DemoRPGMovement : MonoBehaviour
 
     void OnJoinedRoom()
     {
-        CreatePlayerObject();
+        this.CreatePlayerObject();
     }
 
     void CreatePlayerObject()
@@ -16,6 +16,6 @@ public class DemoRPGMovement : MonoBehaviour
 
         GameObject newPlayerObject = PhotonNetwork.Instantiate( "Robot Kyle RPG", position, Quaternion.identity, 0 );
 
-        Camera.Target = newPlayerObject.transform;
+        this.Camera.Target = newPlayerObject.transform;
     }
 }
