@@ -49,13 +49,17 @@ namespace Assets.Scripts.MapGeneration
 
         public void Start()
         {
-            instance = this;            
+            instance = this;
+            this.Generate();      
         }
 
         public void Generate()
         {
             // alleen de master client moet generen
-            if (!PhotonNetwork.isMasterClient) return;
+            
+            
+            // TODO: WEGHALEN
+            //if (!PhotonNetwork.isMasterClient) return;
             Debug.Log("Generating map");
             this.CreateWaterMesh();
             this.CreateDirtMesh();

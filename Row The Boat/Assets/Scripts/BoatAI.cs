@@ -23,6 +23,7 @@ public class BoatAI : MonoBehaviour {
     
     private Rigidbody _rb;
 
+    public bool Logging;
 
     // Use this for initialization
     void Start()
@@ -72,7 +73,8 @@ public class BoatAI : MonoBehaviour {
 
             if (rayHitCenter.distance > 0)
             {
-                Debug.Log("Center start");
+                if (this.Logging)
+                    Debug.Log("Center start");
                 Debug.DrawLine(this._rayCenter.position, rayHitCenter.point, Color.green, this._rayInterval);
 
                     RaycastHit hitLeft;
@@ -158,9 +160,11 @@ public class BoatAI : MonoBehaviour {
 
             if (this.angleCorrect)
                 forceMultiplier /= 2;
-
-            Debug.Log("Skip Left Side: " + skipLeft);
-            Debug.Log("Skip Right Side: " + skipRight);
+            if (this.Logging)
+            {
+                Debug.Log("Skip Left Side: " + skipLeft);
+                Debug.Log("Skip Right Side: " + skipRight);
+            }
             this.nextPaddle = Time.time + this._paddleInterval;
 
             int r = Random.Range(0, 100);

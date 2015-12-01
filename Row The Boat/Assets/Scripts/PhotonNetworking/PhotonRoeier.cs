@@ -14,20 +14,21 @@ namespace Assets.Scripts.PhotonNetworking
 
 		private PaddleSoundController _paddleSoundController;
 
-		void Start()
+	    private void Start()
 		{
 			this._targetRPC = PhotonManager.Instance.GetComponent<PhotonView>();
 			this._photonView = this.GetComponent<PhotonView>();
 			this._rowController = this.GetComponent<RowTiltController>();
-			this._paddleSoundController = this.GetComponent<PaddleSoundController> ();
-			this._rowController.Row += (sender, args) =>
+			this._paddleSoundController = this.GetComponent<PaddleSoundController> ();            
+            this.transform.GetChild(0).gameObject.SetActive(!PhotonNetwork.isMasterClient);
+            this._rowController.Row += (sender, args) =>
 			{
                 if (args.Side == this.Side)
 				    this.Roei(args.Strength * args.Efficiency);
 			};
 		}
 
-		void Update()
+	    private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 				this.Roei(20f);

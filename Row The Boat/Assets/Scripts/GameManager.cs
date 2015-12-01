@@ -30,8 +30,8 @@ namespace Assets.Scripts
 				this._rowButton.gameObject.SetActive(true);
                 return;
             }
-            GameObject.Find("Boat_Mobile_Roeien(Clone)").transform.GetChild(0).gameObject.SetActive(true);            
-            this._mapGenerator.Generate();
+            GameObject.Find("Boat_Mobile_Roeien(Clone)").transform.GetChild(0).gameObject.SetActive(true);
+            //this._mapGenerator.Generate(seed);
         }
     }
 }

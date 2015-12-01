@@ -32,6 +32,10 @@ public class Roeiboot : MonoBehaviour
                 this.AddForce(this._achter.position, args.Strength * args.Efficiency);
             };
         }
+        if (!PhotonNetwork.isMasterClient)
+        {
+            PhotonManager.Instance.Boot = this;
+        }
 
 	}
 

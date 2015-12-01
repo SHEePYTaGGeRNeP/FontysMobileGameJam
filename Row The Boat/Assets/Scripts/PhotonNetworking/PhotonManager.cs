@@ -13,7 +13,7 @@ namespace Assets.Scripts.PhotonNetworking
         public bool Host;
 
         private Roeiboot _boot;
-        public Roeiboot Boot { get { return this._boot; } }
+        public Roeiboot Boot { get { return this._boot; } set { this._boot = value; } }
 
         public event EventHandler OnJoinedRoomEvent;
 
@@ -21,6 +21,10 @@ namespace Assets.Scripts.PhotonNetworking
         private RoeiButtonHandler _roeiButtonHandler;
         [SerializeField]
         private LobbiesManager _lobbiesManager;
+
+
+        private bool _aPlayerHasJoined;
+
 
         private void Awake()
         {
@@ -78,9 +82,9 @@ namespace Assets.Scripts.PhotonNetworking
             Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
             if (PhotonNetwork.isMasterClient)
             {
-                GameObject spawnedPlayer = PhotonNetwork.Instantiate("Boat_Mobile_Roeien", Vector3.zero, Quaternion.identity, 0);
-                PhotonNetwork.Instantiate("AI_Boat_Mobile_Roeien", new Vector3(-1.8f, 0,-5f), Quaternion.identity, 0);
-                
+                GameObject boot = PhotonNetwork.Instantiate("Boat_Mobile_Roeien", Vector3.zero, Quaternion.identity, 0);
+                this._boot = boot.GetComponent<Roeiboot>();
+                PhotonNetwork.Instantiate("AI_Boat_Mobile_Roeien", new Vector3(0, 0, -10f), Quaternion.identity, 0);
             }
             this.OnJoinedRoomReached(EventArgs.Empty);
         }
@@ -96,25 +100,44 @@ namespace Assets.Scripts.PhotonNetworking
         public override void OnPhotonPlayerConnected(PhotonPlayer player)
         {
             Debug.Log("Player connected");
-            if (PhotonNetwork.isMasterClient)
+            if (!PhotonNetwork.isMasterClient) return;
+            this.Invoke("WaitForFirstPlayer", 5);
+            if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
             {
-                if (this._boot == null)
-                    this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
-                if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
-                {
-                    // TODO: Send RPC to client.
-                    Debug.Log("No Paddles avaiable bro");
-                    return;
-                }
-                Debug.Log("Spawn");
-                GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);
-                spawnedPlayer.transform.SetParent(this._boot.transform);
-                Paddle paddleToAssign = this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
-                spawnedPlayer.transform.position = paddleToAssign.transform.position;
-                PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
-                PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
-                this.photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
+                // TODO: Send RPC to client.
+                Debug.Log("No Paddles avaiable bro");
+                return;
             }
+            Debug.Log("Spawn");
+            GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);
+            spawnedPlayer.transform.SetParent(this._boot.transform);
+            Paddle paddleToAssign = this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
+            spawnedPlayer.transform.position = paddleToAssign.transform.position;
+            PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
+            PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
+            this.photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
+        }
+
+        private void WaitForFirstPlayer()
+        {
+            this._aPlayerHasJoined = true;
+        }
+            
+        private void FixedUpdate()
+        {
+            if (!this._aPlayerHasJoined || !PhotonNetwork.isMasterClient)
+                return;
+            Debug.Log("Send RPC for transform update");
+            this._photonView.RPC("UpdateBoatTransform", PhotonTargets.All, this._boot.transform.position, this._boot.transform.rotation);
+        }
+
+
+        [PunRPC]
+        public void UpdateBoatTransform(Vector3 pos, Vector3 rot)
+        {
+            Debug.Log("Recieved RPC for transform update");
+            this._boot.transform.position = pos;
+            this._boot.transform.eulerAngles = rot;
         }
 
 
