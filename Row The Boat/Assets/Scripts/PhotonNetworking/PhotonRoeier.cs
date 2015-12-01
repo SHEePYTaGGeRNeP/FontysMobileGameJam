@@ -21,6 +21,7 @@ namespace Assets.Scripts.PhotonNetworking
 			this._rowController = this.GetComponent<RowTiltController>();
 			this._paddleSoundController = this.GetComponent<PaddleSoundController> ();            
             this.transform.GetChild(0).gameObject.SetActive(!PhotonNetwork.isMasterClient);
+	        this.transform.SetParent(GameObject.Find("Boat_Mobile_Roeien(Clone)").transform);
             this._rowController.Row += (sender, args) =>
 			{
                 if (args.Side == this.Side)

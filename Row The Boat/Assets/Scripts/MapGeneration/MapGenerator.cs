@@ -57,9 +57,6 @@ namespace Assets.Scripts.MapGeneration
         {
             // alleen de master client moet generen
             
-            
-            // TODO: WEGHALEN
-            //if (!PhotonNetwork.isMasterClient) return;
             Debug.Log("Generating map");
             this.CreateWaterMesh();
             this.CreateDirtMesh();
@@ -183,7 +180,7 @@ namespace Assets.Scripts.MapGeneration
         {
             //Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
 
-            if (!PhotonNetwork.isMasterClient || !this.hasGenerated) return;
+            if (!this.hasGenerated) return;
 
             if (this.strokes.Count != 30)
             {
