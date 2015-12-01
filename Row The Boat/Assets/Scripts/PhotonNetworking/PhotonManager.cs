@@ -5,42 +5,42 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.PhotonNetworking
 {
-	class PhotonManager : Photon.PunBehaviour
-	{
-		public static PhotonManager Instance;
+    class PhotonManager : Photon.PunBehaviour
+    {
+        public static PhotonManager Instance;
 
-		private PhotonView _photonView;
-		public bool Host;
+        private PhotonView _photonView;
+        public bool Host;
 
-		private Roeiboot _boot;
-		public Roeiboot Boot { get { return this._boot; } }
+        private Roeiboot _boot;
+        public Roeiboot Boot { get { return this._boot; } }
 
-		public event EventHandler OnJoinedRoomEvent;
+        public event EventHandler OnJoinedRoomEvent;
 
         [SerializeField]
         private RoeiButtonHandler _roeiButtonHandler;
         [SerializeField]
         private LobbiesManager _lobbiesManager;
 
-	    private void Awake()
-		{
-			Instance = this;
-			this._photonView = this.GetComponent<PhotonView>();
-		}
+        private void Awake()
+        {
+            Instance = this;
+            this._photonView = this.GetComponent<PhotonView>();
+        }
 
-	    private void Start()
-		{
-			PhotonNetwork.logLevel = PhotonLogLevel.Informational;
-			PhotonNetwork.ConnectUsingSettings("0.1");
-		}
+        private void Start()
+        {
+            PhotonNetwork.logLevel = PhotonLogLevel.Informational;
+            PhotonNetwork.ConnectUsingSettings("0.1");
+        }
 
-	    private void OnGUI()
-		{
-			GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-		}
+        private void OnGUI()
+        {
+            GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+        }
 
-		public override void OnConnectedToMaster()
-		{
+        public override void OnConnectedToMaster()
+        {
             // when AutoJoinLobby is off, this method gets called when PUN finished the connection (instead of OnJoinedLobby())
             if (this._lobbiesManager == null)
             {
@@ -51,86 +51,93 @@ namespace Assets.Scripts.PhotonNetworking
             {
                 this._lobbiesManager.StartUpdating();
             }
-		}
+        }
 
         public void CreateRoom(string roomname)
         {
             Debug.Log("Creating room " + roomname);
             this.Host = true;
-            RoomOptions ro = new RoomOptions() { isVisible = true, maxPlayers = 5};
+            RoomOptions ro = new RoomOptions() { isVisible = true, maxPlayers = 5 };
             PhotonNetwork.CreateRoom(roomname, ro, TypedLobby.Default);
         }
 
-		public override void OnJoinedLobby()
-		{
-			Debug.Log("Joining random room!");
-			PhotonNetwork.JoinRandomRoom();
-		}
-		void OnPhotonRandomJoinFailed()
-		{
-			Debug.Log("Can't join random room - Creating room");
-			this.Host = true;
-			PhotonNetwork.CreateRoom(null);
-		}
+        public override void OnJoinedLobby()
+        {
+            Debug.Log("Joining random room!");
+            PhotonNetwork.JoinRandomRoom();
+        }
+        void OnPhotonRandomJoinFailed()
+        {
+            Debug.Log("Can't join random room - Creating room");
+            this.Host = true;
+            PhotonNetwork.CreateRoom(null);
+        }
 
-		public override void OnJoinedRoom()
-		{
-			Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
-			this.OnJoinedRoomReached(EventArgs.Empty);
-		}
-		protected virtual void OnJoinedRoomReached(EventArgs e)
-		{
-			EventHandler handler = this.OnJoinedRoomEvent;
-			if (handler != null)
-			{
-				handler(this, e);
-			}
-		}
+        public override void OnJoinedRoom()
+        {
+            Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
+            if (PhotonNetwork.isMasterClient)
+            {
+                GameObject spawnedPlayer = PhotonNetwork.Instantiate("Boat_Mobile_Roeien", Vector3.zero, Quaternion.identity, 0);
+                PhotonNetwork.Instantiate("AI_Boat_Mobile_Roeien", new Vector3(-1.8f, 0,-5f), Quaternion.identity, 0);
+                
+            }
+            this.OnJoinedRoomReached(EventArgs.Empty);
+        }
+        protected virtual void OnJoinedRoomReached(EventArgs e)
+        {
+            EventHandler handler = this.OnJoinedRoomEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
 
-		public override void OnPhotonPlayerConnected(PhotonPlayer player)
-		{
-			if (PhotonNetwork.isMasterClient)
-			{
-				if (this._boot == null)
-					this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
-				if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
-				{
-					// TODO: Send RPC to client.
-					Debug.Log("No Paddles avaiable bro");
-					return;
-				}
-				Debug.Log("Spawn");
-				GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);
-				spawnedPlayer.transform.SetParent(this._boot.transform);
-				Paddle paddleToAssign = this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
-				spawnedPlayer.transform.position = paddleToAssign.transform.position;
-				PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
-				PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
-			    this.photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
-			}
-		}
+        public override void OnPhotonPlayerConnected(PhotonPlayer player)
+        {
+            Debug.Log("Player connected");
+            if (PhotonNetwork.isMasterClient)
+            {
+                if (this._boot == null)
+                    this._boot = GameObject.Find("Boat_Mobile_Roeien").GetComponent<Roeiboot>();
+                if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
+                {
+                    // TODO: Send RPC to client.
+                    Debug.Log("No Paddles avaiable bro");
+                    return;
+                }
+                Debug.Log("Spawn");
+                GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);
+                spawnedPlayer.transform.SetParent(this._boot.transform);
+                Paddle paddleToAssign = this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
+                spawnedPlayer.transform.position = paddleToAssign.transform.position;
+                PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
+                PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
+                this.photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
+            }
+        }
 
 
-		/// <summary>
-		/// Called on connecting client
-		/// </summary>
-		[PunRPC]
-		public void AssignPaddle(int playerID, int paddleID, int rowside )
-		{
-			Debug.Log("assigning paddle");
-			PhotonRoeier myPlayer = PhotonView.Find(playerID).gameObject.GetComponent<PhotonRoeier>();
+        /// <summary>
+        /// Called on connecting client
+        /// </summary>
+        [PunRPC]
+        public void AssignPaddle(int playerID, int paddleID, int rowside)
+        {
+            Debug.Log("assigning paddle");
+            PhotonRoeier myPlayer = PhotonView.Find(playerID).gameObject.GetComponent<PhotonRoeier>();
 
             this._roeiButtonHandler.Roeier = myPlayer;
-			myPlayer.PaddleViewId = paddleID;
-			myPlayer.Side = (RowTiltController.RowSide) rowside;
-		}
+            myPlayer.PaddleViewId = paddleID;
+            myPlayer.Side = (RowTiltController.RowSide)rowside;
+        }
 
 
-		[PunRPC]
-		public void AddForce(int paddleViewId, float force)
-		{
-			Paddle paddle = PhotonView.Find(paddleViewId).GetComponent<Paddle>();
-			this._boot.AddForce(paddle.transform.position, force);
-		}
-	}
+        [PunRPC]
+        public void AddForce(int paddleViewId, float force)
+        {
+            Paddle paddle = PhotonView.Find(paddleViewId).GetComponent<Paddle>();
+            this._boot.AddForce(paddle.transform.position, force);
+        }
+    }
 }

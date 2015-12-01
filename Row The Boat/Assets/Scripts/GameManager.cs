@@ -16,8 +16,6 @@ namespace Assets.Scripts
         [SerializeField]
         private MapGenerator _mapGenerator;
         [SerializeField]
-        private BoatAI _boatAi;
-        [SerializeField]
         private Button _rowButton;
 
         // Use this for initialization
@@ -27,10 +25,13 @@ namespace Assets.Scripts
 
         private void PhotonManagerOnOnJoinedRoomEvent(object sender, EventArgs eventArgs)
         {
-            if (!PhotonNetwork.isMasterClient) return;
-            this._rowButton.gameObject.SetActive(false);
+            if (!PhotonNetwork.isMasterClient)
+            {
+				this._rowButton.gameObject.SetActive(true);
+                return;
+            }
+            GameObject.Find("Boat_Mobile_Roeien(Clone)").transform.GetChild(0).gameObject.SetActive(true);            
             this._mapGenerator.Generate();
-            this._boatAi.gameObject.SetActive(true);
         }
     }
 }
