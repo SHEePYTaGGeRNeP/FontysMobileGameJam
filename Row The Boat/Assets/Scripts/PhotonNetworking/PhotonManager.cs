@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.PhotonNetworking
 {
+    using System.Collections.Generic;
+
     class PhotonManager : Photon.PunBehaviour
     {
-        public static PhotonManager Instance;
+        public static PhotonManager Instance;       
 
         private PhotonView _photonView;
         public bool Host;
@@ -127,15 +129,14 @@ namespace Assets.Scripts.PhotonNetworking
         {
             if (!this._aPlayerHasJoined || !PhotonNetwork.isMasterClient)
                 return;
-            Debug.Log("Send RPC for transform update");
-            this._photonView.RPC("UpdateBoatTransform", PhotonTargets.All, this._boot.transform.position, this._boot.transform.rotation);
+            //this._photonView.RPC("UpdateBoatTransform", PhotonTargets.All, this._boot.transform.position, this._boot.transform.rotation.eulerAngles);
         }
 
 
         [PunRPC]
         public void UpdateBoatTransform(Vector3 pos, Vector3 rot)
         {
-            Debug.Log("Recieved RPC for transform update");
+            if (PhotonNetwork.isMasterClient) return;
             this._boot.transform.position = pos;
             this._boot.transform.eulerAngles = rot;
         }
