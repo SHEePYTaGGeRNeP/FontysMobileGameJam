@@ -4,4 +4,6 @@ git update-index --assume-unchanged "Row The Boat\Assets\Art\MapGenerator\DirtOb
 
 
 TO TRACK AGAIN:
+git update-index --no-assume-unchanged "Row The Boat\Row The Boat.CSharp.csproj"
+git update-index --no-assume-unchanged "Row The Boat\Assets\Art\MapGenerator\DirtObject.prefab"
 git update-index --no-assume-unchanged "Row The Boat\Assets\Art\MapGenerator\DirtObject.prefab"
