@@ -8,45 +8,45 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 {
     class PoolList
     {
-        private List<ObjectData> list;
-        private GameObjectType type;
+        private List<ObjectData> _list;
+        private GameObjectType _type;
 
         public PoolList(GameObjectType type)
         {
-            this.type = type;
-            this.list = new List<ObjectData>();
+            this._type = type;
+            this._list = new List<ObjectData>();
         }
 
         public GameObjectType GetGameObjectType()
         {
-            return this.type;
+            return this._type;
         }
 
         public GameObject GetNextAvaiableObject()
         {
             // Check the list for an object that is not used
-            for (int i = 0; i < this.list.Count; i++)
+            for (int i = 0; i < this._list.Count; i++)
             {
-                if (this.list[i].IsBeschikbaar())
+                if (this._list[i].IsBeschikbaar())
                 {
-                    return this.list[i].obj;
+                    return this._list[i].Obj;
                 }
             }
 
             // No object is avaiable, create a new one
-            return ObjectPool.GetInstance().CreateNewObject(this.type);
+            return ObjectPool.GetInstance().CreateNewObject(this._type);
         }
 
         public void AddGameObject(GameObject obj)
         {
-            this.list.Add(new ObjectData(obj));
+            this._list.Add(new ObjectData(obj));
         }
 
         public int Contains(GameObject obj)
         {
-            for (int i = 0; i < this.list.Count; i++)
+            for (int i = 0; i < this._list.Count; i++)
             {
-                if (this.list[i].obj == obj)
+                if (this._list[i].Obj == obj)
                 {
                     return i;
                 }
@@ -57,13 +57,13 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         public void SetBeschikbaar(int obj)
         {
-            this.list[obj].transform.position = new Vector3(this.list[obj].transform.position.x, this.list[obj].transform.position.y, -10);
-            this.list[obj].transform.parent = MapGenerator.GetInstance().ObjectPoolHolder.transform;
+            this._list[obj].Transform.position = new Vector3(this._list[obj].Transform.position.x, this._list[obj].Transform.position.y, -10);
+            this._list[obj].Transform.parent = MapGenerator.GetInstance().ObjectPoolHolder.transform;
         }
 
         public int GetObjectCount()
         {
-            return this.list.Count;
+            return this._list.Count;
         }
     }
 }

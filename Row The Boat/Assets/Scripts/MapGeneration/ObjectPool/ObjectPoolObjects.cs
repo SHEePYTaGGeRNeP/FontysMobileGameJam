@@ -8,12 +8,12 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 {
     class ObjectPoolObjects : MonoBehaviour
     {
-        public List<GameObject> trees;
-        public List<GameObject> stones;
+        public List<GameObject> Trees;
+        public List<GameObject> Stones;
 
         public static ObjectPoolObjects Instance { get; private set; }
 
-        public void Start()
+        public void Awake()
         {
             Instance = this;
         }

@@ -8,31 +8,31 @@ namespace Assets.Scripts.MapGeneration
 {
     class Water : MonoBehaviour
     {
-        public Mesh mesh;
+        public Mesh Mesh;
         //public Water left;
         //public Water right;
 
-        private Vector3 nextPosition = new Vector3();
-        private Vector3 startPosition = new Vector3();
-        private float lerpValue = -1;
+        private Vector3 _nextPosition = new Vector3();
+        private Vector3 _startPosition = new Vector3();
+        private float _lerpValue = -1;
 
 
         public void Update1()
         {
-            Vector3[] vertices = this.mesh.vertices;
+            Vector3[] vertices = this.Mesh.vertices;
 
-            if (this.lerpValue >= 1)
+            if (this._lerpValue >= 1)
             {
-                this.lerpValue = 0;
-                this.startPosition = this.nextPosition;
-                this.nextPosition = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+                this._lerpValue = 0;
+                this._startPosition = this._nextPosition;
+                this._nextPosition = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
                 
             }
             
-            vertices[4] = Vector3.Lerp(this.startPosition, this.nextPosition, this.lerpValue);
+            vertices[4] = Vector3.Lerp(this._startPosition, this._nextPosition, this._lerpValue);
 
-            this.mesh.vertices = vertices;
-            this.lerpValue += 0.1f;
+            this.Mesh.vertices = vertices;
+            this._lerpValue += 0.1f;
         }
     }
 }

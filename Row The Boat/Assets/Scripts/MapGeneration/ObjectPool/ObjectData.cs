@@ -8,18 +8,18 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 {
     class ObjectData
     {
-        public GameObject obj;
-        public Transform transform;
+        public GameObject Obj;
+        public Transform Transform;
 
         public ObjectData(GameObject obj)
         {
-            this.obj = obj;
-            this.transform = obj.transform;
+            this.Obj = obj;
+            this.Transform = obj.transform;
         }
 
         public bool IsBeschikbaar()
         {
-            return this.transform.position.z <= -9;
+            return this.Transform.position.z <= -9;
         }
     }
 }

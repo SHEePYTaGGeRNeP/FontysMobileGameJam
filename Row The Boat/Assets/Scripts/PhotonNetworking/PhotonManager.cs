@@ -84,9 +84,9 @@ namespace Assets.Scripts.PhotonNetworking
             Debug.Log("OnJoinedRoom() : You Have Joined a Room : " + PhotonNetwork.room.name);
             if (PhotonNetwork.isMasterClient)
             {
-                GameObject boot = PhotonNetwork.Instantiate("Boat_Mobile_Roeien", Vector3.zero, Quaternion.identity, 0);
+                GameObject boot = PhotonNetwork.Instantiate("Boat_Mobile_Roeien", this.transform.position, Quaternion.identity, 0);
                 this._boot = boot.GetComponent<Roeiboot>();
-                PhotonNetwork.Instantiate("AI_Boat_Mobile_Roeien", new Vector3(0, 0, -10f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate("AI_Boat_Mobile_Roeien", this.transform.position - new Vector3(0, 0, 10f), Quaternion.identity, 0);
             }
             this.OnJoinedRoomReached(EventArgs.Empty);
         }

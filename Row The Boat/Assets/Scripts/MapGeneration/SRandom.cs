@@ -8,15 +8,15 @@ namespace Assets.Scripts.MapGeneration
 {
     class SRandom
     {
-        private int seed;
+        private int _seed;
         private static SRandom instance;
-        private int id;
+        private int _id;
 
         public SRandom(int seed)
         {
-            this.seed = seed;
+            this._seed = seed;
             instance = this;
-            this.id = 0;
+            this._id = 0;
 
 
         }
@@ -27,7 +27,7 @@ namespace Assets.Scripts.MapGeneration
             {
                 return new SRandom(seed);
             }
-            else if (seed == instance.seed)
+            else if (seed == instance._seed)
             {
                 return instance;
             }
@@ -37,13 +37,13 @@ namespace Assets.Scripts.MapGeneration
 
         public float Random(float min, float max)
         {
-            id++;
+            this._id++;
             float diff = max * 1000 - min * 1000;
 
             string num = "";
             for (int i = 0; i < 32; i++)
             {
-                num += (id * seed + seed + id + i) % 2;
+                num += (this._id * this._seed + this._seed + this._id + i) % 2;
             }
 
 

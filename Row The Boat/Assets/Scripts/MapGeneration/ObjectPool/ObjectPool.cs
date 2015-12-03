@@ -10,7 +10,7 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
     class ObjectPool
     {
-        private List<PoolList> objectList;
+        private List<PoolList> _objectList;
 
         public Vector3 Poolpoint = new Vector3(0, 0, -10);
 
@@ -20,7 +20,7 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
             if (instance == null)
             {
                 instance = new ObjectPool();
-                instance.objectList = new List<PoolList>();
+                instance._objectList = new List<PoolList>();
             }
 
             return instance;
@@ -34,7 +34,7 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
                 return list.GetNextAvaiableObject();
             }
 
-            this.objectList.Add(new PoolList(type));
+            this._objectList.Add(new PoolList(type));
             return this.GetObject(type);
         }
 
@@ -44,10 +44,10 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
             switch (type)
             {
                 case GameObjectType.Stone:
-                    go = GameObject.Instantiate(ObjectPoolObjects.Instance.stones[UnityEngine.Random.Range(0, ObjectPoolObjects.Instance.stones.Count)]);
+                    go = GameObject.Instantiate(ObjectPoolObjects.Instance.Stones[UnityEngine.Random.Range(0, ObjectPoolObjects.Instance.Stones.Count)]);
                     break;
                 case GameObjectType.Tree:
-                    go = GameObject.Instantiate(ObjectPoolObjects.Instance.trees[UnityEngine.Random.Range(0, ObjectPoolObjects.Instance.trees.Count)]);
+                    go = GameObject.Instantiate(ObjectPoolObjects.Instance.Trees[UnityEngine.Random.Range(0, ObjectPoolObjects.Instance.Trees.Count)]);
                     break;
                 case GameObjectType.Decoration:
                     //go = GameObject.Instantiate(MapGenerator.GetInstance().decoration[UnityEngine.Random.Range(0, MapGenerator.GetInstance().decoration.Count)]);
@@ -68,12 +68,12 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         public void SetBeschikbaar(GameObject obj)
         {
-            for (int i = 0; i < this.objectList.Count; i++)
+            for (int i = 0; i < this._objectList.Count; i++)
             {
-                int result = this.objectList[i].Contains(obj);
+                int result = this._objectList[i].Contains(obj);
                 if (result != -1)
                 {
-                    this.objectList[i].SetBeschikbaar(result);
+                    this._objectList[i].SetBeschikbaar(result);
                     return;
                 }
             }
@@ -81,11 +81,11 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         private PoolList GetList(GameObjectType type)
         {
-            for (int i = 0; i < this.objectList.Count; i++)
+            for (int i = 0; i < this._objectList.Count; i++)
             {
-                if (this.objectList[i].GetGameObjectType() == type)
+                if (this._objectList[i].GetGameObjectType() == type)
                 {
-                    return this.objectList[i];
+                    return this._objectList[i];
                 }
             }
 
