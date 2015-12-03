@@ -11,34 +11,32 @@ namespace Assets.Scripts.MapGeneration
     {
         public GameObject ObjectPoolHolder = null;
 
-        public GameObject WaterObject = null;
-        public GameObject DirtObject = null;
-        public GameObject DirtSideObject = null;
+        public GameObject EmptyMeshObject = null;
+        public Material Dirt = null;
+        public Material Water = null;
+        public int SideWidth = 10;
+        public int WaterWidth = 10;
+        public int UncalculatedNormalSize = 10;
 
-        public GameObject Finish = null;
+        public int PondWidth = 15;
+        public int PondLength = 20;
+        public int PondDirtLength = 5;
+        public int totalLength = 40;
 
-        public List<GameObject> stones = null;
-        public List<GameObject> trees = null;
-        public List<GameObject> decoration = null;
-
-        public GameObject Player = null;
-
-        public int WaterWidth = 7;
         private int zPosition = 0;
+        private int normalCounter = 10;
+        private int bushCounter = 5;
 
-        private float lastDisplacement = 0;
-        private float displacementValue = 0;
-        private float displacementInterpolation = 1;
+        private Mesh mDirt;
+        private Mesh mWater;
+        private GameObject goDirt;
+        private GameObject goWater;
 
-        private WaterStroke lastWaterBlock;
+        private float nextDisplacement;
+        private float lerpDisplacement = 1.0f;
+        private float startDisplacement = 0.0f;
 
-        public int MapLengte = 20;
 
-        private List<WaterStroke> strokes;
-        private List<GameObject> strokeObjects;
-        private List<GameObject> dirt;
-
-        private bool generateObstacle = false;
 
         private static MapGenerator instance;
         public static MapGenerator GetInstance()
@@ -49,270 +47,397 @@ namespace Assets.Scripts.MapGeneration
         public void Start()
         {
             instance = this;
-            CreateWaterMesh();
-            CreateDirtMesh();
+            normalCounter = UncalculatedNormalSize;
 
-            strokes = new List<WaterStroke>();
-            strokeObjects = new List<GameObject>();
-            dirt = new List<GameObject>();
+            // Setup the dirtMesh
+            List<Vector3> v = new List<Vector3>();
+
+            mDirt = new Mesh();
+            mDirt.name = "Dirt";
+            mDirt.Clear();
+            mDirt.SetVertices(v);
+            goDirt = Instantiate(EmptyMeshObject);
+            MeshFilter mf = (MeshFilter)goDirt.gameObject.GetComponent(typeof(MeshFilter));
+            MeshRenderer mr = (MeshRenderer)goDirt.gameObject.GetComponent(typeof(MeshRenderer));
+            mf.mesh = mDirt;
+            mr.material = Dirt;
+            goDirt.transform.parent = this.transform;
+            goDirt.name = "Dirt";
+
+
+
+            // Setup the waterMesh
+            v = new List<Vector3>();
+
+            mWater = new Mesh();
+            mWater.name = "Water";
+            mWater.Clear();
+            mWater.SetVertices(v);
+            goWater = Instantiate(EmptyMeshObject);
+            mf = (MeshFilter)goWater.gameObject.GetComponent(typeof(MeshFilter));
+            mr = (MeshRenderer)goWater.gameObject.GetComponent(typeof(MeshRenderer));
+            mf.mesh = mWater;
+            mr.material = Water;
+            goWater.transform.parent = this.transform;
+            goWater.name = "Water";
+
+            GeneratePond();
         }
 
-        private void CreateDirtMesh()
-        {
-            // THIS NEEDS TO CHANGE
-            Mesh mesh = new Mesh();
-            mesh.name = "DirtMesh";
-            mesh.Clear();
-            List<Vector3> vertices = new List<Vector3>();
-
-            //vertices.Add(new Vector3(WaterWidth, 0, 1));
-            //vertices.Add(new Vector3(WaterWidth, 0, -1));
-            //vertices.Add(new Vector3(-WaterWidth, 0, -1));
-            //vertices.Add(new Vector3(-WaterWidth, 0, 1));
-
-            vertices.Add(new Vector3(WaterWidth, -1, 1));
-            vertices.Add(new Vector3(WaterWidth, -1, -1));
-            vertices.Add(new Vector3(-WaterWidth, -1, -1));
-            vertices.Add(new Vector3(-WaterWidth, -1, 1));
-
-            vertices.Add(new Vector3(WaterWidth - 1, -1, 1));
-            vertices.Add(new Vector3(WaterWidth - 1, -1, -1));
-            vertices.Add(new Vector3(-WaterWidth + 1, -1, -1));
-            vertices.Add(new Vector3(-WaterWidth + 1, -1, 1));
-
-            mesh.SetVertices(vertices);
-
-            List<int> triangles = new List<int>();
-
-            triangles.Add(0);
-            triangles.Add(1);
-            triangles.Add(5);
-
-            triangles.Add(0);
-            triangles.Add(5);
-            triangles.Add(4);
-
-            triangles.Add(4);
-            triangles.Add(5);
-            triangles.Add(6);
-
-            triangles.Add(4);
-            triangles.Add(6);
-            triangles.Add(7);
-
-            triangles.Add(7);
-            triangles.Add(6);
-            triangles.Add(2);
-
-            triangles.Add(7);
-            triangles.Add(2);
-            triangles.Add(3);
-
-            mesh.SetTriangles(triangles, 0);
-
-            mesh.RecalculateNormals();
-
-            MeshFilter mf = (MeshFilter)DirtObject.gameObject.GetComponent(typeof(MeshFilter));
-            MeshRenderer mr = (MeshRenderer)DirtObject.gameObject.GetComponent(typeof(MeshRenderer));
-            mf.mesh = mesh;
-
-            DirtObject.name = "Dirt";
-        }
-
-        private void CreateWaterMesh()
-        {
-            Mesh mesh = new Mesh();
-            mesh.name = "WaterMesh";
-            mesh.Clear();
-            List<Vector3> vertices = new List<Vector3>();
-
-            vertices.Add(new Vector3(1, 0, 1));
-            vertices.Add(new Vector3(1, 0, -1));
-            vertices.Add(new Vector3(-1, 0, -1));
-            vertices.Add(new Vector3(-1, 0, 1));
-            vertices.Add(new Vector3(0, 0.2f, 0));
-
-            mesh.SetVertices(vertices);
-
-            List<int> triangles = new List<int>();
-
-            triangles.Add(4);
-            triangles.Add(0);
-            triangles.Add(1);
-
-            triangles.Add(4);
-            triangles.Add(1);
-            triangles.Add(2);
-
-            triangles.Add(4);
-            triangles.Add(2);
-            triangles.Add(3);
-
-            triangles.Add(4);
-            triangles.Add(3);
-            triangles.Add(0);
-
-            mesh.SetTriangles(triangles, 0);
-
-            mesh.RecalculateNormals();
-
-            MeshFilter mf = (MeshFilter)WaterObject.gameObject.GetComponent(typeof(MeshFilter));
-            MeshRenderer mr = (MeshRenderer)WaterObject.gameObject.GetComponent(typeof(MeshRenderer));
-            mf.mesh = mesh;
-
-            WaterObject.name = "Water";
-            Water w = WaterObject.GetComponent<Water>();
-            w.mesh = mesh;
-        }
 
         public void Update()
         {
-            //Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 0.25f);
-
-            if (strokes.Count != 30)
+            if (totalLength > 0)
             {
-                GameObject parent = new GameObject();
-                parent.name = "WaterStroke";
-                parent.transform.parent = this.transform;
-                strokeObjects.Add(parent);
+                float displacement = GenerateMoat();
 
-                //WaterStroke ws = new WaterStroke(5, zPosition, ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt), lastWaterBlock);
-                WaterStroke ws = new WaterStroke(5, zPosition, DirtSideObject, lastWaterBlock, parent.transform);
-                for (int row = 0; row < 5; row++)
+                totalLength--;
+
+                if (totalLength == 0)
                 {
-                    GameObject dirt = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Dirt);
-                    dirt.transform.position = new Vector3(-1 + lastDisplacement, 0, zPosition);
-                    dirt.transform.parent = parent.transform;
-                    this.dirt.Add(dirt);
-
-                    for (int i = 0; i < WaterWidth; i++)
-                    {
-                        GameObject water = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Water);
-                        water.transform.position = new Vector3(-WaterWidth + (i * 2) + lastDisplacement, 0, zPosition);
-                        water.transform.parent = parent.transform;
-
-                        ws.AddWater(water, row);
-                    }
-
-                    CapsuleCollider bc = dirt.AddComponent<CapsuleCollider>();
-                    bc.center = new Vector3(-(WaterWidth - 1.25f), 0, 0);
-                    //bc.size = new Vector3(2, 1, 2);
-                    bc.height = 1;
-                    bc.radius = 1.5f;
-
-                    bc = dirt.AddComponent<CapsuleCollider>();
-                    bc.center = new Vector3(WaterWidth - 1.25f, 0, 0);
-                    //bc.size = new Vector3(2, 1, 2);
-                    bc.height = 1;
-                    bc.radius = 1.5f;
-
-
-                    zPosition += 2;
-
-                    if (displacementInterpolation >= 1)
-                    {
-                        displacementValue += UnityEngine.Random.Range(-100, 100) / 10;
-                        displacementInterpolation = 0;
-                    }
-
-                    lastDisplacement = Lerp(lastDisplacement, displacementValue, displacementInterpolation);
-                    displacementInterpolation += 0.2f;
-                }
-
-                // Generate an obstacle
-                if (generateObstacle)
-                {
-                    List<GameObjectType> obsta = new List<GameObjectType>();
-                    obsta.Add(GameObjectType.Stone);
-                    obsta.Add(GameObjectType.Tree);
-
-                    GameObjectType type = obsta[UnityEngine.Random.Range(0, obsta.Count)];
-
-                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(type);
-                    if (type == GameObjectType.Stone)
-                    {
-                        go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth, WaterWidth), -1, zPosition);
-                    }
-                    else if (type == GameObjectType.Tree)
-                    {
-                        int dist = UnityEngine.Random.Range(-25, 25);
-                        go.transform.position = new Vector3(lastDisplacement + dist, -1, zPosition);
-
-                        go.transform.eulerAngles = new Vector3(0, 0, UnityEngine.Random.Range(-45, 45));
-                    }
-                    go.transform.parent = parent.transform;
-                    ws.AddObstacle(go);
-                }
-
-                generateObstacle = !generateObstacle;
-
-                // Generate decoration
-
-                for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
-                {
-                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
-                    go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth * 3, -WaterWidth), go.transform.position.y, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
-                    go.transform.parent = parent.transform;
-                    ws.AddObstacle(go);
-
-                    //go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Decoration);
-                    //go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(-WaterWidth * 3, -WaterWidth), 1, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
-                    //go.transform.parent = parent.transform;
-                    //ws.AddObstacle(go);
-                }
-
-                for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
-                {
-                    GameObject go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
-                    go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(WaterWidth, WaterWidth * 3), go.transform.position.y, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
-                    go.transform.parent = parent.transform;
-                    ws.AddObstacle(go);
-
-                    //go = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Decoration);
-                    //go.transform.position = new Vector3(lastDisplacement + UnityEngine.Random.Range(WaterWidth, WaterWidth * 3), 1, zPosition + UnityEngine.Random.Range(-2, 1) + UnityEngine.Random.value);
-                    //go.transform.parent = parent.transform;
-                    //ws.AddObstacle(go);
-                }
-
-
-
-                ws.GenerateSides(parent.transform);
-
-                strokes.Add(ws);
-
-                lastWaterBlock = ws;
-
-                MapLengte--;
-            }
-
-            if (strokes.Count > 0)
-            {
-                if (strokes[0].ZPosition + 20 * 2 < Player.transform.position.z)
-                {
-                    strokes[0].Destroy();
-                    strokes.RemoveAt(0);
-                    strokeObjects.RemoveAt(0);
-                    for (int i = 0; i < 5; i++)
-                    {
-                        ObjectPool.ObjectPool.GetInstance().SetBeschikbaar(dirt[0]);
-                        dirt.RemoveAt(0);
-                    }
+                    GenerateReversePond(displacement);
+                    mDirt.RecalculateNormals();
+                    mWater.RecalculateNormals();
                 }
             }
+        }
 
-            if (MapLengte == 0)
-            {
-                GameObject fi = Instantiate(Finish);
-                fi.transform.position = new Vector3(lastDisplacement, 0.2f, zPosition);
-                MapLengte = -1;
-            }
-
-            
+        private float GetNextRandomValue(float min, float max)
+        {
+            //float value = UnityEngine.Random.Range(min, max - 1) + UnityEngine.Random.value;
+            float value = SRandom.Get(1560).Random((float)min, (float)max);
+            //while (value > max)
+            //    value /= 10;
+            return value;
         }
 
         private float Lerp(float start, float end, float i)
         {
             return start + (end - start) * i;
+        }
+
+        private float GenerateMoat()
+        {
+            float displacement = Lerp(startDisplacement, nextDisplacement, lerpDisplacement) + (GetNextRandomValue(0, 1) == 1 ? GetNextRandomValue(-0.25f, 0.25f) : 0);
+            lerpDisplacement += 0.1f;
+            if (lerpDisplacement >= 1.0f)
+            {
+                lerpDisplacement = 0;
+                startDisplacement = nextDisplacement;
+                nextDisplacement += GetNextRandomValue(-7.5f, 7.5f);
+            }
+
+            GenerateDirtAndWater(displacement, WaterWidth, SideWidth);
+
+            return displacement;
+        }
+
+        private void GeneratePond()
+        {
+            for (int i = 0; i < PondDirtLength; i++)
+            {
+                GenerateDirtAndWater(0, 0, SideWidth);
+            }
+
+            int lerpMovement = (PondLength - 5) / 4;
+            float lerp = 0;
+
+            for (int i = 0; i < lerpMovement; i++)
+            {
+                GenerateDirtAndWater(GetNextRandomValue(-0.25f, 0.25f), (int)Lerp(3, PondWidth / 4 * 3, lerp), SideWidth);
+                lerp += (1.0f / ((float)lerpMovement));
+            }
+
+            lerp = 0;
+            for (int i = 0; i < lerpMovement; i++)
+            {
+                GenerateDirtAndWater(GetNextRandomValue(-0.25f, 0.25f), (int)Lerp(PondWidth / 4 * 3, PondWidth, lerp), SideWidth);
+                lerp += (1.0f / ((float)lerpMovement));
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                GenerateDirtAndWater(GetNextRandomValue(-0.005f, 0.005f), PondWidth, SideWidth);
+            }
+
+            lerp = 0;
+            for (int i = 0; i < PondLength / 2; i++)
+            {
+                GenerateDirtAndWater(GetNextRandomValue(-0.25f, 0.25f), (int)Lerp(PondWidth, WaterWidth, lerp), SideWidth);
+                lerp += (1.0f / ((float)PondLength / 2.0f));
+            }
+        }
+
+        private void GenerateReversePond(float displacement)
+        {
+            int lerpMovement = (PondLength - 5) / 4;
+            float lerp = 1;
+
+            for (int i = 0; i < PondLength / 2; i++)
+            {
+                GenerateDirtAndWater(displacement + GetNextRandomValue(-0.25f, 0.25f), (int)Lerp(PondWidth, WaterWidth, lerp), SideWidth);
+                lerp -= (1.0f / ((float)PondLength / 2.0f));
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                GenerateDirtAndWater(displacement + GetNextRandomValue(-0.005f, 0.005f), PondWidth, SideWidth);
+            }
+
+            lerp = 1;
+
+
+            for (int i = 0; i < lerpMovement; i++)
+            {
+                GenerateDirtAndWater(displacement + GetNextRandomValue(-0.25f, 0.25f), (int)Lerp(PondWidth / 4 * 3, PondWidth, lerp), SideWidth);
+                lerp -= (1.0f / ((float)lerpMovement));
+            }
+
+            lerp = 1;
+            for (int i = 0; i < lerpMovement; i++)
+            {
+                GenerateDirtAndWater(displacement + GetNextRandomValue(-0.25f, 0.25f), (int)Lerp(3, PondWidth / 4 * 3, lerp), SideWidth);
+                lerp -= (1.0f / ((float)lerpMovement));
+            }
+
+            for (int i = 0; i < PondDirtLength; i++)
+            {
+                GenerateDirtAndWater(displacement, 0, SideWidth);
+            }
+        }
+
+        private void GenerateDirtAndWater(float displacement, int water, int dirt)
+        {
+            List<Vector3> v = new List<Vector3>(mDirt.vertices);
+            List<int> f = new List<int>(mDirt.triangles);
+
+            zPosition++;
+
+            //  0        1                6         7
+            //  ---------\ 2           5 /----------
+            //            \______|______/
+            //            3            4
+
+            v.Add(new Vector3(-dirt - water / 2 + displacement, 3.0f, zPosition));          // 0
+            v.Add(new Vector3(-water / 2 - 2 + displacement, 0.75f, zPosition));          // 1
+            if (water > 0)
+            {
+                v.Add(new Vector3(-water / 2 - 1 + displacement, 0.25f, zPosition));          // 2
+                v.Add(new Vector3(-water / 2 + displacement, -1.0f, zPosition));          // 3
+                v.Add(new Vector3(water / 2 + displacement, -1.0f, zPosition));          // 4
+                v.Add(new Vector3(water / 2 + 1 + displacement, 0.25f, zPosition));          // 5
+            }
+            else
+            {
+                v.Add(new Vector3(-water / 2 - 1 + displacement, 0.75f, zPosition));          // 2
+                v.Add(new Vector3(-water / 2 + displacement, 0.75f, zPosition));          // 3
+                v.Add(new Vector3(water / 2 + displacement, 0.75f, zPosition));          // 4
+                v.Add(new Vector3(water / 2 + 1 + displacement, 0.75f, zPosition));          // 5
+            }
+            v.Add(new Vector3(water / 2 + 1.5f + displacement, 0.75f, zPosition));          // 6
+            v.Add(new Vector3(dirt + water / 2 + displacement, 3.0f, zPosition));          // 7
+
+            if (v.Count > 16)
+            {
+
+                // 0 (0, 8, 1)
+                f.Add(v.Count - 16);
+                f.Add(v.Count - 8);
+                f.Add(v.Count - 15);
+
+                // 1 (1, 8, 9)
+                f.Add(v.Count - 15);
+                f.Add(v.Count - 8);
+                f.Add(v.Count - 7);
+
+                // 2 (1, 9, 2)
+                f.Add(v.Count - 15);
+                f.Add(v.Count - 7);
+                f.Add(v.Count - 14);
+
+                // 3 (2, 9, 10)
+                f.Add(v.Count - 14);
+                f.Add(v.Count - 7);
+                f.Add(v.Count - 6);
+
+                // 4 (2, 10, 3)
+                f.Add(v.Count - 14);
+                f.Add(v.Count - 6);
+                f.Add(v.Count - 13);
+
+                // 5 (3, 10, 11)
+                f.Add(v.Count - 13);
+                f.Add(v.Count - 6);
+                f.Add(v.Count - 5);
+
+                // 6 (3, 11, 4)
+                f.Add(v.Count - 13);
+                f.Add(v.Count - 5);
+                f.Add(v.Count - 12);
+
+                // 7 (4, 11, 12)
+                f.Add(v.Count - 12);
+                f.Add(v.Count - 5);
+                f.Add(v.Count - 4);
+
+                // 8 (4, 12, 5)
+                f.Add(v.Count - 12);
+                f.Add(v.Count - 4);
+                f.Add(v.Count - 11);
+
+                // 9 (5, 12, 13)
+                f.Add(v.Count - 11);
+                f.Add(v.Count - 4);
+                f.Add(v.Count - 3);
+
+                // 10 (5, 13, 6)
+                f.Add(v.Count - 11);
+                f.Add(v.Count - 3);
+                f.Add(v.Count - 10);
+
+                // 11 (6, 13, 14)
+                f.Add(v.Count - 10);
+                f.Add(v.Count - 3);
+                f.Add(v.Count - 2);
+
+                // 12 (6, 14, 7)
+                f.Add(v.Count - 10);
+                f.Add(v.Count - 2);
+                f.Add(v.Count - 9);
+
+                // 13 (7, 14, 15)
+                f.Add(v.Count - 9);
+                f.Add(v.Count - 2);
+                f.Add(v.Count - 1);
+
+            }
+
+            mDirt.SetVertices(v);
+            mDirt.SetTriangles(f, 0);
+            if (normalCounter == 0)
+                mDirt.RecalculateNormals();
+
+
+
+            v = new List<Vector3>(mWater.vertices);
+            f = new List<int>(mWater.triangles);
+
+            v.Add(new Vector3(-water / 2 - 2.5f + displacement, 0.0f, zPosition));              // 0
+            v.Add(new Vector3(UnityEngine.Random.Range(-water / 4, water / 4 - 1) + UnityEngine.Random.value + displacement, 0.25f, zPosition + 0.5f));       // 1
+            v.Add(new Vector3(water / 2 + 2.5f + displacement, 0.0f, zPosition));              // 2
+
+
+            if (v.Count > 3)
+            {
+                // 0 (0, 1, 2)
+                f.Add(v.Count - 6);
+                f.Add(v.Count - 5);
+                f.Add(v.Count - 4);
+
+                // 1 (0, 3, 1)
+                f.Add(v.Count - 6);
+                f.Add(v.Count - 3);
+                f.Add(v.Count - 5);
+
+                // 2 (3, 5, 1)
+                f.Add(v.Count - 3);
+                f.Add(v.Count - 1);
+                f.Add(v.Count - 5);
+
+                // 3 (5, 2, 1)
+                f.Add(v.Count - 1);
+                f.Add(v.Count - 4);
+                f.Add(v.Count - 5);
+            }
+
+
+            mWater.SetVertices(v);
+            mWater.SetTriangles(f, 0);
+            if (normalCounter == 0)
+            {
+                mWater.RecalculateNormals();
+                normalCounter = UncalculatedNormalSize;
+            }
+            else normalCounter--;
+
+
+            if (water > 0)
+            {
+                // Add 2 capsule colliders
+                CapsuleCollider cc = goDirt.AddComponent<CapsuleCollider>();
+                cc.center = new Vector3(-water / 2 - 1 + displacement, 0, zPosition);
+                cc.radius = 1.0f;
+                cc.height = 1.0f;
+
+                cc = goDirt.AddComponent<CapsuleCollider>();
+                cc.center = new Vector3(water / 2 + 1 + displacement, 0, zPosition);
+                cc.radius = 1.0f;
+                cc.height = 1.0f;
+
+
+                // Place a rock sometimes
+                if (GetNextRandomValue(0, 5) == 1)
+                {
+                    GameObject rock = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Stone);
+                    rock.transform.position = new Vector3(-water / 2 - 1 + displacement, 0, zPosition);
+                    rock.transform.parent = this.transform;
+                    rock.transform.localScale = new Vector3(1, 0.5f, 1);
+                    rock.transform.localEulerAngles = new Vector3(0, GetNextRandomValue(0.0f, 360.0f), 0);
+                }
+
+                // Place a rock sometimes
+                if (GetNextRandomValue(0, 5) == 1)
+                {
+                    GameObject rock = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Stone);
+                    rock.transform.position = new Vector3(water / 2 + 1 + displacement, 0, zPosition);
+                    rock.transform.parent = this.transform;
+                    rock.transform.localScale = new Vector3(1, 0.5f, 1);
+                    rock.transform.localEulerAngles = new Vector3(0, GetNextRandomValue(0.0f, 360.0f), 0);
+                }
+            }
+
+            GameObject tree = null;
+            if (GetNextRandomValue(0, 4) == 1)
+            {
+                tree = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
+                GameObject.Destroy(tree.GetComponent<CapsuleCollider>());
+                tree.transform.position = new Vector3(-water / 2 - 1 + displacement - GetNextRandomValue(0.0f, SideWidth), 0, zPosition);
+                tree.transform.parent = this.transform;
+                tree.transform.localScale = new Vector3(3, 3, 3);
+                tree.transform.localEulerAngles = new Vector3(0, GetNextRandomValue(0.0f, 360.0f), 0);
+            }
+
+            if (GetNextRandomValue(0, 3) == 1)
+            {
+                tree = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
+                GameObject.Destroy(tree.GetComponent<CapsuleCollider>());
+                tree.transform.position = new Vector3(water / 2 + 1 + displacement + GetNextRandomValue(0.0f, SideWidth), 0, zPosition);
+                tree.transform.parent = this.transform;
+                tree.transform.localScale = new Vector3(3, 3, 3);
+                tree.transform.localEulerAngles = new Vector3(0, GetNextRandomValue(0.0f, 360.0f), 0);
+            }
+
+            // Bush on the sides
+            if (bushCounter == 0)
+            {
+                tree = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
+                GameObject.Destroy(tree.GetComponent<CapsuleCollider>());
+                tree.transform.position = new Vector3(-water / 2 - 1 + displacement - SideWidth - GetNextRandomValue(0.0f, 5.0f), -4, zPosition);
+                tree.transform.parent = this.transform;
+                tree.transform.localScale = new Vector3(3, 3, 3);
+                tree.transform.localEulerAngles = new Vector3(0, GetNextRandomValue(0.0f, 360.0f), 0);
+
+                tree = ObjectPool.ObjectPool.GetInstance().GetObject(GameObjectType.Tree);
+                GameObject.Destroy(tree.GetComponent<CapsuleCollider>());
+                tree.transform.position = new Vector3(water / 2 + 1 + displacement + SideWidth + GetNextRandomValue(0.0f, 5.0f), -4, zPosition);
+                tree.transform.parent = this.transform;
+                tree.transform.localScale = new Vector3(3, 3, 3);
+                tree.transform.localEulerAngles = new Vector3(0, GetNextRandomValue(0.0f, 360.0f), 0);
+
+                bushCounter = 5;
+            }
+            else
+                bushCounter--;
         }
     }
 }
