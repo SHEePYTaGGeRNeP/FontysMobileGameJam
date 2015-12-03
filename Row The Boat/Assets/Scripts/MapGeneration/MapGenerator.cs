@@ -50,13 +50,13 @@ namespace Assets.Scripts.MapGeneration
             instance = this;
             normalCounter = UncalculatedNormalSize;
             
-            Debug.Log("Generating map");
-            this.CreateWaterMesh();
-            this.CreateDirtMesh();
+            //Debug.Log("Generating map");
+            //this.CreateWaterMesh();
+            //this.CreateDirtMesh();
 
-            this.strokes = new List<WaterStroke>();
-            this.strokeObjects = new List<GameObject>();
-            this.dirt = new List<GameObject>();
+            //this.strokes = new List<WaterStroke>();
+            //this.strokeObjects = new List<GameObject>();
+            //this.dirt = new List<GameObject>();
             this.hasGenerated = true;
 
             // Setup the dirtMesh
@@ -211,8 +211,6 @@ namespace Assets.Scripts.MapGeneration
             }
 
             for (int i = 0; i < PondDirtLength; i++)
-
-            if (this.strokes.Count != 30)
             {
                 GenerateDirtAndWater(displacement, 0, SideWidth);
             }
