@@ -17,10 +17,10 @@ public class SpaceShipControl : MonoBehaviour {
 
 	void Start() {
 		SensorHelper.ActivateRotation();
-		initialSensorValue = SensorHelper.rotation;
-		gotFirstValue = false;
-		
-		StartCoroutine(Calibration());
+	    this.initialSensorValue = SensorHelper.rotation;
+	    this.gotFirstValue = false;
+
+	    this.StartCoroutine(this.Calibration());
 	}
 	
 	IEnumerator Calibration() {
@@ -33,10 +33,10 @@ public class SpaceShipControl : MonoBehaviour {
 		yield return new WaitForSeconds(0.1f);
 		
 		// set initial rotation
-		initialSensorValue = SensorHelper.rotation;
+	    this.initialSensorValue = SensorHelper.rotation;
 		
 		// allow updates
-		gotFirstValue = true;
+	    this.gotFirstValue = true;
 	}
 	
 	bool gotFirstValue = false;
@@ -49,26 +49,26 @@ public class SpaceShipControl : MonoBehaviour {
 	public float movementStrength = 10;
 		
 	void Update() {
-		if(!gotFirstValue) return;
+		if(!this.gotFirstValue) return;
 		
 		// calculate difference between current rotation and initial rotation
-		differenceRotation = FromToRotation(initialSensorValue, SensorHelper.rotation);
+	    this.differenceRotation = FromToRotation(this.initialSensorValue, SensorHelper.rotation);
 		
 		// differenceEuler is the difference in degrees between the current SensorHelper.rotation and the initial value
-		differenceEuler = differenceRotation.eulerAngles;
+	    this.differenceEuler = this.differenceRotation.eulerAngles;
 		
-		if(differenceEuler.x > 180) differenceEuler.x -= 360;
-		if(differenceEuler.y > 180) differenceEuler.y -= 360;
-		if(differenceEuler.z > 180) differenceEuler.z -= 360;
+		if(this.differenceEuler.x > 180) this.differenceEuler.x -= 360;
+		if(this.differenceEuler.y > 180) this.differenceEuler.y -= 360;
+		if(this.differenceEuler.z > 180) this.differenceEuler.z -= 360;
 		
 		// for an airplane: disable yaw,
 		// only use roll and pitch
-		differenceEuler.y = 0;
+	    this.differenceEuler.y = 0;
 		
 		// rotate us
-		transform.Rotate(differenceEuler * Time.deltaTime * strength);
+	    this.transform.Rotate(this.differenceEuler * Time.deltaTime * this.strength);
 		// move forward all the time (no speed control)
-		transform.Translate(Vector3.forward * movementStrength * Time.deltaTime, Space.Self);
+	    this.transform.Translate(Vector3.forward * this.movementStrength * Time.deltaTime, Space.Self);
 	}
 	
 	/// <summary>
@@ -80,8 +80,8 @@ public class SpaceShipControl : MonoBehaviour {
 
 	public bool showGUI = false;
 	public void OnGUI() {
-		if(!showGUI) return;
+		if(!this.showGUI) return;
 		GUI.Label(new Rect(10,10,200,25), "Relative rotation to start in degrees:");
-		GUI.Label(new Rect(10,40,200,25), ""+differenceEuler);
+		GUI.Label(new Rect(10,40,200,25), ""+ this.differenceEuler);
 	}
 }

@@ -10,7 +10,7 @@ public class AudioRpc : Photon.MonoBehaviour
 
     void Awake()
     {
-        m_Source = GetComponent<AudioSource>();
+        this.m_Source = this.GetComponent<AudioSource>();
     }
 
     [PunRPC]
@@ -23,8 +23,8 @@ public class AudioRpc : Photon.MonoBehaviour
 
         Debug.Log( "Marco" );
 
-        m_Source.clip = marco;
-        m_Source.Play();
+        this.m_Source.clip = this.marco;
+        this.m_Source.Play();
     }
 
     [PunRPC]
@@ -37,8 +37,8 @@ public class AudioRpc : Photon.MonoBehaviour
 
         Debug.Log( "Polo" );
 
-        m_Source.clip = polo;
-        m_Source.Play();
+        this.m_Source.clip = this.polo;
+        this.m_Source.Play();
     }
 
     void OnApplicationFocus( bool focus )

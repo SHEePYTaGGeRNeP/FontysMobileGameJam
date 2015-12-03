@@ -32,10 +32,10 @@ public class InRoomRoundTimer : MonoBehaviour
         if (PhotonNetwork.time < 0.0001f)
         {
             // we can only start the round when the time is available. let's check that in Update()
-            startRoundWhenTimeIsSynced = true;
+            this.startRoundWhenTimeIsSynced = true;
             return;
         }
-        startRoundWhenTimeIsSynced = false;
+        this.startRoundWhenTimeIsSynced = false;
 
         
 
@@ -64,7 +64,7 @@ public class InRoomRoundTimer : MonoBehaviour
     {
         if (propertiesThatChanged.ContainsKey(StartTimeKey))
         {
-            StartTime = (double)propertiesThatChanged[StartTimeKey];
+            this.StartTime = (double)propertiesThatChanged[StartTimeKey];
         }
     }
 
@@ -85,7 +85,7 @@ public class InRoomRoundTimer : MonoBehaviour
 
     void Update()
     {
-        if (startRoundWhenTimeIsSynced)
+        if (this.startRoundWhenTimeIsSynced)
         {
             this.StartRoundNow();   // the "time is known" check is done inside the method.
         }
@@ -95,13 +95,13 @@ public class InRoomRoundTimer : MonoBehaviour
     {
         // alternatively to doing this calculation here:
         // calculate these values in Update() and make them publicly available to all other scripts
-        double elapsedTime = (PhotonNetwork.time - StartTime);
-        double remainingTime = SecondsPerTurn - (elapsedTime % SecondsPerTurn);
-        int turn = (int)(elapsedTime / SecondsPerTurn);
+        double elapsedTime = (PhotonNetwork.time - this.StartTime);
+        double remainingTime = this.SecondsPerTurn - (elapsedTime % this.SecondsPerTurn);
+        int turn = (int)(elapsedTime / this.SecondsPerTurn);
 
 
         // simple gui for output
-        GUILayout.BeginArea(TextPos);
+        GUILayout.BeginArea(this.TextPos);
         GUILayout.Label(string.Format("elapsed: {0:0.000}", elapsedTime));
         GUILayout.Label(string.Format("remaining: {0:0.000}", remainingTime));
         GUILayout.Label(string.Format("turn: {0:0}", turn));

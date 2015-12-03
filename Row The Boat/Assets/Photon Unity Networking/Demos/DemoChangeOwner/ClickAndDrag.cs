@@ -10,19 +10,19 @@ public class ClickAndDrag : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        if (!photonView.isMine)
+        if (!this.photonView.isMine)
         {
             return;
         }
 
 	    InputToEvent input = Camera.main.GetComponent<InputToEvent>();
 	    if (input == null) return;
-        if (!following)
+        if (!this.following)
         {
             if (input.Dragging)
             {
-                camOnPress = this.transform.position;
-                following = true;
+                this.camOnPress = this.transform.position;
+                this.following = true;
             }
             else
             {
@@ -33,13 +33,13 @@ public class ClickAndDrag : Photon.MonoBehaviour
         {
             if (input.Dragging)
             {
-                Vector3 target = camOnPress - (new Vector3(input.DragVector.x, 0, input.DragVector.y) * factor);
+                Vector3 target = this.camOnPress - (new Vector3(input.DragVector.x, 0, input.DragVector.y) * this.factor);
                 this.transform.position = Vector3.Lerp(this.transform.position, target, Time.deltaTime*.5f);
             }
             else
             {
-                camOnPress = Vector3.zero;
-                following = false;
+                this.camOnPress = Vector3.zero;
+                this.following = false;
             }
         }
 	}

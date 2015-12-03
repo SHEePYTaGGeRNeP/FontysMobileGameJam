@@ -12,7 +12,7 @@ public class GUICustomAuth : MonoBehaviour
 
     public void Start()
     {
-        GuiRect = new Rect(Screen.width / 4, 80, Screen.width / 2, Screen.height - 100);
+        this.GuiRect = new Rect(Screen.width / 4, 80, Screen.width / 2, Screen.height - 100);
     }
 
 
@@ -41,7 +41,7 @@ public class GUICustomAuth : MonoBehaviour
     public void OnCustomAuthenticationFailed(string debugMessage)
     {
         this.authDebugMessage = debugMessage;
-        SetStateAuthFailed();
+        this.SetStateAuthFailed();
     }
 
 
@@ -51,31 +51,31 @@ public class GUICustomAuth : MonoBehaviour
 
     public void SetStateAuthInput()
     {
-        RootOf3dButtons.SetActive(false);
-        guiState = GuiState.AuthInput;
+        this.RootOf3dButtons.SetActive(false);
+        this.guiState = GuiState.AuthInput;
     }
 
     public void SetStateAuthHelp()
     {
-        RootOf3dButtons.SetActive(false);
-        guiState = GuiState.AuthHelp;
+        this.RootOf3dButtons.SetActive(false);
+        this.guiState = GuiState.AuthHelp;
     }
 
     public void SetStateAuthOrNot()
     {
-        RootOf3dButtons.SetActive(true);
-        guiState = GuiState.AuthOrNot; 
+        this.RootOf3dButtons.SetActive(true);
+        this.guiState = GuiState.AuthOrNot; 
     }
 
     public void SetStateAuthFailed()
     {
-        RootOf3dButtons.SetActive(false);
-        guiState = GuiState.AuthFailed; 
+        this.RootOf3dButtons.SetActive(false);
+        this.guiState = GuiState.AuthFailed; 
     }
 
     public void ConnectWithNickname()
     {
-        RootOf3dButtons.SetActive(false);
+        this.RootOf3dButtons.SetActive(false);
 
         PhotonNetwork.AuthValues = new AuthenticationValues() {UserId = PhotonNetwork.playerName }; // null by default but maybe set in a previous session.
         PhotonNetwork.playerName = PhotonNetwork.playerName + "Nick";
@@ -94,8 +94,8 @@ public class GUICustomAuth : MonoBehaviour
         }
 
 
-        GUILayout.BeginArea(GuiRect);
-        switch (guiState)
+        GUILayout.BeginArea(this.GuiRect);
+        switch (this.guiState)
         {
             case GuiState.AuthFailed:
                 GUILayout.Label("Authentication Failed");
@@ -115,11 +115,11 @@ public class GUICustomAuth : MonoBehaviour
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button("Back"))
                 {
-                    SetStateAuthInput();
+                    this.SetStateAuthInput();
                 }
                 if (GUILayout.Button("Help"))
                 {
-                    SetStateAuthHelp();
+                    this.SetStateAuthHelp();
                 }
                 GUILayout.EndHorizontal();
                 break;
@@ -147,7 +147,7 @@ public class GUICustomAuth : MonoBehaviour
                 GUILayout.Space(10);
                 if (GUILayout.Button("Back to input"))
                 {
-                    SetStateAuthInput();
+                    this.SetStateAuthInput();
                 }
                 break;
 
@@ -182,7 +182,7 @@ public class GUICustomAuth : MonoBehaviour
 
                 if (GUILayout.Button("Help", GUILayout.Width(100)))
                 {
-                    SetStateAuthHelp();
+                    this.SetStateAuthHelp();
                 }
 
                 break;

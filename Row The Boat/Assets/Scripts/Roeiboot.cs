@@ -29,8 +29,12 @@ public class Roeiboot : MonoBehaviour
             this._rowController.Row += (sender, args) =>
             {
                 //if (args.Side != RowTiltController.RowSide.Left) return;
-                AddForce(this._achter.position, args.Strength * args.Efficiency);
+                this.AddForce(this._achter.position, args.Strength * args.Efficiency);
             };
+        }
+        if (!PhotonNetwork.isMasterClient)
+        {
+            PhotonManager.Instance.Boot = this;
         }
 
 	}

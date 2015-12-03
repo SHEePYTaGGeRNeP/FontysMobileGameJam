@@ -11,16 +11,16 @@ public class HighlightOwnedGameObj : Photon.MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (photonView.isMine)
+        if (this.photonView.isMine)
         {
             if (this.markerTransform == null)
             {
                 GameObject markerObject = (GameObject) GameObject.Instantiate(this.PointerPrefab);
-                markerObject.transform.parent = gameObject.transform;
+                markerObject.transform.parent = this.gameObject.transform;
                 this.markerTransform = markerObject.transform;
             }
 
-            Vector3 parentPos = gameObject.transform.position;
+            Vector3 parentPos = this.gameObject.transform.position;
             this.markerTransform.position = new Vector3(parentPos.x, parentPos.y + this.Offset, parentPos.z);
             this.markerTransform.rotation = Quaternion.identity;
         }

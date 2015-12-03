@@ -7,7 +7,7 @@ public class DemoBoxesGui : MonoBehaviour
 
     void OnGUI()
     {
-        if (HideUI)
+        if (this.HideUI)
         {
             return;
         }

@@ -14,20 +14,22 @@ namespace Assets.Scripts.PhotonNetworking
 
 		private PaddleSoundController _paddleSoundController;
 
-		void Start()
+	    private void Start()
 		{
 			this._targetRPC = PhotonManager.Instance.GetComponent<PhotonView>();
 			this._photonView = this.GetComponent<PhotonView>();
 			this._rowController = this.GetComponent<RowTiltController>();
-			this._paddleSoundController = this.GetComponent<PaddleSoundController> ();
-			this._rowController.Row += (sender, args) =>
+			this._paddleSoundController = this.GetComponent<PaddleSoundController> ();            
+            this.transform.GetChild(0).gameObject.SetActive(!PhotonNetwork.isMasterClient);
+	        this.transform.SetParent(GameObject.Find("Boat_Mobile_Roeien(Clone)").transform);
+            this._rowController.Row += (sender, args) =>
 			{
                 if (args.Side == this.Side)
 				    this.Roei(args.Strength * args.Efficiency);
 			};
 		}
 
-		void Update()
+	    private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 				this.Roei(20f);
@@ -35,8 +37,8 @@ namespace Assets.Scripts.PhotonNetworking
 
 		public void Roei(float force)
 		{
-			if (PaddleViewId == 0) return;
-			_paddleSoundController.PlayRandomPaddleSound ();
+			if (this.PaddleViewId == 0) return;
+		    this._paddleSoundController.PlayRandomPaddleSound ();
 			this._targetRPC.RPC("AddForce", PhotonTargets.MasterClient, this.PaddleViewId, force);
 		}
 
@@ -45,7 +47,7 @@ namespace Assets.Scripts.PhotonNetworking
 		{
 			if (stream.isWriting)
 			{
-				Vector3 pos = transform.localPosition;
+				Vector3 pos = this.transform.localPosition;
 				stream.Serialize(ref pos);
 			}
 			else

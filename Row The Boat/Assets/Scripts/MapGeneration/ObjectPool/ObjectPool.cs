@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.MapGeneration.ObjectPool
 {
+    using Object = UnityEngine.Object;
+
     class ObjectPool
     {
         private List<PoolList> objectList;
@@ -26,14 +28,14 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         public GameObject GetObject(GameObjectType type)
         {
-            PoolList list = GetList(type);
+            PoolList list = this.GetList(type);
             if (list != null)
             {
                 return list.GetNextAvaiableObject();
             }
 
-            objectList.Add(new PoolList(type));
-            return GetObject(type);
+            this.objectList.Add(new PoolList(type));
+            return this.GetObject(type);
         }
 
         public GameObject CreateNewObject(GameObjectType type)
@@ -54,7 +56,7 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
             if (go != null)
             {
-                PoolList list = GetList(type);
+                PoolList list = this.GetList(type);
                 if (list != null)
                 {
                     list.AddGameObject(go);
@@ -66,12 +68,12 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         public void SetBeschikbaar(GameObject obj)
         {
-            for (int i = 0; i < objectList.Count; i++)
+            for (int i = 0; i < this.objectList.Count; i++)
             {
-                int result = objectList[i].Contains(obj);
+                int result = this.objectList[i].Contains(obj);
                 if (result != -1)
                 {
-                    objectList[i].SetBeschikbaar(result);
+                    this.objectList[i].SetBeschikbaar(result);
                     return;
                 }
             }
@@ -79,11 +81,11 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         private PoolList GetList(GameObjectType type)
         {
-            for (int i = 0; i < objectList.Count; i++)
+            for (int i = 0; i < this.objectList.Count; i++)
             {
-                if (objectList[i].GetGameObjectType() == type)
+                if (this.objectList[i].GetGameObjectType() == type)
                 {
-                    return objectList[i];
+                    return this.objectList[i];
                 }
             }
 

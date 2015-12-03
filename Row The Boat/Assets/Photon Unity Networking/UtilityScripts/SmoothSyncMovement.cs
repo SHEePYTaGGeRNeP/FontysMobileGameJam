@@ -17,14 +17,14 @@ public class SmoothSyncMovement : Photon.MonoBehaviour
         if (stream.isWriting)
         {
             //We own this player: send the others our data
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation); 
+            stream.SendNext(this.transform.position);
+            stream.SendNext(this.transform.rotation); 
         }
         else
         {
             //Network player, receive data
-            correctPlayerPos = (Vector3)stream.ReceiveNext();
-            correctPlayerRot = (Quaternion)stream.ReceiveNext();
+            this.correctPlayerPos = (Vector3)stream.ReceiveNext();
+            this.correctPlayerRot = (Quaternion)stream.ReceiveNext();
         }
     }
 
@@ -33,11 +33,11 @@ public class SmoothSyncMovement : Photon.MonoBehaviour
 
     public void Update()
     {
-        if (!photonView.isMine)
+        if (!this.photonView.isMine)
         {
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
-            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * this.SmoothingDelay);
-            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * this.SmoothingDelay);
+            this.transform.position = Vector3.Lerp(this.transform.position, this.correctPlayerPos, Time.deltaTime * this.SmoothingDelay);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, this.correctPlayerRot, Time.deltaTime * this.SmoothingDelay);
         }
     }
 

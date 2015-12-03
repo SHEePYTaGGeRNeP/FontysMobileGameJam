@@ -47,17 +47,17 @@ public class InRoomChat : Photon.MonoBehaviour
         GUI.SetNextControlName("");
         GUILayout.BeginArea(this.GuiRect);
 
-        scrollPos = GUILayout.BeginScrollView(scrollPos);
+        this.scrollPos = GUILayout.BeginScrollView(this.scrollPos);
         GUILayout.FlexibleSpace();
-        for (int i = messages.Count - 1; i >= 0; i--)
+        for (int i = this.messages.Count - 1; i >= 0; i--)
         {
-            GUILayout.Label(messages[i]);
+            GUILayout.Label(this.messages[i]);
         }
         GUILayout.EndScrollView();
 
         GUILayout.BeginHorizontal();
         GUI.SetNextControlName("ChatInput");
-        inputLine = GUILayout.TextField(inputLine);
+        this.inputLine = GUILayout.TextField(this.inputLine);
         if (GUILayout.Button("Send", GUILayout.ExpandWidth(false)))
         {
             this.photonView.RPC("Chat", PhotonTargets.All, this.inputLine);

@@ -20,21 +20,21 @@ public abstract class Filter<T>
 	
     public T Update(T input)
     {
-        UpdateFunc(input);
-        return Holder;
+        this.UpdateFunc(input);
+        return this.Holder;
     }
 	
     public T Value
     {
         get
         {
-            return Holder;
+            return this.Holder;
         }
     }
 	
     public Filter(float hardness)
     {
-        Holder = default(T);
-        Hardness = hardness;
+        this.Holder = default(T);
+        this.Hardness = hardness;
     }
 }

@@ -19,20 +19,20 @@ namespace Assets.Scripts.MapGeneration
 
         public void Update1()
         {
-            Vector3[] vertices = mesh.vertices;
+            Vector3[] vertices = this.mesh.vertices;
 
-            if (lerpValue >= 1)
+            if (this.lerpValue >= 1)
             {
-                lerpValue = 0;
-                startPosition = nextPosition;
-                nextPosition = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+                this.lerpValue = 0;
+                this.startPosition = this.nextPosition;
+                this.nextPosition = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
                 
             }
             
-            vertices[4] = Vector3.Lerp(startPosition, nextPosition, lerpValue);
+            vertices[4] = Vector3.Lerp(this.startPosition, this.nextPosition, this.lerpValue);
 
-            mesh.vertices = vertices;
-            lerpValue += 0.1f;
+            this.mesh.vertices = vertices;
+            this.lerpValue += 0.1f;
         }
     }
 }

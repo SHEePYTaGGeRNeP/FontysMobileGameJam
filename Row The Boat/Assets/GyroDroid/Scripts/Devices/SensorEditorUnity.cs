@@ -48,7 +48,7 @@ class SensorEditorUnity : Sensor
 		for (var i = 1; i <= Sensor.Count; i++) 
 		{
 			// fill the sensor information array with debug values
-			Sensors[i] = new Information(GetSensorDebugAvailable(i), 1, 0, "DEBUG", 0, 100, "DEBUG", 0, Description[i]);
+			Sensors[i] = new Information(this.GetSensorDebugAvailable(i), 1, 0, "DEBUG", 0, 100, "DEBUG", 0, Description[i]);
 		}
 	}
 
@@ -67,7 +67,7 @@ class SensorEditorUnity : Sensor
     {
 		Input.gyro.enabled = true;
 		Input.compass.enabled = true;
-		Get (sensorID).available = GetSensorDebugAvailable((int)sensorID);
+		Get (sensorID).available = this.GetSensorDebugAvailable((int)sensorID);
 		Get (sensorID).active = true;
 		return true;
 	}
@@ -90,43 +90,43 @@ class SensorEditorUnity : Sensor
 		switch (sensorID)
 		{
 		    case Type.Accelerometer:
-		        accelerometerDebugValue = val;
+		        this.accelerometerDebugValue = val;
 				break;
 		    case Type.Gravity:
-		        gravityDebugValue = val;
+		        this.gravityDebugValue = val;
 				break;
 		    case Type.Gyroscope:
-		        gyroscopeDebugValue = val;
+		        this.gyroscopeDebugValue = val;
 				break;
 		    case Type.Light:
-		        lightDebugValue = val.x;
+		        this.lightDebugValue = val.x;
 				break;
 		    case Type.LinearAcceleration:
-		        linearAccelerationDebugValue = val;
+		        this.linearAccelerationDebugValue = val;
 				break;
 		    case Type.MagneticField:
-		        magneticFieldDebugValue = val;
+		        this.magneticFieldDebugValue = val;
 				break;
 		    case Type.Orientation:
-		        orientationDebugValue = val;
+		        this.orientationDebugValue = val;
 				break;
 		    case Type.Pressure:
-		        pressureDebugValue = val.x;
+		        this.pressureDebugValue = val.x;
 				break;
 		    case Type.Proximity:
-		        proximityDebugValue = val.x;
+		        this.proximityDebugValue = val.x;
 				break;
 		    case Type.RotationVector:
-		        rotationVectorDebugValue = val;
+		        this.rotationVectorDebugValue = val;
 				break;
 		    case Type.Temperature:
-		        temperatureDebugValue = val.x;
+		        this.temperatureDebugValue = val.x;
 				break;
 			case Type.AmbientTemperature:
-				ambientTemperatureDebugValue = val.x;
+		        this.ambientTemperatureDebugValue = val.x;
 				break;
 			case Type.RelativeHumidity:
-				relativeHumidityDebugValue = val.x;
+		        this.relativeHumidityDebugValue = val.x;
 				break;
 		}
 	}
@@ -141,37 +141,37 @@ class SensorEditorUnity : Sensor
 	    switch (sensorID)
 	    {
 	        case Type.Accelerometer:
-				if(Vector3.Distance(Input.acceleration, lastAcceleration) > 0.001f )
+				if(Vector3.Distance(Input.acceleration, this.lastAcceleration) > 0.001f )
 					return Input.acceleration;
-				lastAcceleration = Input.acceleration;
-	            return accelerometerDebugValue;
+	            this.lastAcceleration = Input.acceleration;
+	            return this.accelerometerDebugValue;
 	        case Type.Gravity:
-	            return gravityDebugValue;
+	            return this.gravityDebugValue;
 	        case Type.Gyroscope:
-	            return gyroscopeDebugValue;
+	            return this.gyroscopeDebugValue;
 	        case Type.Light:
-	            return new Vector3(lightDebugValue, 0, 0);
+	            return new Vector3(this.lightDebugValue, 0, 0);
 	        case Type.LinearAcceleration:
-	            return linearAccelerationDebugValue;
+	            return this.linearAccelerationDebugValue;
 	        case Type.MagneticField:
-	            return magneticFieldDebugValue;
+	            return this.magneticFieldDebugValue;
 	        case Type.Orientation:
-	            return orientationDebugValue;
+	            return this.orientationDebugValue;
 	        case Type.Pressure:
-	            return new Vector3(pressureDebugValue, 0, 0);
+	            return new Vector3(this.pressureDebugValue, 0, 0);
 	        case Type.Proximity:
-	            return new Vector3(proximityDebugValue, 0, 0);
+	            return new Vector3(this.proximityDebugValue, 0, 0);
 	        case Type.RotationVector:
-				if(Quaternion.Angle (Input.gyro.attitude, lastGyroAttitude) > 0.001f)
+				if(Quaternion.Angle (Input.gyro.attitude, this.lastGyroAttitude) > 0.001f)
 					return -(Quaternion.Euler (-90,0,0) * Input.gyro.attitude).eulerAngles;
-				lastGyroAttitude = Input.gyro.attitude;
-	            return rotationVectorDebugValue;
+	            this.lastGyroAttitude = Input.gyro.attitude;
+	            return this.rotationVectorDebugValue;
 	        case Type.Temperature:
-	            return new Vector3(temperatureDebugValue, 0, 0);
+	            return new Vector3(this.temperatureDebugValue, 0, 0);
 			case Type.AmbientTemperature:
-				return new Vector3(ambientTemperatureDebugValue, 0, 0);
+				return new Vector3(this.ambientTemperatureDebugValue, 0, 0);
 			case Type.RelativeHumidity:
-				return new Vector3(relativeHumidityDebugValue, 0, 0);
+				return new Vector3(this.relativeHumidityDebugValue, 0, 0);
             default:
 	            return Vector3.zero;
 	    }
@@ -179,7 +179,7 @@ class SensorEditorUnity : Sensor
 	
 	protected override Vector3 _getDeviceOrientation()
 	{
-		return getOrientationDebugValue;
+		return this.getOrientationDebugValue;
 	}
 	
 	protected override float GetDeviceAltitude(float pressure, float pressureAtSeaLevel = PressureValue.StandardAthmosphere)
@@ -217,31 +217,31 @@ class SensorEditorUnity : Sensor
 		switch ((Type) id)
 		{
 			case Type.Accelerometer:
-				return accelerometerAvailable;
+				return this.accelerometerAvailable;
 			case Type.Gravity:
-				return gravityAvailable;
+				return this.gravityAvailable;
 			case Type.Gyroscope:
-				return gyroscopeAvailable;
+				return this.gyroscopeAvailable;
 			case Type.Light:
-				return lightAvailable;
+				return this.lightAvailable;
 			case Type.LinearAcceleration:
-				return linearAccelerationAvailable;
+				return this.linearAccelerationAvailable;
 			case Type.MagneticField:
-				return magneticFieldAvailable;
+				return this.magneticFieldAvailable;
 			case Type.Orientation:
-				return orientationAvailable;
+				return this.orientationAvailable;
 			case Type.Pressure:
-				return pressureAvailable;
+				return this.pressureAvailable;
 			case Type.Proximity:
-				return proximityAvailable;
+				return this.proximityAvailable;
 			case Type.RotationVector:
-				return rotationVectorAvailable;
+				return this.rotationVectorAvailable;
 			case Type.Temperature:
-				return temperatureAvailable;
+				return this.temperatureAvailable;
 			case Type.AmbientTemperature:
-				return ambientTemperatureAvailable;
+				return this.ambientTemperatureAvailable;
 			case Type.RelativeHumidity:
-				return relativeHumidityAvailable;
+				return this.relativeHumidityAvailable;
 			default:
 				return false;
 		}

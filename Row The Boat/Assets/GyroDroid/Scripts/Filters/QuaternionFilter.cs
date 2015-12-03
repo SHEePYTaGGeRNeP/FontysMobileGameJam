@@ -4,7 +4,7 @@ public class QuaternionFilter : Filter<Quaternion>
 {
     public override void UpdateFunc(Quaternion input)
     {
-        Holder = Quaternion.Lerp(Holder, input, Time.deltaTime * Hardness);
+        this.Holder = Quaternion.Lerp(this.Holder, input, Time.deltaTime * this.Hardness);
     }
     public QuaternionFilter(float hardness) : base(hardness)
     {

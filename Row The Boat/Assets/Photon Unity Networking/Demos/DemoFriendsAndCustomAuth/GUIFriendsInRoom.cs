@@ -8,7 +8,7 @@ public class GUIFriendsInRoom : MonoBehaviour
 
     void Start()
     {
-        GuiRect = new Rect(Screen.width / 4, 80, Screen.width / 2, Screen.height - 100);
+        this.GuiRect = new Rect(Screen.width / 4, 80, Screen.width / 2, Screen.height - 100);
     }
 
     
@@ -19,7 +19,7 @@ public class GUIFriendsInRoom : MonoBehaviour
             return;
         }
 
-        GUILayout.BeginArea(GuiRect);
+        GUILayout.BeginArea(this.GuiRect);
 
         GUILayout.Label("In-Game");
         GUILayout.Label("For simplicity, this demo just shows the players in this room. The list will expand when more join.");

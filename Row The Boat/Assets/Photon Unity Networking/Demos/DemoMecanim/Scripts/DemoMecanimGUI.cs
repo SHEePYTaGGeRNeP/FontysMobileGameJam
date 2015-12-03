@@ -32,16 +32,16 @@ public class DemoMecanimGUI : PunBehaviour
 
     public void Update()
     {
-        FindRemoteAnimator();
+        this.FindRemoteAnimator();
 
-        m_SlideIn = Mathf.Lerp( m_SlideIn, m_IsOpen ? 1f : 0f, Time.deltaTime * 9f );
-        m_FoundPlayerSlideIn = Mathf.Lerp( m_FoundPlayerSlideIn, m_AnimatorView == null ? 0f : 1f, Time.deltaTime * 5f );
+        this.m_SlideIn = Mathf.Lerp(this.m_SlideIn, this.m_IsOpen ? 1f : 0f, Time.deltaTime * 9f );
+        this.m_FoundPlayerSlideIn = Mathf.Lerp(this.m_FoundPlayerSlideIn, this.m_AnimatorView == null ? 0f : 1f, Time.deltaTime * 5f );
     }
 
     /// <summary>Finds the Animator component of a remote client on a GameObject tagged as Player and sets m_RemoteAnimator.</summary>
     public void FindRemoteAnimator()
     {
-        if( m_RemoteAnimator != null )
+        if(this.m_RemoteAnimator != null )
         {
             return;
         }
@@ -53,56 +53,56 @@ public class DemoMecanimGUI : PunBehaviour
             PhotonView view = gos[ i ].GetComponent<PhotonView>();
             if( view != null && view.isMine == false )
             {
-                m_RemoteAnimator = gos[ i ].GetComponent<Animator>();
+                this.m_RemoteAnimator = gos[ i ].GetComponent<Animator>();
             }
         }
     }
 
     public void OnGUI()
     {
-        GUI.skin = Skin;
+        GUI.skin = this.Skin;
 
         string[] synchronizeTypeContent = new string[] { "Disabled", "Discrete", "Continuous" };
 
-        GUILayout.BeginArea( new Rect( Screen.width - 200 * m_FoundPlayerSlideIn - 400 * m_SlideIn, 0, 600, Screen.height ), GUI.skin.box );
+        GUILayout.BeginArea( new Rect( Screen.width - 200 * this.m_FoundPlayerSlideIn - 400 * this.m_SlideIn, 0, 600, Screen.height ), GUI.skin.box );
         {
             GUILayout.Label( "Mecanim Demo", GUI.skin.customStyles[ 0 ] );
 
             GUI.color = Color.white;
             string label = "Settings";
 
-            if( m_IsOpen == true )
+            if(this.m_IsOpen == true )
             {
                 label = "Close";
             }
 
             if( GUILayout.Button( label, GUILayout.Width( 110 ) ) )
             {
-                m_IsOpen = !m_IsOpen;
+                this.m_IsOpen = !this.m_IsOpen;
             }
 
             string parameters = "";
 
-            if( m_AnimatorView != null )
+            if(this.m_AnimatorView != null )
             {
                 parameters += "Send Values:\n";
 
-                for( int i = 0; i < m_AnimatorView.GetSynchronizedParameters().Count; ++i )
+                for( int i = 0; i < this.m_AnimatorView.GetSynchronizedParameters().Count; ++i )
                 {
-                    PhotonAnimatorView.SynchronizedParameter parameter = m_AnimatorView.GetSynchronizedParameters()[ i ];
+                    PhotonAnimatorView.SynchronizedParameter parameter = this.m_AnimatorView.GetSynchronizedParameters()[ i ];
                     
                     try
                     {
                         switch( parameter.Type )
                         {
                         case PhotonAnimatorView.ParameterType.Bool:
-                            parameters += parameter.Name + " (" + ( m_AnimatorView.GetComponent<Animator>().GetBool( parameter.Name ) ? "True" : "False" ) + ")\n";
+                            parameters += parameter.Name + " (" + (this.m_AnimatorView.GetComponent<Animator>().GetBool( parameter.Name ) ? "True" : "False" ) + ")\n";
                             break;
                         case PhotonAnimatorView.ParameterType.Int:
-                            parameters += parameter.Name + " (" + m_AnimatorView.GetComponent<Animator>().GetInteger( parameter.Name ) + ")\n";
+                            parameters += parameter.Name + " (" + this.m_AnimatorView.GetComponent<Animator>().GetInteger( parameter.Name ) + ")\n";
                             break;
                         case PhotonAnimatorView.ParameterType.Float:
-                            parameters += parameter.Name + " (" + m_AnimatorView.GetComponent<Animator>().GetFloat( parameter.Name ).ToString( "0.00" ) + ")\n";
+                            parameters += parameter.Name + " (" + this.m_AnimatorView.GetComponent<Animator>().GetFloat( parameter.Name ).ToString( "0.00" ) + ")\n";
                             break;
                         }
                     }
@@ -113,26 +113,26 @@ public class DemoMecanimGUI : PunBehaviour
                 }
             }
 
-            if( m_RemoteAnimator != null )
+            if(this.m_RemoteAnimator != null )
             {
                 parameters += "\nReceived Values:\n";
 
-                for( int i = 0; i < m_AnimatorView.GetSynchronizedParameters().Count; ++i )
+                for( int i = 0; i < this.m_AnimatorView.GetSynchronizedParameters().Count; ++i )
                 {
-                    PhotonAnimatorView.SynchronizedParameter parameter = m_AnimatorView.GetSynchronizedParameters()[ i ];
+                    PhotonAnimatorView.SynchronizedParameter parameter = this.m_AnimatorView.GetSynchronizedParameters()[ i ];
 
                     try
                     {
                         switch( parameter.Type )
                         {
                         case PhotonAnimatorView.ParameterType.Bool:
-                            parameters += parameter.Name + " (" + ( m_RemoteAnimator.GetBool( parameter.Name ) ? "True" : "False" ) + ")\n";
+                            parameters += parameter.Name + " (" + (this.m_RemoteAnimator.GetBool( parameter.Name ) ? "True" : "False" ) + ")\n";
                             break;
                         case PhotonAnimatorView.ParameterType.Int:
-                            parameters += parameter.Name + " (" + m_RemoteAnimator.GetInteger( parameter.Name ) + ")\n";
+                            parameters += parameter.Name + " (" + this.m_RemoteAnimator.GetInteger( parameter.Name ) + ")\n";
                             break;
                         case PhotonAnimatorView.ParameterType.Float:
-                            parameters += parameter.Name + " (" + m_RemoteAnimator.GetFloat( parameter.Name ).ToString( "0.00" ) + ")\n";
+                            parameters += parameter.Name + " (" + this.m_RemoteAnimator.GetFloat( parameter.Name ).ToString( "0.00" ) + ")\n";
                             break;
                         }
                     }
@@ -146,21 +146,21 @@ public class DemoMecanimGUI : PunBehaviour
             GUIStyle style = new GUIStyle( GUI.skin.label );
             style.alignment = TextAnchor.UpperLeft;
 
-            GUI.color = new Color( 1f, 1f, 1f, 1 - m_SlideIn );
+            GUI.color = new Color( 1f, 1f, 1f, 1 - this.m_SlideIn );
             GUI.Label( new Rect( 10, 100, 600, Screen.height ), parameters, style );
 
-            if( m_AnimatorView != null )
+            if(this.m_AnimatorView != null )
             {
-                GUI.color = new Color( 1f, 1f, 1f, m_SlideIn );
+                GUI.color = new Color( 1f, 1f, 1f, this.m_SlideIn );
 
                 GUILayout.Space( 20 );
                 GUILayout.Label( "Synchronize Parameters" );
 
-                for( int i = 0; i < m_AnimatorView.GetSynchronizedParameters().Count; ++i )
+                for( int i = 0; i < this.m_AnimatorView.GetSynchronizedParameters().Count; ++i )
                 {
                     GUILayout.BeginHorizontal();
                     {
-                        PhotonAnimatorView.SynchronizedParameter parameter = m_AnimatorView.GetSynchronizedParameters()[ i ];
+                        PhotonAnimatorView.SynchronizedParameter parameter = this.m_AnimatorView.GetSynchronizedParameters()[ i ];
 
                         GUILayout.Label( parameter.Name, GUILayout.Width( 100 ), GUILayout.Height( 36 ) );
 
@@ -169,7 +169,7 @@ public class DemoMecanimGUI : PunBehaviour
 
                         if( newValue != selectedValue )
                         {
-                            m_AnimatorView.SetParameterSynchronized( parameter.Name, parameter.Type, (PhotonAnimatorView.SynchronizeType)newValue );
+                            this.m_AnimatorView.SetParameterSynchronized( parameter.Name, parameter.Type, (PhotonAnimatorView.SynchronizeType)newValue );
                         }
                     }
                     GUILayout.EndHorizontal();
@@ -186,7 +186,7 @@ public class DemoMecanimGUI : PunBehaviour
 
     public override void OnJoinedRoom()
     {
-        CreatePlayerObject();
+        this.CreatePlayerObject();
     }
 
     private void CreatePlayerObject()
@@ -196,7 +196,7 @@ public class DemoMecanimGUI : PunBehaviour
         position.z += Random.Range( -4f, 4f );
 
         GameObject newPlayerObject = PhotonNetwork.Instantiate( "Robot Kyle Mecanim", position, Quaternion.identity, 0 );
-        m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView>();
+        this.m_AnimatorView = newPlayerObject.GetComponent<PhotonAnimatorView>();
     }
 
     #endregion

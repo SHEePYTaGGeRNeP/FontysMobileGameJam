@@ -32,18 +32,18 @@ public class CheckAvailability : MonoBehaviour {
 	string message;
 		
 	void Start() {
-		message = "";	
+	    this.message = "";	
 	}
 	
 	void OnGUI() {
-		if(message == "")
-			message = CheckForErrors();
+		if(this.message == "")
+		    this.message = this.CheckForErrors();
 		
-		GUI.color = guiColor;
+		GUI.color = this.guiColor;
 		
 		GUILayout.BeginArea(GUITools.Scale (new Rect(10,10,Screen.width-20, 200)));
-		if(sceneDescription != "") GUILayout.Label(sceneDescription);
-		GUILayout.Label(message);
+		if(this.sceneDescription != "") GUILayout.Label(this.sceneDescription);
+		GUILayout.Label(this.message);
 		GUILayout.EndArea();
 	}
 }

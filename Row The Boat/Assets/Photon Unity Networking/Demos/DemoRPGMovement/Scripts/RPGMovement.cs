@@ -21,39 +21,39 @@ public class RPGMovement : MonoBehaviour
 
     void Start() 
     {
-        m_CharacterController = GetComponent<CharacterController>();
-        m_Animator = GetComponent<Animator>();
-        m_PhotonView = GetComponent<PhotonView>();
-        m_TransformView = GetComponent<PhotonTransformView>();
+        this.m_CharacterController = this.GetComponent<CharacterController>();
+        this.m_Animator = this.GetComponent<Animator>();
+        this.m_PhotonView = this.GetComponent<PhotonView>();
+        this.m_TransformView = this.GetComponent<PhotonTransformView>();
     }
 
     void Update() 
     {
-        if( m_PhotonView.isMine == true )
+        if(this.m_PhotonView.isMine == true )
         {
-            ResetSpeedValues();
+            this.ResetSpeedValues();
 
-            UpdateRotateMovement();
+            this.UpdateRotateMovement();
 
-            UpdateForwardMovement();
-            UpdateBackwardMovement();
-            UpdateStrafeMovement();
+            this.UpdateForwardMovement();
+            this.UpdateBackwardMovement();
+            this.UpdateStrafeMovement();
 
-            MoveCharacterController();
-            ApplyGravityToCharacterController();
+            this.MoveCharacterController();
+            this.ApplyGravityToCharacterController();
 
-            ApplySynchronizedValues();
+            this.ApplySynchronizedValues();
         }
 
-        UpdateAnimation();
+        this.UpdateAnimation();
     }
 
     void UpdateAnimation()
     {
-        Vector3 movementVector = transform.position - m_LastPosition;
+        Vector3 movementVector = this.transform.position - this.m_LastPosition;
 
-        float speed = Vector3.Dot( movementVector.normalized, transform.forward );
-        float direction = Vector3.Dot( movementVector.normalized, transform.right );
+        float speed = Vector3.Dot( movementVector.normalized, this.transform.forward );
+        float direction = Vector3.Dot( movementVector.normalized, this.transform.right );
 
         if( Mathf.Abs( speed ) < 0.2f )
         {
@@ -74,40 +74,40 @@ public class RPGMovement : MonoBehaviour
             }
         }
 
-        m_AnimatorSpeed = Mathf.MoveTowards( m_AnimatorSpeed, speed, Time.deltaTime * 5f );
+        this.m_AnimatorSpeed = Mathf.MoveTowards(this.m_AnimatorSpeed, speed, Time.deltaTime * 5f );
 
-        m_Animator.SetFloat( "Speed", m_AnimatorSpeed );
-        m_Animator.SetFloat( "Direction", direction );
+        this.m_Animator.SetFloat( "Speed", this.m_AnimatorSpeed );
+        this.m_Animator.SetFloat( "Direction", direction );
 
-        m_LastPosition = transform.position;
+        this.m_LastPosition = this.transform.position;
     }
 
     void ResetSpeedValues()
     {
-        m_CurrentMovement = Vector3.zero;
-        m_CurrentTurnSpeed = 0;
+        this.m_CurrentMovement = Vector3.zero;
+        this.m_CurrentTurnSpeed = 0;
     }
 
     void ApplySynchronizedValues()
     {
-        m_TransformView.SetSynchronizedValues( m_CurrentMovement, m_CurrentTurnSpeed );
+        this.m_TransformView.SetSynchronizedValues(this.m_CurrentMovement, this.m_CurrentTurnSpeed );
     }
 
     void ApplyGravityToCharacterController()
     {
-        m_CharacterController.Move( transform.up * Time.deltaTime * -9.81f );
+        this.m_CharacterController.Move(this.transform.up * Time.deltaTime * -9.81f );
     }
 
     void MoveCharacterController()
     {
-        m_CharacterController.Move( m_CurrentMovement * Time.deltaTime );
+        this.m_CharacterController.Move(this.m_CurrentMovement * Time.deltaTime );
     }
 
     void UpdateForwardMovement()
     {
         if( Input.GetKey( KeyCode.W ) == true )
         {
-            m_CurrentMovement = transform.forward * ForwardSpeed;
+            this.m_CurrentMovement = this.transform.forward * this.ForwardSpeed;
         }
     }
 
@@ -115,7 +115,7 @@ public class RPGMovement : MonoBehaviour
     {
         if( Input.GetKey( KeyCode.S ) == true )
         {
-            m_CurrentMovement = -transform.forward * BackwardSpeed;
+            this.m_CurrentMovement = -this.transform.forward * this.BackwardSpeed;
         }
     }
 
@@ -123,12 +123,12 @@ public class RPGMovement : MonoBehaviour
     {
         if( Input.GetKey( KeyCode.Q ) == true )
         {
-            m_CurrentMovement = -transform.right * StrafeSpeed;            
+            this.m_CurrentMovement = -this.transform.right * this.StrafeSpeed;            
         }
 
         if( Input.GetKey( KeyCode.E ) == true )
         {
-            m_CurrentMovement = transform.right * StrafeSpeed;
+            this.m_CurrentMovement = this.transform.right * this.StrafeSpeed;
         }
     }
 
@@ -136,14 +136,14 @@ public class RPGMovement : MonoBehaviour
     {
         if( Input.GetKey( KeyCode.A ) == true )
         {
-            m_CurrentTurnSpeed = -RotateSpeed;
-            transform.Rotate( 0, -RotateSpeed * Time.deltaTime, 0 );
+            this.m_CurrentTurnSpeed = -this.RotateSpeed;
+            this.transform.Rotate( 0, -this.RotateSpeed * Time.deltaTime, 0 );
         }
 
         if( Input.GetKey( KeyCode.D ) == true )
         {
-            m_CurrentTurnSpeed = RotateSpeed;
-            transform.Rotate( 0, RotateSpeed * Time.deltaTime, 0 );
+            this.m_CurrentTurnSpeed = this.RotateSpeed;
+            this.transform.Rotate( 0, this.RotateSpeed * Time.deltaTime, 0 );
         }
     }
 }

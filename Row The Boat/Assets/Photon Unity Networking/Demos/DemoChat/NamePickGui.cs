@@ -14,10 +14,10 @@ public class NamePickGui : MonoBehaviour
 
     public void Awake()
     {
-        this.guiCenteredRect = new Rect(Screen.width/2-GuiSize.x/2, Screen.height/2-GuiSize.y/4, GuiSize.x, GuiSize.y);
+        this.guiCenteredRect = new Rect(Screen.width/2- this.GuiSize.x/2, Screen.height/2- this.GuiSize.y/4, this.GuiSize.x, this.GuiSize.y);
         this.chatComponent = this.GetComponent<ChatGui>();
 
-        if (this.chatComponent != null && chatComponent.enabled)
+        if (this.chatComponent != null && this.chatComponent.enabled)
         {
             Debug.LogWarning("When using the NamePickGui, ChatGui should be disabled initially.");
             
@@ -49,7 +49,7 @@ public class NamePickGui : MonoBehaviour
 
 
         GUI.skin.label.wordWrap = true;
-        GUILayout.BeginArea(guiCenteredRect);
+        GUILayout.BeginArea(this.guiCenteredRect);
 
 
         if (this.chatComponent != null && string.IsNullOrEmpty(this.chatComponent.ChatAppId))

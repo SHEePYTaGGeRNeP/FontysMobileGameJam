@@ -17,23 +17,23 @@ public class OnClickInstantiate : MonoBehaviour
             return;
         }
 
-        switch (InstantiateType)
+        switch (this.InstantiateType)
         {
             case 0:
-                PhotonNetwork.Instantiate(Prefab.name, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(this.Prefab.name, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity, 0);
                 break;
             case 1:
-                PhotonNetwork.InstantiateSceneObject(Prefab.name, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity, 0, null);
+                PhotonNetwork.InstantiateSceneObject(this.Prefab.name, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity, 0, null);
                 break;
         }
     }
 
     void OnGUI()
     {
-        if (showGui)
+        if (this.showGui)
         {
             GUILayout.BeginArea(new Rect(Screen.width - 180, 0, 180, 50));
-            InstantiateType = GUILayout.Toolbar(InstantiateType, InstantiateTypeNames);
+            this.InstantiateType = GUILayout.Toolbar(this.InstantiateType, this.InstantiateTypeNames);
             GUILayout.EndArea();
         }
     }

@@ -9,16 +9,16 @@ public class OnAwakePhysicsSettings : Photon.MonoBehaviour
 {
     public void Awake()
     {
-        if (!photonView.isMine)
+        if (!this.photonView.isMine)
         {
-            Rigidbody attachedRigidbody = GetComponent<Rigidbody>();
+            Rigidbody attachedRigidbody = this.GetComponent<Rigidbody>();
             if (attachedRigidbody != null)
             {
                 attachedRigidbody.isKinematic = true;
             }
             else
             {
-                Rigidbody2D attachedRigidbody2d = GetComponent<Rigidbody2D>();
+                Rigidbody2D attachedRigidbody2d = this.GetComponent<Rigidbody2D>();
                 if (attachedRigidbody2d != null)
                 {
                     attachedRigidbody2d.isKinematic = true;

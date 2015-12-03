@@ -10,12 +10,12 @@ public class CubeExtra : Photon.MonoBehaviour
 
     public void Awake()
     {
-        if (photonView.isMine)
+        if (this.photonView.isMine)
         {
             this.enabled = false;   // Only enable inter/extrapol for remote players
         }
 
-        latestCorrectPos = transform.position;
+        this.latestCorrectPos = this.transform.position;
     }
 
     // this method is called by PUN when this script is being "observed" by a PhotonView (setup in inspector)
@@ -24,8 +24,8 @@ public class CubeExtra : Photon.MonoBehaviour
         // Always send transform (depending on reliability of the network view)
         if (stream.isWriting)
         {
-            Vector3 pos = transform.localPosition;
-            Quaternion rot = transform.localRotation;
+            Vector3 pos = this.transform.localPosition;
+            Quaternion rot = this.transform.localRotation;
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
         }
@@ -38,18 +38,18 @@ public class CubeExtra : Photon.MonoBehaviour
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
 
-            lastMovement = (pos - latestCorrectPos) / (Time.time - lastTime);
+            this.lastMovement = (pos - this.latestCorrectPos) / (Time.time - this.lastTime);
 
-            lastTime = Time.time;
-            latestCorrectPos = pos;
+            this.lastTime = Time.time;
+            this.latestCorrectPos = pos;
 
-            transform.position = latestCorrectPos;
+            this.transform.position = this.latestCorrectPos;
         }
     }
 
     // This only runs where the component is enabled, which is only on remote peers (server/clients)
     public void Update()
     {
-        transform.localPosition += lastMovement * Time.deltaTime;
+        this.transform.localPosition += this.lastMovement * Time.deltaTime;
     }
 }

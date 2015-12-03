@@ -14,12 +14,12 @@ public class PlayerDiamond : MonoBehaviour
     {
         get
         {
-            if( m_PhotonView == null )
+            if(this.m_PhotonView == null )
             {
-                m_PhotonView = transform.parent.GetComponent<PhotonView>();
+                this.m_PhotonView = this.transform.parent.GetComponent<PhotonView>();
             }
 
-            return m_PhotonView;
+            return this.m_PhotonView;
         }
     }
 
@@ -28,12 +28,12 @@ public class PlayerDiamond : MonoBehaviour
     {
         get
         {
-            if( m_DiamondRenderer == null )
+            if(this.m_DiamondRenderer == null )
             {
-                m_DiamondRenderer = GetComponentInChildren<Renderer>();
+                this.m_DiamondRenderer = this.GetComponentInChildren<Renderer>();
             }
 
-            return m_DiamondRenderer;
+            return this.m_DiamondRenderer;
         }
     }
 
@@ -44,53 +44,53 @@ public class PlayerDiamond : MonoBehaviour
     #region Update
     void Start()
     {
-        m_Height = HeightOffset;
+        this.m_Height = this.HeightOffset;
 
-        if( HeadTransform != null )
+        if(this.HeadTransform != null )
         {
-            m_Height += HeadTransform.position.y;
+            this.m_Height += this.HeadTransform.position.y;
         }
     }
 
     void Update() 
     {
-        UpdateDiamondPosition();
-        UpdateDiamondRotation();
-        UpdateDiamondVisibility();
+        this.UpdateDiamondPosition();
+        this.UpdateDiamondRotation();
+        this.UpdateDiamondVisibility();
     }
 
     void UpdateDiamondPosition()
     {
         Vector3 targetPosition = Vector3.zero;
 
-        if( HeadTransform != null )
+        if(this.HeadTransform != null )
         {
-            targetPosition = HeadTransform.position;
+            targetPosition = this.HeadTransform.position;
         }
 
-        targetPosition.y = m_Height;
+        targetPosition.y = this.m_Height;
 
         if( float.IsNaN( targetPosition.x ) == false && float.IsNaN( targetPosition.z ) == false )
         {
-            transform.position = Vector3.Lerp( transform.position, targetPosition, Time.deltaTime * 10f );
+            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, Time.deltaTime * 10f );
         }
     }
 
     void UpdateDiamondRotation()
     {
-        m_Rotation += Time.deltaTime * 180f;
-        m_Rotation = m_Rotation % 360;
+        this.m_Rotation += Time.deltaTime * 180f;
+        this.m_Rotation = this.m_Rotation % 360;
 
-        transform.rotation = Quaternion.Euler( 0, m_Rotation, 0 );
+        this.transform.rotation = Quaternion.Euler( 0, this.m_Rotation, 0 );
     }
 
     void UpdateDiamondVisibility()
     {
-        DiamondRenderer.enabled = true;
+        this.DiamondRenderer.enabled = true;
 
-        if( PhotonView == null || PhotonView.isMine == false )
+        if(this.PhotonView == null || this.PhotonView.isMine == false )
         {
-            DiamondRenderer.enabled = false;
+            this.DiamondRenderer.enabled = false;
         }
     }
     #endregion

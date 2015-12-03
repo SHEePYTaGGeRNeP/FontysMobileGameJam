@@ -25,7 +25,7 @@ public class SupportLogging : MonoBehaviour
 
     public void Start()
     {
-        if (LogTrafficStats)
+        if (this.LogTrafficStats)
         {
             this.InvokeRepeating("LogStats", 10, 10);
         }
@@ -69,7 +69,7 @@ public class SupportLogging : MonoBehaviour
         Debug.Log("SupportLogger OnConnectedToPhoton().");
         this.LogBasics();
 
-        if (LogTrafficStats)
+        if (this.LogTrafficStats)
         {
             PhotonNetwork.NetworkStatisticsEnabled = true;
         }

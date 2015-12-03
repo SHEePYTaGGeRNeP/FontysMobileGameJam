@@ -14,15 +14,15 @@ public class TestScript : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        lowPassFilterFactor = accelerometerUpdateInterval / lowPassKernelWidthInSeconds;
+        this.lowPassFilterFactor = this.accelerometerUpdateInterval / this.lowPassKernelWidthInSeconds;
     }
 
     // Update is called once per frame
     private void Update()
     {
         var acceleration = Input.acceleration;
-        lowPassValue = Vector3.Lerp(lowPassValue, acceleration, lowPassFilterFactor);
-        var deltaAcceleration = acceleration - lowPassValue;
+        this.lowPassValue = Vector3.Lerp(this.lowPassValue, acceleration, this.lowPassFilterFactor);
+        var deltaAcceleration = acceleration - this.lowPassValue;
         if (deltaAcceleration.sqrMagnitude >= 2.0f)
         {
             // Perform your "shaking actions" here, with suitable guards in the if check above, if necessary to not, to not fire again if they're already being performed.

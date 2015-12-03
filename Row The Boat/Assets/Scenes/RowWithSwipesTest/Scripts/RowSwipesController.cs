@@ -17,12 +17,12 @@ public class RowSwipesController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rb = transform.GetComponent<Rigidbody> ();
+	    this.rb = this.transform.GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		HandleSwipes ();
+	    this.HandleSwipes ();
 	}
 
 	void HandleSwipes() 
@@ -32,26 +32,26 @@ public class RowSwipesController : MonoBehaviour {
 			
 			switch (touch.phase) {
 			case TouchPhase.Began:
-				couldBeSwipe = true;
-				startPos = touch.position;
-				swipeStartTime = Time.time;
+			        this.couldBeSwipe = true;
+			        this.startPos = touch.position;
+			        this.swipeStartTime = Time.time;
 				break;
 				
 			case TouchPhase.Ended:
-				float swipeTime = Time.time - swipeStartTime;
-				float swipeDist = (touch.position - startPos).magnitude;
+				float swipeTime = Time.time - this.swipeStartTime;
+				float swipeDist = (touch.position - this.startPos).magnitude;
 				
-				if (couldBeSwipe && swipeTime < maxSwipeTime && swipeDist > minSwipeDist) {
+				if (this.couldBeSwipe && swipeTime < this.maxSwipeTime && swipeDist > this.minSwipeDist) {
 					// Swipe detected!
+
+				    this.couldBeSwipe = false; // Set to false so we can detect future swipes
 					
-					couldBeSwipe = false; // Set to false so we can detect future swipes
-					
-					float absHorizontal = Mathf.Abs(touch.position.x - startPos.x); 
-					float absVertical = Mathf.Abs(touch.position.y - startPos.y);
+					float absHorizontal = Mathf.Abs(touch.position.x - this.startPos.x); 
+					float absVertical = Mathf.Abs(touch.position.y - this.startPos.y);
 					
 					if (absHorizontal > absVertical) //Checking if swipe was horizontal or vertical
 					{
-						if (Mathf.Sign(touch.position.x - startPos.x) == 1f)
+						if (Mathf.Sign(touch.position.x - this.startPos.x) == 1f)
 						{
 							//Swiped Right
 							Debug.Log("Swiped RIGHT!");
@@ -65,7 +65,7 @@ public class RowSwipesController : MonoBehaviour {
 					}
 					else 
 					{
-						if (Mathf.Sign(touch.position.y - startPos.y) == 1f)
+						if (Mathf.Sign(touch.position.y - this.startPos.y) == 1f)
 						{
 							// Swiped Up
 						}
@@ -74,9 +74,9 @@ public class RowSwipesController : MonoBehaviour {
 							Debug.Log(touch.position.x);
 							// Swiped Down
 							if (touch.position.x > (Screen.width / 2)) {
-								rb.AddForce(Vector3.left * rowForce);
+							    this.rb.AddForce(Vector3.left * this.rowForce);
 							} else {
-								rb.AddForce(Vector3.right * rowForce);
+							    this.rb.AddForce(Vector3.right * this.rowForce);
 							}
 						}
 					}

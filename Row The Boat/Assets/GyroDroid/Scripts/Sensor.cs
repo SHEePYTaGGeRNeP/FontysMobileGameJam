@@ -1,4 +1,4 @@
-// #######################################
+﻿// #######################################
 // ---------------------------------------
 // ---------------------------------------
 // prefrontal cortex -- http://prefrontalcortex.de
@@ -231,7 +231,7 @@ public abstract partial class Sensor : MonoBehaviour
 	// fetch the active sensors every frame
 	void Update()
 	{
-		DeviceUpdate();
+	    this.DeviceUpdate();
 
 		
 //#if !UNITY_EDITOR
@@ -240,19 +240,19 @@ public abstract partial class Sensor : MonoBehaviour
 		{
 			if (Sensors[i] != null && Sensors[i].active)
 			{
-				Sensors[i].SetValue(GetDeviceSensor((Type)i));
+				Sensors[i].SetValue(this.GetDeviceSensor((Type)i));
 			}
 		}
 //#endif
 
 		// fetch additional values
-		surfaceRotation = GetSurfaceRotation();
+		surfaceRotation = this.GetSurfaceRotation();
 		// set the compensateSurfaceRotation
 	    //CompensateSurfaceRotation = _getSurfaceRotationCompensation();
 		
 		// only call this if the appropriate sensors are activated
 		if(Get(Type.MagneticField).active && Get(Type.Accelerometer).active)
-			_deviceOrientation = _getDeviceOrientation();
+			_deviceOrientation = this._getDeviceOrientation();
 	}
 
     void OnApplicationPause(bool pause)
@@ -292,20 +292,20 @@ public abstract partial class Sensor : MonoBehaviour
 			Deactivate(t);
 		}
 
-	    DisableDevice();
+	    this.DisableDevice();
 
 		_singleton = null;
 	}
 
     void Awake()
 	{
-		Singleton = this;		
-		sensors = new Information[Sensor.Count + 1];
+		Singleton = this;
+        this.sensors = new Information[Sensor.Count + 1];
 
-	    AwakeDevice();
+        this.AwakeDevice();
 		
 		// get Device orientation
-		surfaceRotation = GetSurfaceRotation();
+		surfaceRotation = this.GetSurfaceRotation();
 	    // GPSPosition = GetPosition();
 		
 #if !NO_GYRODROID_STATISTICS
@@ -329,12 +329,12 @@ public abstract partial class Sensor : MonoBehaviour
     
 	public float GetAltitude(float pressure, float pressureAtSeaLevel = PressureValue.StandardAthmosphere)
 	{
-		return GetDeviceAltitude(pressure, pressureAtSeaLevel);
+		return this.GetDeviceAltitude(pressure, pressureAtSeaLevel);
 	}
 	
 	public Quaternion QuaternionFromRotationVector(Vector3 v)
 	{
-	    var r = QuaternionFromDeviceRotationVector(v);
+	    var r = this.QuaternionFromDeviceRotationVector(v);
 		
 		return float.IsNaN(r.x) ? Quaternion.identity : r;
 	}

@@ -78,7 +78,7 @@ public class PickupItemSyncer : Photon.MonoBehaviour
             return;
         }
 
-        SendPickedUpItems(msgInfo.sender);
+        this.SendPickedUpItems(msgInfo.sender);
     }
 
 

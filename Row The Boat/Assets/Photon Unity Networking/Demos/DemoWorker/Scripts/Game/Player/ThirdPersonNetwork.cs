@@ -8,24 +8,24 @@ public class ThirdPersonNetwork : Photon.MonoBehaviour
 
     void Awake()
     {
-        cameraScript = GetComponent<ThirdPersonCamera>();
-        controllerScript = GetComponent<ThirdPersonController>();
+        this.cameraScript = this.GetComponent<ThirdPersonCamera>();
+        this.controllerScript = this.GetComponent<ThirdPersonController>();
 
-         if (photonView.isMine)
+         if (this.photonView.isMine)
         {
             //MINE: local player, simply enable the local scripts
-            cameraScript.enabled = true;
-            controllerScript.enabled = true;
+            this.cameraScript.enabled = true;
+            this.controllerScript.enabled = true;
         }
         else
-        {           
-            cameraScript.enabled = false;
+        {
+            this.cameraScript.enabled = false;
 
-            controllerScript.enabled = true;
-            controllerScript.isControllable = false;
+            this.controllerScript.enabled = true;
+            this.controllerScript.isControllable = false;
         }
 
-        gameObject.name = gameObject.name + photonView.viewID;
+        this.gameObject.name = this.gameObject.name + this.photonView.viewID;
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -33,16 +33,16 @@ public class ThirdPersonNetwork : Photon.MonoBehaviour
         if (stream.isWriting)
         {
             //We own this player: send the others our data
-            stream.SendNext((int)controllerScript._characterState);
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation); 
+            stream.SendNext((int)this.controllerScript._characterState);
+            stream.SendNext(this.transform.position);
+            stream.SendNext(this.transform.rotation); 
         }
         else
         {
             //Network player, receive data
-            controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
-            correctPlayerPos = (Vector3)stream.ReceiveNext();
-            correctPlayerRot = (Quaternion)stream.ReceiveNext();
+            this.controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
+            this.correctPlayerPos = (Vector3)stream.ReceiveNext();
+            this.correctPlayerRot = (Quaternion)stream.ReceiveNext();
         }
     }
 
@@ -51,11 +51,11 @@ public class ThirdPersonNetwork : Photon.MonoBehaviour
 
     void Update()
     {
-        if (!photonView.isMine)
+        if (!this.photonView.isMine)
         {
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
-            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
-            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
+            this.transform.position = Vector3.Lerp(this.transform.position, this.correctPlayerPos, Time.deltaTime * 5);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, this.correctPlayerRot, Time.deltaTime * 5);
         }
     }
 

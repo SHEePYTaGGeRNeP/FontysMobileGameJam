@@ -18,13 +18,13 @@ public class OnClickLoadSomething : MonoBehaviour
 
     public void OnClick()
     {
-        switch (ResourceTypeToLoad)
+        switch (this.ResourceTypeToLoad)
         {
             case ResourceTypeOption.Scene:
-                Application.LoadLevel(ResourceToLoad);
+                Application.LoadLevel(this.ResourceToLoad);
                 break;
             case ResourceTypeOption.Web:
-                Application.OpenURL(ResourceToLoad);
+                Application.OpenURL(this.ResourceToLoad);
                 break;
         }
     }

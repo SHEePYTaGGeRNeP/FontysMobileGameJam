@@ -11,13 +11,13 @@ public class CubeLerp : Photon.MonoBehaviour
 
     public void Awake()
     {
-        if (photonView.isMine)
+        if (this.photonView.isMine)
         {
             this.enabled = false;   // due to this, Update() is not called on the owner client.
         }
 
-        latestCorrectPos = transform.position;
-        onUpdatePos = transform.position;
+        this.latestCorrectPos = this.transform.position;
+        this.onUpdatePos = this.transform.position;
     }
 
     /// <summary>
@@ -36,8 +36,8 @@ public class CubeLerp : Photon.MonoBehaviour
     {
         if (stream.isWriting)
         {
-            Vector3 pos = transform.localPosition;
-            Quaternion rot = transform.localRotation;
+            Vector3 pos = this.transform.localPosition;
+            Quaternion rot = this.transform.localRotation;
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
         }
@@ -50,11 +50,11 @@ public class CubeLerp : Photon.MonoBehaviour
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
 
-            latestCorrectPos = pos;                 // save this to move towards it in FixedUpdate()
-            onUpdatePos = transform.localPosition;  // we interpolate from here to latestCorrectPos
-            fraction = 0;                           // reset the fraction we alreay moved. see Update()
+            this.latestCorrectPos = pos;                 // save this to move towards it in FixedUpdate()
+            this.onUpdatePos = this.transform.localPosition;  // we interpolate from here to latestCorrectPos
+            this.fraction = 0;                           // reset the fraction we alreay moved. see Update()
 
-            transform.localRotation = rot;          // this sample doesn't smooth rotation
+            this.transform.localRotation = rot;          // this sample doesn't smooth rotation
         }
     }
 
@@ -67,7 +67,7 @@ public class CubeLerp : Photon.MonoBehaviour
         // Our fraction variable would reach 1 in 100ms if we multiply deltaTime by 10.
         // We want it to take a bit longer, so we multiply with 9 instead.
 
-        fraction = fraction + Time.deltaTime * 9;
-        transform.localPosition = Vector3.Lerp(onUpdatePos, latestCorrectPos, fraction);    // set our pos between A and B
+        this.fraction = this.fraction + Time.deltaTime * 9;
+        this.transform.localPosition = Vector3.Lerp(this.onUpdatePos, this.latestCorrectPos, this.fraction);    // set our pos between A and B
     }
 }

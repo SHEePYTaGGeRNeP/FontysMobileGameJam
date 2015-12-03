@@ -4,7 +4,7 @@ public class AngleFilter : FloatFilter
 {
     public override void UpdateFunc(float input)
     {
-        Holder = Mathf.LerpAngle(Holder, input, Time.deltaTime * Hardness);
+        this.Holder = Mathf.LerpAngle(this.Holder, input, Time.deltaTime * this.Hardness);
     }
     public AngleFilter(float hardness) : base(hardness)
     {

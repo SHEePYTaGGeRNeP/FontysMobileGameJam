@@ -23,6 +23,7 @@ public class BoatAI : MonoBehaviour {
     
     private Rigidbody _rb;
 
+    public bool Logging;
 
     // Use this for initialization
     void Start()
@@ -36,53 +37,54 @@ public class BoatAI : MonoBehaviour {
         bool skipLeft = false;
         bool skipRight = false;
 
-        float yRotation = transform.rotation.eulerAngles.y;
+        float yRotation = this.transform.rotation.eulerAngles.y;
         //Debug.Log("Y Rotation: " + transform.rotation.eulerAngles);
 
-        angleCorrect = false;
+        this.angleCorrect = false;
 
-        if(yRotation > _maxAngle && yRotation < 180)
+        if(yRotation > this._maxAngle && yRotation < 180)
         {
-            angleCorrect = true;
+            this.angleCorrect = true;
             skipLeft = true;
         }
 
-        else if(yRotation > 180 && yRotation < (360 -_maxAngle))
+        else if(yRotation > 180 && yRotation < (360 - this._maxAngle))
         {
-            angleCorrect = true;
+            this.angleCorrect = true;
             skipRight = true;
         }
 
-        else if(Time.time > nextPaddle)
+        else if(Time.time > this.nextPaddle)
         {
             RaycastHit rayHitLeft;
             RaycastHit rayHitCenter;
             RaycastHit rayHitRight;
 
-            nextRaycast = Time.time + _rayInterval;
+            this.nextRaycast = Time.time + this._rayInterval;
 
-            Ray leftRay = new Ray(_rayLeft.position, transform.forward);
-            Ray centerRay = new Ray(_rayCenter.position, transform.forward);
-            Ray rightRay = new Ray(_rayRight.position, transform.forward);
+            Ray leftRay = new Ray(this._rayLeft.position, this.transform.forward);
+            Ray centerRay = new Ray(this._rayCenter.position, this.transform.forward);
+            Ray rightRay = new Ray(this._rayRight.position, this.transform.forward);
 
-            Physics.Raycast(leftRay, out rayHitLeft, _rayLength);
-            Physics.Raycast(centerRay, out rayHitCenter, _rayLength);
-            Physics.Raycast(rightRay, out rayHitRight, _rayLength);
+            Physics.Raycast(leftRay, out rayHitLeft, this._rayLength);
+            Physics.Raycast(centerRay, out rayHitCenter, this._rayLength);
+            Physics.Raycast(rightRay, out rayHitRight, this._rayLength);
             
 
             if (rayHitCenter.distance > 0)
             {
-                Debug.Log("Center start");
-                Debug.DrawLine(_rayCenter.position, rayHitCenter.point, Color.green, _rayInterval);
+                if (this.Logging)
+                    Debug.Log("Center start");
+                Debug.DrawLine(this._rayCenter.position, rayHitCenter.point, Color.green, this._rayInterval);
 
                     RaycastHit hitLeft;
                     RaycastHit hitRight;
 
-                    Ray rayLeft = new Ray(_rayLeft.position, transform.forward);
-                    Ray rayRight = new Ray(_rayRight.position, transform.forward);
+                    Ray rayLeft = new Ray(this._rayLeft.position, this.transform.forward);
+                    Ray rayRight = new Ray(this._rayRight.position, this.transform.forward);
 
-                    Physics.Raycast(rayLeft, out hitLeft, _rayLength * 1.5f);
-                    Physics.Raycast(rayRight, out hitRight, _rayLength * 1.5f);
+                    Physics.Raycast(rayLeft, out hitLeft, this._rayLength * 1.5f);
+                    Physics.Raycast(rayRight, out hitRight, this._rayLength * 1.5f);
 
                     
                     if (hitLeft.distance > 0 && hitRight.distance > 0)
@@ -90,24 +92,24 @@ public class BoatAI : MonoBehaviour {
                         if (hitLeft.distance > hitRight.distance)
                         {
                             skipLeft = true;
-                            Debug.DrawLine(_rayRight.position, hitRight.point, Color.blue, _rayInterval);
+                            Debug.DrawLine(this._rayRight.position, hitRight.point, Color.blue, this._rayInterval);
                         }
                         else
                         {
                             skipRight = true;
-                            Debug.DrawLine(_rayLeft.position, hitLeft.point, Color.red, _rayInterval);
+                            Debug.DrawLine(this._rayLeft.position, hitLeft.point, Color.red, this._rayInterval);
                         }
                     }
 
                     else if (hitLeft.distance > 0)
                     {
                         skipRight = true;
-                        Debug.DrawLine(_rayLeft.position, hitLeft.point, Color.white, _rayInterval);
+                        Debug.DrawLine(this._rayLeft.position, hitLeft.point, Color.white, this._rayInterval);
                     }
                     else if (hitRight.distance > 0)
                     {
                         skipLeft = true;
-                        Debug.DrawLine(_rayRight.position, hitRight.point, Color.yellow, _rayInterval);
+                        Debug.DrawLine(this._rayRight.position, hitRight.point, Color.yellow, this._rayInterval);
                     }
                         
                     else
@@ -133,13 +135,13 @@ public class BoatAI : MonoBehaviour {
 
             else if (rayHitLeft.distance > 0)
             {
-                Debug.DrawLine(_rayLeft.position, rayHitLeft.point, Color.red, _rayInterval);
+                Debug.DrawLine(this._rayLeft.position, rayHitLeft.point, Color.red, this._rayInterval);
                 skipRight = true;
             }
 
             else if(rayHitRight.distance > 0 )
             {
-                Debug.DrawLine(_rayRight.position, rayHitRight.point, Color.blue, _rayInterval);
+                Debug.DrawLine(this._rayRight.position, rayHitRight.point, Color.blue, this._rayInterval);
                 skipLeft = true;
             }
 
@@ -152,36 +154,38 @@ public class BoatAI : MonoBehaviour {
             //}
         }
 
-        if(Time.time > nextPaddle)
+        if(Time.time > this.nextPaddle)
         {
-            float forceMultiplier = _forceMultiplier;
+            float forceMultiplier = this._forceMultiplier;
 
-            if (angleCorrect)
+            if (this.angleCorrect)
                 forceMultiplier /= 2;
-
-            Debug.Log("Skip Left Side: " + skipLeft);
-            Debug.Log("Skip Right Side: " + skipRight);
-            nextPaddle = Time.time + _paddleInterval;
+            if (this.Logging)
+            {
+                Debug.Log("Skip Left Side: " + skipLeft);
+                Debug.Log("Skip Right Side: " + skipRight);
+            }
+            this.nextPaddle = Time.time + this._paddleInterval;
 
             int r = Random.Range(0, 100);
 
-            if (r <= _randomPercentage && !skipLeft)
-                paddleLeftFront(forceMultiplier);
+            if (r <= this._randomPercentage && !skipLeft)
+                this.paddleLeftFront(forceMultiplier);
 
             r = Random.Range(0, 100);
 
-            if (r <= _randomPercentage && !skipRight)
-                paddleRightFront(forceMultiplier);
+            if (r <= this._randomPercentage && !skipRight)
+                this.paddleRightFront(forceMultiplier);
 
             r = Random.Range(0, 100);
 
-            if (r <= _randomPercentage && !skipLeft)
-                paddleLeftBack(forceMultiplier);
+            if (r <= this._randomPercentage && !skipLeft)
+                this.paddleLeftBack(forceMultiplier);
 
             r = Random.Range(0, 100);
 
-            if (r <= _randomPercentage && !skipRight)
-                paddleRightBack(forceMultiplier);
+            if (r <= this._randomPercentage && !skipRight)
+                this.paddleRightBack(forceMultiplier);
         }
     }
 

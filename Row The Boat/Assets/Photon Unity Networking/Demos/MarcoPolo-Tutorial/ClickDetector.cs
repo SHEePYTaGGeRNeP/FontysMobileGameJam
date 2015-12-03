@@ -14,7 +14,7 @@ public class ClickDetector : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            GameObject goPointedAt = RaycastObject(Input.mousePosition);
+            GameObject goPointedAt = this.RaycastObject(Input.mousePosition);
 
             if (goPointedAt != null && goPointedAt != this.gameObject && goPointedAt.name.Equals("monsterprefab(Clone)", StringComparison.OrdinalIgnoreCase))
             {

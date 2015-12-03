@@ -83,15 +83,15 @@ public class LoaderGUI : MonoBehaviour {
 		float dpiScaling = GUITools.DpiScaling;
 
 		GUI.color = Color.white;
-		GUI.skin = guiSkin;
+		GUI.skin = this.guiSkin;
 		GUITools.SetFontSizes();
 
 		// Screen.height - Screen.height / 5
-		scrollVector = GUI.BeginScrollView(new Rect(Screen.width/2 - 100 * dpiScaling, Screen.height/10, 230 * dpiScaling, Screen.height * 0.8f), scrollVector, new Rect(0,0,200 * dpiScaling, (scenes.Length * 50 + 50) * dpiScaling));
+	    this.scrollVector = GUI.BeginScrollView(new Rect(Screen.width/2 - 100 * dpiScaling, Screen.height/10, 230 * dpiScaling, Screen.height * 0.8f), this.scrollVector, new Rect(0,0,200 * dpiScaling, (this.scenes.Length * 50 + 50) * dpiScaling));
 		
 //		GUILayout.BeginArea(new Rect(0, 0, 300, scenes.Length * 50));
 		
-		foreach(SceneData s in scenes)
+		foreach(SceneData s in this.scenes)
 		if(GUILayout.Button(s.name, GUILayout.Height(50 * dpiScaling), GUILayout.Width(230 * dpiScaling)))
 		{
 			Debug.Log("Loading scene: " + s.name);

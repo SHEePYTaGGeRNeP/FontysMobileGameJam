@@ -26,29 +26,29 @@ public class MoveByKeys : Photon.MonoBehaviour
     public void Start()
     {
         //enabled = photonView.isMine;
-        this.isSprite = (GetComponent<SpriteRenderer>() != null);
+        this.isSprite = (this.GetComponent<SpriteRenderer>() != null);
 
-        this.body2d = GetComponent<Rigidbody2D>();
-        this.body = GetComponent<Rigidbody>();
+        this.body2d = this.GetComponent<Rigidbody2D>();
+        this.body = this.GetComponent<Rigidbody>();
     }
 
 
     // Update is called once per frame
     public void FixedUpdate()
     {
-        if (!photonView.isMine)
+        if (!this.photonView.isMine)
         {
             return;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left*(this.Speed*Time.deltaTime);
+            this.transform.position += Vector3.left*(this.Speed*Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.right*(this.Speed*Time.deltaTime);
+            this.transform.position += Vector3.right*(this.Speed*Time.deltaTime);
         }
 
         // jumping has a simple "cooldown" time but you could also jump in the air
@@ -83,12 +83,12 @@ public class MoveByKeys : Photon.MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
-                transform.position += Vector3.forward*(this.Speed*Time.deltaTime);
+                this.transform.position += Vector3.forward*(this.Speed*Time.deltaTime);
             }
 
             if (Input.GetKey(KeyCode.S))
             {
-                transform.position -= Vector3.forward*(this.Speed*Time.deltaTime);
+                this.transform.position -= Vector3.forward*(this.Speed*Time.deltaTime);
             }
         }
     }

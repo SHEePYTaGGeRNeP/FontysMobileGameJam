@@ -7,7 +7,7 @@ public class CloseApplication : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(key))
+		if(Input.GetKeyDown(this.key))
 			Application.Quit();
 	}
 }

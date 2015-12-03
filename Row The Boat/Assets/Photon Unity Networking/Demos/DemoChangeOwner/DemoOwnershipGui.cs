@@ -25,7 +25,7 @@ public class DemoOwnershipGui : MonoBehaviour
         GUI.skin = this.Skin;
         GUILayout.BeginArea(new Rect(Screen.width - 200, 0, 200, Screen.height));
         {
-            string label = TransferOwnershipOnRequest ? "passing objects" : "rejecting to pass";
+            string label = this.TransferOwnershipOnRequest ? "passing objects" : "rejecting to pass";
             if (GUILayout.Button(label))
             {
                 this.TransferOwnershipOnRequest = !this.TransferOwnershipOnRequest;

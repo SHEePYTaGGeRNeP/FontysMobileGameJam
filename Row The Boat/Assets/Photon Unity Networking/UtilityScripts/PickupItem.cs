@@ -75,7 +75,7 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
     {
         // read the description in SecondsBeforeRespawn
 
-        if (stream.isWriting && SecondsBeforeRespawn <= 0)
+        if (stream.isWriting && this.SecondsBeforeRespawn <= 0)
         {
             stream.SendNext(this.gameObject.transform.position);
         }
@@ -132,7 +132,7 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
         if (!this.gameObject.GetActive())
         {
             // optional logging:
-            Debug.Log("Ignored PU RPC, cause item is inactive. " + this.gameObject + " SecondsBeforeRespawn: " + SecondsBeforeRespawn + " TimeOfRespawn: " + this.TimeOfRespawn + " respawn in future: " + (TimeOfRespawn > PhotonNetwork.time));
+            Debug.Log("Ignored PU RPC, cause item is inactive. " + this.gameObject + " SecondsBeforeRespawn: " + this.SecondsBeforeRespawn + " TimeOfRespawn: " + this.TimeOfRespawn + " respawn in future: " + (this.TimeOfRespawn > PhotonNetwork.time));
             return;     // makes this RPC being ignored
         }
 
@@ -149,7 +149,7 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
 
 
         // setup a respawn (or none, if the item has to be dropped)
-        if (SecondsBeforeRespawn <= 0)
+        if (this.SecondsBeforeRespawn <= 0)
         {
             this.PickedUp(0.0f);    // item doesn't auto-respawn. must be dropped
         }
@@ -157,7 +157,7 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
         {
             // how long it is until this item respanws, depends on the pickup time and the respawn time
             double timeSinceRpcCall = (PhotonNetwork.time - msgInfo.timestamp);
-            double timeUntilRespawn = SecondsBeforeRespawn - timeSinceRpcCall;
+            double timeUntilRespawn = this.SecondsBeforeRespawn - timeSinceRpcCall;
 
             //Debug.Log("msg timestamp: " + msgInfo.timestamp + " time until respawn: " + timeUntilRespawn);
 
@@ -178,7 +178,7 @@ public class PickupItem : Photon.MonoBehaviour, IPunObservable
         if (timeUntilRespawn > 0)
         {
             this.TimeOfRespawn = PhotonNetwork.time + timeUntilRespawn;
-            Invoke("PunRespawn", timeUntilRespawn);
+            this.Invoke("PunRespawn", timeUntilRespawn);
         }
     }
 

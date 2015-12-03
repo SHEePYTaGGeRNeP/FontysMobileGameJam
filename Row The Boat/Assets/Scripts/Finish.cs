@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -10,15 +6,15 @@ namespace Assets.Scripts
     {
         public void OnTriggerEnter(Collider collision)
         {
-            if (this.name.ToLower().Contains("ai"))
+            if (this.name.ToUpper().Contains("AI"))
             {
                 // AI heeft gewonnen
-                Debug.Log("AI");
+                Debug.Log("AI heeft gewonnen");
             }
             else
             {
                 // Spelers hebben gewonnen
-                Debug.Log("Spelers");
+                Debug.Log("Spelers hebben gewonnen");
             }
         }
     }

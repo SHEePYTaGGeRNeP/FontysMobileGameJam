@@ -25,11 +25,11 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
         public GameObject GetNextAvaiableObject()
         {
             // Check the list for an object that is not used
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < this.list.Count; i++)
             {
-                if (list[i].IsBeschikbaar())
+                if (this.list[i].IsBeschikbaar())
                 {
-                    return list[i].obj;
+                    return this.list[i].obj;
                 }
             }
 
@@ -39,14 +39,14 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         public void AddGameObject(GameObject obj)
         {
-            list.Add(new ObjectData(obj));
+            this.list.Add(new ObjectData(obj));
         }
 
         public int Contains(GameObject obj)
         {
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < this.list.Count; i++)
             {
-                if (list[i].obj == obj)
+                if (this.list[i].obj == obj)
                 {
                     return i;
                 }
@@ -57,8 +57,8 @@ namespace Assets.Scripts.MapGeneration.ObjectPool
 
         public void SetBeschikbaar(int obj)
         {
-            list[obj].transform.position = new Vector3(list[obj].transform.position.x, list[obj].transform.position.y, -10);
-            list[obj].transform.parent = MapGenerator.GetInstance().ObjectPoolHolder.transform;
+            this.list[obj].transform.position = new Vector3(this.list[obj].transform.position.x, this.list[obj].transform.position.y, -10);
+            this.list[obj].transform.parent = MapGenerator.GetInstance().ObjectPoolHolder.transform;
         }
 
         public int GetObjectCount()

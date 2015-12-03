@@ -13,9 +13,9 @@ public class CreateHouses : MonoBehaviour {
 		Vector3 randomPosition;
 		
 		// place some houses...
-		for(int i = 0; i < count; i++) {
-			randomPosition = new Vector3((Random.value - 0.5f) * worldSize, 0, (Random.value - 0.5f) * worldSize);
-			Transform newHouse = (Transform) Instantiate(housePrefab, randomPosition, Quaternion.Euler(0,Random.value * 360, 0));
+		for(int i = 0; i < this.count; i++) {
+			randomPosition = new Vector3((Random.value - 0.5f) * this.worldSize, 0, (Random.value - 0.5f) * this.worldSize);
+			Transform newHouse = (Transform) Instantiate(this.housePrefab, randomPosition, Quaternion.Euler(0,Random.value * 360, 0));
 			newHouse.localScale = new Vector3(Random.value * 2 + 1,Random.value * 2 + 0.2f,Random.value * 2 + 1);
 		}
 	}

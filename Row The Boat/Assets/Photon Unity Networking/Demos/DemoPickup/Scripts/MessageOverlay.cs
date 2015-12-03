@@ -7,22 +7,22 @@ public class MessageOverlay : MonoBehaviour
 
     public void Start()
     {
-        SetActive(true);
+        this.SetActive(true);
     }
 
     public void OnJoinedRoom()
     {
-        SetActive(false);
+        this.SetActive(false);
     }
 
     public void OnLeftRoom()
     {
-        SetActive(true);
+        this.SetActive(true);
     }
 
     void SetActive(bool enable)
     {
-        foreach (GameObject o in Objects)
+        foreach (GameObject o in this.Objects)
         {
             #if UNITY_3_5
             o.SetActiveRecursively(enable);

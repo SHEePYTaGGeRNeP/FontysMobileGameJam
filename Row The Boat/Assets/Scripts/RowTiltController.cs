@@ -28,71 +28,71 @@ public class RowTiltController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        Rotation = SensorHelper.rotation.eulerAngles;
-        Acceleration = Input.gyro.userAcceleration;
-        if (Debugging) Debug.Log(string.Format("Rot: {0}, Accel: {1}", Rotation, Acceleration));
+        this.Rotation = SensorHelper.rotation.eulerAngles;
+        this.Acceleration = Input.gyro.userAcceleration;
+        if (this.Debugging) Debug.Log(string.Format("Rot: {0}, Accel: {1}", this.Rotation, this.Acceleration));
 
-        CheckRowSide();
-        CheckEfficiency();
-        CheckRowMotion();
+        this.CheckRowSide();
+        this.CheckEfficiency();
+        this.CheckRowMotion();
     }
 
     public void CheckRowSide()
     {
-        if (Rotation.z >= 15 && Rotation.z <= 60)
+        if (this.Rotation.z >= 15 && this.Rotation.z <= 60)
         {
-            _rowSide = RowSide.Left;
+            this._rowSide = RowSide.Left;
         }
-        else if (Rotation.z <= 345 && Rotation.z >= 300)
+        else if (this.Rotation.z <= 345 && this.Rotation.z >= 300)
         {
-            _rowSide = RowSide.Right;
+            this._rowSide = RowSide.Right;
         }
         else
         {
-            _rowSide = RowSide.None;
+            this._rowSide = RowSide.None;
         }
     }
 
     public void CheckEfficiency()
     {
-        if (_rowSide != RowSide.None)
+        if (this._rowSide != RowSide.None)
         {
-            if (Rotation.x >= 270)
+            if (this.Rotation.x >= 270)
             {
-                Efficiency = ((Rotation.x - 270) * (100f / 90f)) / 100f;
+                this.Efficiency = ((this.Rotation.x - 270) * (100f / 90f)) / 100f;
             }
-            else if (Rotation.x <= 90)
+            else if (this.Rotation.x <= 90)
             {
-                Efficiency = Mathf.Abs(((Rotation.x - 90) * (100f / 90f)) / 100f);
+                this.Efficiency = Mathf.Abs(((this.Rotation.x - 90) * (100f / 90f)) / 100f);
             }
             else
             {
-                Efficiency = 0;
+                this.Efficiency = 0;
             }
         }
         else
         {
-            Efficiency = 0;
+            this.Efficiency = 0;
         }
     }
 
     public void CheckRowMotion()
     {
-        if (Mathf.Abs(Acceleration.z) >= 0.05f)
+        if (Mathf.Abs(this.Acceleration.z) >= 0.05f)
         {
-            AccumulatedStrength += Mathf.Abs(Acceleration.z);
+            this.AccumulatedStrength += Mathf.Abs(this.Acceleration.z);
         }
-        else if (Mathf.Abs(AccumulatedStrength) >= 0.3f)
+        else if (Mathf.Abs(this.AccumulatedStrength) >= 0.3f)
         {
-            OnRow(new RowEventArgs(_rowSide, AccumulatedStrength, Efficiency));
-            if (Debugging) Debug.Log("Rowed! " + AccumulatedStrength);
-            AccumulatedStrength = 0;
+            this.OnRow(new RowEventArgs(this._rowSide, this.AccumulatedStrength, this.Efficiency));
+            if (this.Debugging) Debug.Log("Rowed! " + this.AccumulatedStrength);
+            this.AccumulatedStrength = 0;
         }
     }
 
     protected virtual void OnRow(RowEventArgs e)
     {
-        var row = Row;
+        var row = this.Row;
         if (row != null) row.Invoke(this, e);
     }
 
@@ -100,9 +100,9 @@ public class RowTiltController : MonoBehaviour
     {
         public RowEventArgs(RowSide side, float strength, float efficiency)
         {
-            Side = side;
-            Strength = strength;
-            Efficiency = efficiency;
+            this.Side = side;
+            this.Strength = strength;
+            this.Efficiency = efficiency;
         }
 
         public RowSide Side { get; protected set; }
@@ -111,7 +111,7 @@ public class RowTiltController : MonoBehaviour
 
         public override string ToString()
         {
-            return string.Format("Side: {0}, Strength: {1}, Efficiency: {2}", Side, Strength, Efficiency);
+            return string.Format("Side: {0}, Strength: {1}, Efficiency: {2}", this.Side, this.Strength, this.Efficiency);
         }
     }
 }

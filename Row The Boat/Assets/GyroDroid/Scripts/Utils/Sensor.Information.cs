@@ -33,12 +33,12 @@ public partial class Sensor
 		bool _active;
 	    public bool active {
 			get {
-				return _active;
+				return this._active;
 			}
 			internal set {
-				_active = value;
-				gotFirstValue = false;
-				SetValue(Vector3.zero);
+			    this._active = value;
+			    this.gotFirstValue = false;
+			    this.SetValue(Vector3.zero);
 			}
 		}
 	
@@ -53,7 +53,7 @@ public partial class Sensor
 	    // for internal use		
 	    public void SetValue(Vector3 v)
 	    {
-	        values = v;
+	        this.values = v;
 	    }
 	
 	    // maximumRange as reported by the device
@@ -80,7 +80,7 @@ public partial class Sensor
 	
 	    public override string ToString()
 	    {
-	        return string.Format("Vendor: {0}, Resolution: {1}, MinDelay: {2}, MaxRange: {3}, Value: {4}", vendor, resolution, minDelay, maximumRange, values.ToString());
+	        return string.Format("Vendor: {0}, Resolution: {1}, MinDelay: {2}, MaxRange: {3}, Value: {4}", this.vendor, this.resolution, this.minDelay, this.maximumRange, this.values.ToString());
 	    }
 
 
@@ -92,9 +92,9 @@ public partial class Sensor
 
 			if(stream.isWriting)
 			{
-				_available = available;
-				_gotFirstValue = gotFirstValue;
-				_values = values;
+				_available = this.available;
+				_gotFirstValue = this.gotFirstValue;
+				_values = this.values;
 				
 				stream.Serialize (ref _gotFirstValue);
 				stream.Serialize(ref _available);
@@ -105,10 +105,10 @@ public partial class Sensor
 				stream.Serialize (ref _gotFirstValue);
 				stream.Serialize(ref _available);
 				stream.Serialize(ref _values);
-	
-				gotFirstValue = _gotFirstValue;
-				available = _available;
-				values = _values;
+
+			    this.gotFirstValue = _gotFirstValue;
+			    this.available = _available;
+			    this.values = _values;
 			}
 		}
 	}

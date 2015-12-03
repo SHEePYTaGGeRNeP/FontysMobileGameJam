@@ -37,6 +37,7 @@ namespace Assets.Scripts.MapGeneration
         private float startDisplacement = 0.0f;
 
 
+        private bool hasGenerated = false;
 
         private static MapGenerator instance;
         public static MapGenerator GetInstance()
@@ -48,6 +49,15 @@ namespace Assets.Scripts.MapGeneration
         {
             instance = this;
             normalCounter = UncalculatedNormalSize;
+            
+            Debug.Log("Generating map");
+            this.CreateWaterMesh();
+            this.CreateDirtMesh();
+
+            this.strokes = new List<WaterStroke>();
+            this.strokeObjects = new List<GameObject>();
+            this.dirt = new List<GameObject>();
+            this.hasGenerated = true;
 
             // Setup the dirtMesh
             List<Vector3> v = new List<Vector3>();
@@ -201,6 +211,8 @@ namespace Assets.Scripts.MapGeneration
             }
 
             for (int i = 0; i < PondDirtLength; i++)
+
+            if (this.strokes.Count != 30)
             {
                 GenerateDirtAndWater(displacement, 0, SideWidth);
             }
@@ -254,7 +266,6 @@ namespace Assets.Scripts.MapGeneration
                 f.Add(v.Count - 15);
                 f.Add(v.Count - 7);
                 f.Add(v.Count - 14);
-
                 // 3 (2, 9, 10)
                 f.Add(v.Count - 14);
                 f.Add(v.Count - 7);

@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.PhotonNetworking
 {
-	class RoeiButtonHandler : MonoBehaviour
+    public class RoeiButtonHandler : MonoBehaviour
 	{
 		public PhotonRoeier Roeier;
 
@@ -15,17 +15,17 @@ namespace Assets.Scripts.PhotonNetworking
 		}
 
 
-		private bool SetRoeier()
+		public bool SetRoeier()
 		{
 			foreach (GameObject go in GameObject.FindGameObjectsWithTag("PhotonPlayer"))
 				if (go.GetComponent<PhotonRoeier>().PaddleViewId != 0)
 				{
-					Roeier = go.GetComponent<PhotonRoeier>();
+				    this.Roeier = go.GetComponent<PhotonRoeier>();
 					break;
 				}
-			if (Roeier == null)
+			if (this.Roeier == null)
 				GameObject.Find("Push").SetActive(false);
-			return Roeier != null;
+			return this.Roeier != null;
 		}
 
 	}

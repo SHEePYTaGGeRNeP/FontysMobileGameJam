@@ -8,12 +8,12 @@ public class PaddleSoundController : MonoBehaviour {
 	AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
-		audioSource = GetComponent<AudioSource> ();
+	    this.audioSource = this.GetComponent<AudioSource> ();
 	}
 
 	public void PlayRandomPaddleSound() {
-		if (clips.Length > 0) {
-			audioSource.PlayOneShot (clips [Random.Range (0, clips.Length)]);
+		if (this.clips.Length > 0) {
+		    this.audioSource.PlayOneShot (this.clips [Random.Range (0, this.clips.Length)]);
 		}
 	}
 }

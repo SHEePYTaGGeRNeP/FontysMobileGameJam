@@ -22,7 +22,7 @@ public class DampenCameraMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * movementSpeed);
-		transform.LookAt(lookAt.position, target.up);
+	    this.transform.position = Vector3.Lerp(this.transform.position, this.target.position, Time.deltaTime * this.movementSpeed);
+	    this.transform.LookAt(this.lookAt.position, this.target.up);
 	}
 }
