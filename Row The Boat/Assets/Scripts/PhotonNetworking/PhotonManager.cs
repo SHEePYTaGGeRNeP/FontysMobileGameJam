@@ -111,12 +111,15 @@ namespace Assets.Scripts.PhotonNetworking
                 return;
             }
             Debug.Log("Spawn");
-            GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", Vector3.zero, Quaternion.identity, 0);
+            Paddle paddleToAssign = this._boot.NextPaddle;
+            GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", paddleToAssign.transform.position, Quaternion.identity, 0);
             spawnedPlayer.transform.SetParent(this._boot.transform);
-            Paddle paddleToAssign = this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
+            this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
             spawnedPlayer.transform.position = paddleToAssign.transform.position;
             PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
             PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
+            
+
             this.photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
         }
 
