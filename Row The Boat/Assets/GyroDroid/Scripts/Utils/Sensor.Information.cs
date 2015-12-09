@@ -84,32 +84,32 @@ public partial class Sensor
 	    }
 
 
-		public void Serialize(BitStream stream)
-		{
-			bool _gotFirstValue = false;
-			bool _available = false;
-			Vector3 _values = Vector3.zero;
+		//public void Serialize(BitStream stream)
+		//{
+		//	bool _gotFirstValue = false;
+		//	bool _available = false;
+		//	Vector3 _values = Vector3.zero;
 
-			if(stream.isWriting)
-			{
-				_available = this.available;
-				_gotFirstValue = this.gotFirstValue;
-				_values = this.values;
+		//	if(stream.isWriting)
+		//	{
+		//		_available = this.available;
+		//		_gotFirstValue = this.gotFirstValue;
+		//		_values = this.values;
 				
-				stream.Serialize (ref _gotFirstValue);
-				stream.Serialize(ref _available);
-				stream.Serialize(ref _values);
-			}
-			else if(stream.isReading)
-			{
-				stream.Serialize (ref _gotFirstValue);
-				stream.Serialize(ref _available);
-				stream.Serialize(ref _values);
+		//		stream.Serialize (ref _gotFirstValue);
+		//		stream.Serialize(ref _available);
+		//		stream.Serialize(ref _values);
+		//	}
+		//	else if(stream.isReading)
+		//	{
+		//		stream.Serialize (ref _gotFirstValue);
+		//		stream.Serialize(ref _available);
+		//		stream.Serialize(ref _values);
 
-			    this.gotFirstValue = _gotFirstValue;
-			    this.available = _available;
-			    this.values = _values;
-			}
-		}
+		//	    this.gotFirstValue = _gotFirstValue;
+		//	    this.available = _available;
+		//	    this.values = _values;
+		//	}
+		//}
 	}
 }
