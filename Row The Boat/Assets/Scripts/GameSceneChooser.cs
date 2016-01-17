@@ -4,24 +4,19 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-	class GameSceneChooser : MonoBehaviour
+    using UnityEngine.SceneManagement;
+
+    internal class GameSceneChooser : MonoBehaviour
 	{
-		[SerializeField]
-		private PhotonManager _photonManager;
-
-
-		void Start()
+        public void Start()
 		{
-			PhotonManager.Instance.OnJoinedRoomEvent += this.CheckSceneToLoad;
-		}
-		private void CheckSceneToLoad(object sender, EventArgs e)
-		{
-			Debug.Log("Checking scene to load...");
-			if (PhotonNetwork.isMasterClient)
-				Application.LoadLevel("Game");
-			else
-				Application.LoadLevel("PhotonNetworking");
+			PhotonManager.Instance.OnJoinedRoomEvent += CheckSceneToLoad;
 		}
 
+		private static void CheckSceneToLoad(object sender, EventArgs e)
+		{
+		    Debug.Log("Checking scene to load...");
+		    SceneManager.LoadScene(PhotonNetwork.isMasterClient ? "Game" : "PhotonNetworking");
+		}
 	}
 }

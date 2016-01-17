@@ -78,11 +78,11 @@ GameObject:
   - 4: {fileID: 499828}
   - 33: {fileID: 3347886}
   - 23: {fileID: 2359232}
-  - 114: {fileID: 11404812}
   - 54: {fileID: 5450164}
   - 136: {fileID: 13621076}
   - 114: {fileID: 11403810}
   - 114: {fileID: 11497174}
+  - 114: {fileID: 11404812}
   m_Layer: 0
   m_Name: Boat_Mobile_Roeien
   m_TagString: Untagged
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8cb94f3430c98458046c5166c04fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Paddles:
+  _paddles:
   - {fileID: 11423302}
   - {fileID: 11402990}
   - {fileID: 11425846}
@@ -415,7 +415,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -475,7 +476,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -499,7 +501,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

@@ -39,4 +39,6 @@ MonoBehaviour:
   - AssignPaddle
   - RequestPaddle
   - UpdateBoatTransform
+  - Disconnect
+  - Disconnect2
   DisableAutoOpenWizard: 1

@@ -1,21 +1,16 @@
-﻿
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace Assets.Scripts.PhotonNetworking
+﻿namespace Assets.Scripts.PhotonNetworking
 {
+    using System;
+    using UnityEngine;
     using System.Collections.Generic;
 
-    class PhotonManager : Photon.PunBehaviour
+    internal class PhotonManager : Photon.PunBehaviour
     {
-        public static PhotonManager Instance;       
+        public static PhotonManager Instance;
 
-        private PhotonView _photonView;
         public bool Host;
 
-        private Roeiboot _boot;
-        public Roeiboot Boot { get { return this._boot; } set { this._boot = value; } }
+        public Roeiboot Boot { get; set; }
 
         public event EventHandler OnJoinedRoomEvent;
 
@@ -24,25 +19,34 @@ namespace Assets.Scripts.PhotonNetworking
         [SerializeField]
         private LobbiesManager _lobbiesManager;
 
+        /// <summary>PlayerID, PhotonRoeierViewID</summary>
+        private readonly Dictionary<int, PhotonView> _playerRoeiers = new Dictionary<int, PhotonView>();
 
-        private bool _aPlayerHasJoined;
 
-
+        // ReSharper disable once UnusedMember.Local
         private void Awake()
         {
             Instance = this;
-            this._photonView = this.GetComponent<PhotonView>();
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
             PhotonNetwork.logLevel = PhotonLogLevel.Informational;
             PhotonNetwork.ConnectUsingSettings("0.1");
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void OnGUI()
         {
             GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+        }
+
+        public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+        {
+            if (!PhotonNetwork.isMasterClient) return;
+            this.photonView.RPC("Disconnect", PhotonTargets.All, this._playerRoeiers[otherPlayer.ID].viewID);
+            PhotonNetwork.Destroy(this._playerRoeiers[otherPlayer.ID]);
         }
 
         public override void OnConnectedToMaster()
@@ -72,7 +76,8 @@ namespace Assets.Scripts.PhotonNetworking
             Debug.Log("Joining random room!");
             PhotonNetwork.JoinRandomRoom();
         }
-        void OnPhotonRandomJoinFailed()
+
+        public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
         {
             Debug.Log("Can't join random room - Creating room");
             this.Host = true;
@@ -85,7 +90,7 @@ namespace Assets.Scripts.PhotonNetworking
             if (PhotonNetwork.isMasterClient)
             {
                 GameObject boot = PhotonNetwork.Instantiate("Boat_Mobile_Roeien", this.transform.position, Quaternion.identity, 0);
-                this._boot = boot.GetComponent<Roeiboot>();
+                this.Boot = boot.GetComponent<Roeiboot>();
                 PhotonNetwork.Instantiate("AI_Boat_Mobile_Roeien", this.transform.position - new Vector3(0, 0, 10f), Quaternion.identity, 0);
             }
             this.OnJoinedRoomReached(EventArgs.Empty);
@@ -101,47 +106,35 @@ namespace Assets.Scripts.PhotonNetworking
 
         public override void OnPhotonPlayerConnected(PhotonPlayer player)
         {
-            Debug.Log("Player connected");
+            Debug.Log("Player connected: " + player.ID);
             if (!PhotonNetwork.isMasterClient) return;
-            this.Invoke("WaitForFirstPlayer", 5);
-            if (this._boot.Paddles == null || this._boot.Paddles.Count == 0)
+            if (this.Boot.FreePaddles.Count == 0)
             {
                 // TODO: Send RPC to client.
                 Debug.Log("No Paddles avaiable bro");
                 return;
             }
-            Debug.Log("Spawn");
-            Paddle paddleToAssign = this._boot.NextPaddle;
+            Paddle paddleToAssign = this.Boot.NextPaddle;
             GameObject spawnedPlayer = PhotonNetwork.Instantiate("Roeier", paddleToAssign.transform.position, Quaternion.identity, 0);
-            spawnedPlayer.transform.SetParent(this._boot.transform);
-            this._boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
+            spawnedPlayer.transform.SetParent(this.Boot.transform);
+            this.Boot.AssignPlayer(spawnedPlayer.GetComponent<PhotonRoeier>());
             spawnedPlayer.transform.position = paddleToAssign.transform.position;
             PhotonView tempPlayerView = spawnedPlayer.GetPhotonView();
             PhotonView tempPaddleView = paddleToAssign.gameObject.GetPhotonView();
-            
+
+            this._playerRoeiers.Add(player.ID, tempPlayerView);
 
             this.photonView.RPC("AssignPaddle", player, tempPlayerView.viewID, tempPaddleView.viewID, (int)tempPaddleView.GetComponent<Paddle>().RowSide);
         }
 
-        private void WaitForFirstPlayer()
-        {
-            this._aPlayerHasJoined = true;
-        }
-            
-        private void FixedUpdate()
-        {
-            if (!this._aPlayerHasJoined || !PhotonNetwork.isMasterClient)
-                return;
-            //this._photonView.RPC("UpdateBoatTransform", PhotonTargets.All, this._boot.transform.position, this._boot.transform.rotation.eulerAngles);
-        }
 
 
         [PunRPC]
         public void UpdateBoatTransform(Vector3 pos, Vector3 rot)
         {
             if (PhotonNetwork.isMasterClient) return;
-            this._boot.transform.position = pos;
-            this._boot.transform.eulerAngles = rot;
+            this.Boot.transform.position = pos;
+            this.Boot.transform.eulerAngles = rot;
         }
 
 
@@ -149,13 +142,14 @@ namespace Assets.Scripts.PhotonNetworking
         /// Called on connecting client
         /// </summary>
         [PunRPC]
-        public void AssignPaddle(int playerID, int paddleID, int rowside)
+        public void AssignPaddle(int roeierViewId, int paddleViewID, int rowside)
         {
-            Debug.Log("assigning paddle");
-            PhotonRoeier myPlayer = PhotonView.Find(playerID).gameObject.GetComponent<PhotonRoeier>();
-
+            Helpers.LogHelper.WriteErrorMessage(typeof(PhotonManager),"AssignPaddle", "Assigning paddle to player");
+            PhotonRoeier myPlayer = PhotonView.Find(roeierViewId).gameObject.GetComponent<PhotonRoeier>();
+            myPlayer.RoeierCamera.gameObject.SetActive(true);
+            myPlayer.LocalRoeier = true;
             this._roeiButtonHandler.Roeier = myPlayer;
-            myPlayer.PaddleViewId = paddleID;
+            myPlayer.PaddleViewId = paddleViewID;
             myPlayer.Side = (RowTiltController.RowSide)rowside;
         }
 
@@ -164,7 +158,15 @@ namespace Assets.Scripts.PhotonNetworking
         public void AddForce(int paddleViewId, float force)
         {
             Paddle paddle = PhotonView.Find(paddleViewId).GetComponent<Paddle>();
-            this._boot.AddForce(paddle.transform.position, force);
+            this.Boot.AddForce(paddle.transform.position, force);
+        }
+
+        [PunRPC]
+        public void Disconnect(int roeierViewId)
+        {
+            Debug.Log(roeierViewId + " has left the game.");
+            PhotonRoeier leftPlayer = PhotonView.Find(roeierViewId).gameObject.GetComponent<PhotonRoeier>();
+            this.Boot.RemovePlayer(leftPlayer);
         }
     }
 }
