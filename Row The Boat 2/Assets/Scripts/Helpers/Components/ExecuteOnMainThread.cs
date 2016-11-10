@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-
-    public class ExecuteOnMainThread : BaseClass
+    using UnityEngine;
+    public class ExecuteOnMainThread : MonoBehaviour
     {
         public static readonly Queue<Action> ActionsToExecute = new Queue<Action>();
 
