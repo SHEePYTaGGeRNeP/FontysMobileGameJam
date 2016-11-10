@@ -53,7 +53,7 @@ namespace Assets.Scripts.MapGeneration
 
             number = min + (number % diff);
 
-            Debug.Log(number);
+            //Debug.Log(number);
             return number / 1000;
         }
 

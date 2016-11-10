@@ -1,23 +1,29 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-
-public class SliderChangeOn : MonoBehaviour
+namespace Assets.Scripts
 {
-	[SerializeField]
-	private Slider _slider;
+    using System.Globalization;
 
-	[SerializeField]
-	private Text _multiplierText;
+    using Assets.Scripts.Helpers;
 
-	[SerializeField]
-	private Roeiboot _roeiboot;
+    public class SliderChangeOn : MonoBehaviour
+    {
+        [SerializeField]
+        private Slider _slider;
 
-	public void OnSliderValueChanged()
-	{
-		this._roeiboot.ForceMultiplier = this._slider.value;
-		this._multiplierText.text = this._roeiboot.ForceMultiplier.ToString();
-	}
+        [SerializeField]
+        private Text _multiplierText;
 
+        [SerializeField]
+        private Roeiboot _roeiboot;
+
+        public void OnSliderValueChanged()
+        {
+            LogHelper.Log(typeof(SliderChangeOn), "SliderValueChanged");
+            this._roeiboot.ForceMultiplier = this._slider.value;
+            this._multiplierText.text = this._roeiboot.ForceMultiplier.ToString(CultureInfo.InvariantCulture);
+        }
+
+    }
 }

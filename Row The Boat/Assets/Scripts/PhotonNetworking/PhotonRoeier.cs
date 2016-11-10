@@ -11,8 +11,11 @@ namespace Assets.Scripts.PhotonNetworking
 		private RowTiltController _rowController;
 		private PhotonView _photonView;
 		private PhotonView _targetRPC;
+	    public bool LocalRoeier { get; set; }
 
 		private PaddleSoundController _paddleSoundController;
+
+	    public Camera RoeierCamera;
 
 	    private void Start()
 		{
@@ -30,8 +33,13 @@ namespace Assets.Scripts.PhotonNetworking
 		}
 
 	    private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.Space))
+	    {
+	        if (this.RoeierCamera.gameObject.activeSelf && !this.LocalRoeier)
+	        {
+                Helpers.LogHelper.WriteErrorMessage(typeof(PhotonRoeier),"Update", "Disabled Paddle in update");
+	            this.RoeierCamera.gameObject.SetActive(false);
+	        }
+	        if (Input.GetKeyDown(KeyCode.Space))
 				this.Roei(20f);
 		}
 
