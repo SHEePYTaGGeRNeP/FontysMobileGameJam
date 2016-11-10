@@ -36,4 +36,5 @@ MonoBehaviour:
   - AssignPaddle
   - Disconnect
   - UpdateBoatTransform
+  - PlayerJoined
   DisableAutoOpenWizard: 1

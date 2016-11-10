@@ -9,7 +9,7 @@
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
 
-    public class LobbiesManager : PhotonBase
+    public class LobbiesManager : MonoBehaviour
     {
         [SerializeField]
         private Dropdown _roomsDropdown;
@@ -23,12 +23,18 @@
         private string _sceneToLoad = "GameScene";
 
         private Dictionary<string, string> _roomsDictionary = new Dictionary<string, string>();
-
+        private PhotonManager _photonManager;
         // ReSharper disable once UnusedMember.Local
+
+        private void Awake()
+        {
+            this._photonManager = GameObject.FindObjectOfType<PhotonManager>();
+        }
+
         private void Start()
         {
-            this.PhotonManager.OnReceivedRoomListUpdateEvent += delegate { this.PopulateServerList(); };
-            this.PhotonManager.OnJoinedRoomEvent += delegate { this.LoadScene(); };
+            this._photonManager.OnReceivedRoomListUpdateEvent += delegate { this.PopulateServerList(); };
+            this._photonManager.OnJoinedRoomEvent += delegate { this.LoadScene(); };
         }
 
         public void Refresh()
@@ -105,7 +111,7 @@
                 LogHelper.LogError(typeof(LobbiesManager), "JoinGameButtonClicked", "Roomname is empty.");
                 return;
             }
-            this.PhotonManager.CreateRoom(this._roomNameField.text, (byte)this._maxPlayersSlider.value);            
+            this._photonManager.CreateRoom(this._roomNameField.text, (byte)this._maxPlayersSlider.value);
         }
 
         private void LoadScene()
