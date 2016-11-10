@@ -469,6 +469,10 @@ Prefab:
       propertyPath: animMenuAlpha
       value: 
       objectReference: {fileID: 1494148701}
+    - target: {fileID: 11450228, guid: bf0d94df6995e8b45a03ade059d9e82e, type: 2}
+      propertyPath: m_Text
+      value: Row The Boat 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf0d94df6995e8b45a03ade059d9e82e, type: 2}
   m_IsPrefabParent: 0
