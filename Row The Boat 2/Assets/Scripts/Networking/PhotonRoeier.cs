@@ -6,8 +6,10 @@ using UnityEngine;
 using Photon;
 namespace Assets.Scripts.Networking
 {
-    class PhotonRoeier : PunBehaviour {
-        [SerializeField] private Camera _camera;
+    class PhotonRoeier : PunBehaviour
+    {
+        [SerializeField]
+        private Camera _camera;
 
         private void Start()
         {

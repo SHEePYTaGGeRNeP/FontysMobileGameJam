@@ -98,7 +98,6 @@
             GameObject spawnedPlayer = PhotonNetwork.Instantiate("NetworkCube",
                 new Vector3(UnityEngine.Random.Range(-10, 10), 0, UnityEngine.Random.Range(-10, 10)),
                 Quaternion.identity, 0);
-            LogHelper.Log(typeof(PhotonManager), "Spawned player");
             // this.photonView.RPC("PlayerJoined", PhotonTargets.MasterClient, PhotonNetwork.player);
         }
 
