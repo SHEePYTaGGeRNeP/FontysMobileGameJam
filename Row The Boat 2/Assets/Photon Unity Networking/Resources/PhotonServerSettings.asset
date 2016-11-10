@@ -32,4 +32,8 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - AddForce
+  - AssignPaddle
+  - Disconnect
+  - UpdateBoatTransform
   DisableAutoOpenWizard: 1
