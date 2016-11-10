@@ -186,7 +186,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 478125341}
   - 114: {fileID: 478125340}
-  - 23: {fileID: 478125342}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -206,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSeed: 12345
+  RiverCollider: {fileID: 628154862}
 --- !u!4 &478125341
 Transform:
   m_ObjectHideFlags: 0
@@ -219,12 +219,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!23 &478125342
+--- !u!1 &628154862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 628154863}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &628154863
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 628154862}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+--- !u!1 &752476167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 752476171}
+  - 33: {fileID: 752476170}
+  - 64: {fileID: 752476169}
+  - 23: {fileID: 752476168}
+  m_Layer: 0
+  m_Name: Water
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &752476168
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 478125339}
+  m_GameObject: {fileID: 752476167}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -232,13 +278,13 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fed1a66e92941a34782828186e1507c1, type: 2}
+  - {fileID: 2100000, guid: 3cfe4a4893fa2e5439382282e3396461, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
+  m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_SelectedWireframeHidden: 0
@@ -248,6 +294,38 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!64 &752476169
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 752476167}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &752476170
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 752476167}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &752476171
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 752476167}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 56.8}
+  m_LocalScale: {x: 3.68214, y: 1, z: 10.851568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &1461896564
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +423,42 @@ MonoBehaviour:
   - prefab: {fileID: 1000014022981870, guid: 1e3a1442ccbee8d4599729fa6cb51a7f, type: 2}
     name: emptymesh
     defaultAmount: 1
+  - prefab: {fileID: 114730, guid: dba89b66e91444f41a1fa1e2dcf2dc88, type: 2}
+    name: tree1
+    defaultAmount: 0
+  - prefab: {fileID: 125328, guid: bdc88c11f3eef1b4c969563159cfc60a, type: 2}
+    name: tree2
+    defaultAmount: 0
+  - prefab: {fileID: 183088, guid: 6ceab3de31523784e81d3cbb5817c51e, type: 2}
+    name: tree3
+    defaultAmount: 0
+  - prefab: {fileID: 116386, guid: 5112b2e896b8454448983c5d6228b69c, type: 2}
+    name: tree4
+    defaultAmount: 0
+  - prefab: {fileID: 155188, guid: d2554ff4df26f3d48b090d10c5beee7d, type: 2}
+    name: tree5
+    defaultAmount: 0
+  - prefab: {fileID: 168716, guid: 2cd543df80786d74f885ed57c9bad045, type: 2}
+    name: tree6
+    defaultAmount: 0
+  - prefab: {fileID: 153112, guid: 9aa8f89a78fef9b4dbf28479cd51fc6b, type: 2}
+    name: tree7
+    defaultAmount: 0
+  - prefab: {fileID: 158410, guid: d52195d51ef7eec4fa67e917701037eb, type: 2}
+    name: stone0
+    defaultAmount: 0
+  - prefab: {fileID: 185476, guid: 740826c89c09c164d9b40577731bad2b, type: 2}
+    name: stone1
+    defaultAmount: 0
+  - prefab: {fileID: 110048, guid: 209d37ed1e027dc47a8d440cfbe2c6b4, type: 2}
+    name: stone2
+    defaultAmount: 0
+  - prefab: {fileID: 168522, guid: 97a822b8a27def5458d348da355c3c32, type: 2}
+    name: stone3
+    defaultAmount: 0
+  - prefab: {fileID: 170642, guid: 51d6714fc5e0a9749824dd8559b2a57f, type: 2}
+    name: stone4
+    defaultAmount: 0
 --- !u!4 &1529473093
 Transform:
   m_ObjectHideFlags: 0

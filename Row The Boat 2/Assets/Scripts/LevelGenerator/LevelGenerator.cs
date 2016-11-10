@@ -14,6 +14,8 @@ namespace Assets.Scripts.LevelGenerator
 
         private Level current;
 
+        public  GameObject RiverCollider;
+
         #endregion
 
         #region "Constructors"
