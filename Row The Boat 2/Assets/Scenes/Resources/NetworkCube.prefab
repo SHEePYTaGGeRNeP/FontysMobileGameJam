@@ -197,7 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 20000013362476072}
-  OwnerID: -1
 --- !u!114 &114000011704850676
 MonoBehaviour:
   m_ObjectHideFlags: 1
